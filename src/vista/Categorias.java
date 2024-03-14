@@ -5,19 +5,36 @@
 package vista;
 
 import controlador.DaoCategorias;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
 
 public class Categorias extends javax.swing.JPanel {
     
     Categoria ct=new Categoria();
     DaoCategorias daoCt=new DaoCategorias();
+    DefaultTableModel modeloCategoria=new DefaultTableModel();
+    
 
     /**
      * Creates new form Categorias
      */
     public Categorias() {
         initComponents();
+        listarCategorias();
+    }
+    
+    private void listarCategorias(){
+        List<Categoria> lista=daoCt.Listar();
+        modeloCategoria=(DefaultTableModel) tblcategorias.getModel();
+        Object[] ob=new Object[2];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdCategoria();
+            ob[1]=lista.get(i).getNomCategoria();
+            modeloCategoria.addRow(ob);
+        }
+       tblcategorias.setModel(modeloCategoria);
     }
 
     /**
@@ -41,7 +58,7 @@ public class Categorias extends javax.swing.JPanel {
         tblcategorias = new javax.swing.JTable();
         btnBuscar = new RSMaterialComponent.RSButtonMaterialDos();
         btnEliminar = new RSMaterialComponent.RSButtonMaterialDos();
-        btnGuardar = new RSMaterialComponent.RSButtonMaterialDos();
+        btnGuardar = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setBackground(new java.awt.Color(238, 238, 238));
 
@@ -131,12 +148,9 @@ public class Categorias extends javax.swing.JPanel {
         btnEliminar.setRound(25);
 
         btnGuardar.setBackground(new java.awt.Color(14, 76, 117));
-        btnGuardar.setForeground(new java.awt.Color(14, 76, 117));
         btnGuardar.setText("Guardar");
-        btnGuardar.setBackgroundHover(new java.awt.Color(14, 76, 117));
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnGuardar.setEffectButton(RSMaterialComponent.RSButtonMaterialDos.EFFECTBUTTON.RAISED);
-        btnGuardar.setInheritsPopupMenu(true);
+        btnGuardar.setBackgroundHover(new java.awt.Color(50, 130, 181));
+        btnGuardar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
         btnGuardar.setRound(25);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +171,9 @@ public class Categorias extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jpanelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
@@ -178,7 +194,7 @@ public class Categorias extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpanelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
@@ -193,13 +209,15 @@ public class Categorias extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        ct.setNomCategoria(txtnomCategoria.getText());
+         ct.setNomCategoria(txtnomCategoria.getText());
         if(daoCt.insertar(ct)){
             JOptionPane.showMessageDialog(null, "Categoria Registrada Con Exito");
             limpiarCampos();
         }else{
             JOptionPane.showMessageDialog(null, "No se pudo registrar la Categoria");
         }
+        limpiarTablaCategoria();
+        listarCategorias();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 
@@ -207,11 +225,18 @@ public class Categorias extends javax.swing.JPanel {
         txtidcategoria.setText("");
         txtnomCategoria.setText("");
     }
+    
+    void limpiarTablaCategoria(){
+        for(int i=0;i<modeloCategoria.getRowCount();i++){
+            modeloCategoria.removeRow(i);
+            i=0-1;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialDos btnBuscar;
     private RSMaterialComponent.RSButtonMaterialDos btnEditar;
     private RSMaterialComponent.RSButtonMaterialDos btnEliminar;
-    private RSMaterialComponent.RSButtonMaterialDos btnGuardar;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

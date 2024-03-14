@@ -7,6 +7,8 @@ package controlador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Categoria;
 import modelo.conexion;
@@ -34,5 +36,24 @@ public class DaoCategorias {
             JOptionPane.showConfirmDialog(null, e);
             return false;
         }
+    }
+    
+    public List Listar(){
+        List<Categoria> lista=new ArrayList<>();
+        String SQL="select * from categorias";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Categoria c=new Categoria();
+                c.setIdCategoria(rs.getInt(1));
+                c.setNomCategoria(rs.getString(2));
+                lista.add(c);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return lista;
     }
 }
