@@ -52,13 +52,13 @@ public class Categorias extends javax.swing.JPanel {
         txtidcategoria = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtnomCategoria = new javax.swing.JTextField();
-        btnEditar = new RSMaterialComponent.RSButtonMaterialDos();
         jpanelRound2 = new modelo.JpanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblcategorias = new javax.swing.JTable();
         btnBuscar = new RSMaterialComponent.RSButtonMaterialDos();
         btnEliminar = new RSMaterialComponent.RSButtonMaterialDos();
         btnGuardar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnEditar = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setBackground(new java.awt.Color(238, 238, 238));
 
@@ -102,10 +102,6 @@ public class Categorias extends javax.swing.JPanel {
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        btnEditar.setBackground(new java.awt.Color(14, 76, 117));
-        btnEditar.setText("Editar");
-        btnEditar.setRound(25);
-
         jpanelRound2.setBackground(new java.awt.Color(255, 255, 255));
         jpanelRound2.setRoundBottomLeft(25);
         jpanelRound2.setRoundBottomRight(25);
@@ -120,6 +116,11 @@ public class Categorias extends javax.swing.JPanel {
                 "ID", "Cetegoria"
             }
         ));
+        tblcategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblcategoriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblcategorias);
 
         javax.swing.GroupLayout jpanelRound2Layout = new javax.swing.GroupLayout(jpanelRound2);
@@ -158,6 +159,17 @@ public class Categorias extends javax.swing.JPanel {
             }
         });
 
+        btnEditar.setBackground(new java.awt.Color(14, 76, 117));
+        btnEditar.setText("Editar");
+        btnEditar.setBackgroundHover(new java.awt.Color(50, 130, 181));
+        btnEditar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.EDIT);
+        btnEditar.setRound(25);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,9 +189,9 @@ public class Categorias extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(321, 321, 321)
+                        .addGap(327, 327, 327)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -201,8 +213,8 @@ public class Categorias extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -220,6 +232,29 @@ public class Categorias extends javax.swing.JPanel {
         listarCategorias();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int fila=tblcategorias.getSelectedRow();
+        if(fila==-1){
+            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+        }else{
+            ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+            ct.setNomCategoria(txtnomCategoria.getText());
+            if(daoCt.editar(ct)){
+                JOptionPane.showMessageDialog(null, "Se modifico con exito");
+                limpiarTablaCategoria();
+                listarCategorias();
+            }
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void tblcategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblcategoriasMouseClicked
+        // TODO add your handling code here:
+        int fila=tblcategorias.getSelectedRow();
+        txtidcategoria.setText(tblcategorias.getValueAt(fila, 0).toString());
+        txtnomCategoria.setText(tblcategorias.getValueAt(fila, 1).toString());
+    }//GEN-LAST:event_tblcategoriasMouseClicked
+
 
     void limpiarCampos(){
         txtidcategoria.setText("");
@@ -234,7 +269,7 @@ public class Categorias extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialDos btnBuscar;
-    private RSMaterialComponent.RSButtonMaterialDos btnEditar;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnEditar;
     private RSMaterialComponent.RSButtonMaterialDos btnEliminar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar;
     private javax.swing.JLabel jLabel1;

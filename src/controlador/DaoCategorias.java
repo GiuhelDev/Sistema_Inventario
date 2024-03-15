@@ -56,4 +56,23 @@ public class DaoCategorias {
         }
         return lista;
     }
+    
+    public boolean editar(Categoria c){
+        String SQL="update categorias set catergoria=? where idCategoria=?";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setString(1, c.getNomCategoria());
+            ps.setInt(2, c.getIdCategoria());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }
