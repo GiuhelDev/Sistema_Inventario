@@ -75,4 +75,22 @@ public class DaoCategorias {
             return false;
         }
     }
+    
+    public boolean eliminar(Categoria c){
+        String SQL="delete from categorias where idCategoria=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdCategoria());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }

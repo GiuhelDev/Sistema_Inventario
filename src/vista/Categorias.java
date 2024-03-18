@@ -56,9 +56,9 @@ public class Categorias extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblcategorias = new javax.swing.JTable();
         btnBuscar = new RSMaterialComponent.RSButtonMaterialDos();
-        btnEliminar = new RSMaterialComponent.RSButtonMaterialDos();
         btnGuardar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnEditar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnEliminar = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setBackground(new java.awt.Color(238, 238, 238));
 
@@ -144,10 +144,6 @@ public class Categorias extends javax.swing.JPanel {
         btnBuscar.setText("Buscar");
         btnBuscar.setRound(25);
 
-        btnEliminar.setBackground(new java.awt.Color(14, 76, 117));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setRound(25);
-
         btnGuardar.setBackground(new java.awt.Color(14, 76, 117));
         btnGuardar.setText("Guardar");
         btnGuardar.setBackgroundHover(new java.awt.Color(50, 130, 181));
@@ -167,6 +163,17 @@ public class Categorias extends javax.swing.JPanel {
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setBackground(new java.awt.Color(14, 76, 117));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setBackgroundHover(new java.awt.Color(50, 130, 181));
+        btnEliminar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.DELETE);
+        btnEliminar.setRound(25);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -191,9 +198,9 @@ public class Categorias extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(327, 327, 327)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -211,10 +218,10 @@ public class Categorias extends javax.swing.JPanel {
                     .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -224,12 +231,12 @@ public class Categorias extends javax.swing.JPanel {
          ct.setNomCategoria(txtnomCategoria.getText());
         if(daoCt.insertar(ct)){
             JOptionPane.showMessageDialog(null, "Categoria Registrada Con Exito");
-            limpiarCampos();
         }else{
             JOptionPane.showMessageDialog(null, "No se pudo registrar la Categoria");
         }
         limpiarTablaCategoria();
         listarCategorias();
+        limpiarCampos();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -244,6 +251,7 @@ public class Categorias extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Se modifico con exito");
                 limpiarTablaCategoria();
                 listarCategorias();
+                limpiarCampos();
             }
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -254,6 +262,23 @@ public class Categorias extends javax.swing.JPanel {
         txtidcategoria.setText(tblcategorias.getValueAt(fila, 0).toString());
         txtnomCategoria.setText(tblcategorias.getValueAt(fila, 1).toString());
     }//GEN-LAST:event_tblcategoriasMouseClicked
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        if(!txtidcategoria.getText().isEmpty()){
+            int confirmacion=JOptionPane.showConfirmDialog(null, "¿Es tas seguro de eliminar la categoria?","Confirmar",2);
+            if(confirmacion==0){
+                ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+                daoCt.eliminar(ct);
+                limpiarTablaCategoria();
+                listarCategorias();
+                limpiarCampos();
+                JOptionPane.showMessageDialog(null, "Se Elimino con exito la cetegoria");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     void limpiarCampos(){
@@ -267,10 +292,11 @@ public class Categorias extends javax.swing.JPanel {
             i=0-1;
         }
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialDos btnBuscar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEditar;
-    private RSMaterialComponent.RSButtonMaterialDos btnEliminar;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnEliminar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
