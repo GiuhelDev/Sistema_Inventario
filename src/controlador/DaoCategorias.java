@@ -93,4 +93,24 @@ public class DaoCategorias {
             return false;
         }
     }
+    
+    public boolean buscar(Categoria c){
+        String SQL="select * from categorias where idCategoria=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdCategoria());
+            rs=ps.executeQuery();
+            if(rs.next()){
+                c.setIdCategoria(rs.getInt(1));
+                c.setNomCategoria(rs.getString(2));
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }
