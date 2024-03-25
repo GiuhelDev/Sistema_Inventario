@@ -4,19 +4,46 @@
  */
 package vista;
 
+import controlador.DaoClientes;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.clientes;
+
 /**
  *
  * @author HELIO
  */
 public class Clientes extends javax.swing.JPanel {
+    
+    clientes c=new clientes();
+    DaoClientes dao=new DaoClientes();
+    DefaultTableModel modeloClientes=new DefaultTableModel();
 
     /**
      * Creates new form Clientes
      */
     public Clientes() {
         initComponents();
+        listarClientes();
     }
 
+    private void listarClientes(){
+        List<clientes> lista=dao.Listar();
+        modeloClientes=(DefaultTableModel) tablaclientes.getModel();
+        Object[] ob=new Object[7];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdCliente();
+            ob[1]=lista.get(i).getNombre();
+            ob[2]=lista.get(i).getApellido();
+            ob[3]=lista.get(i).getDocumento();
+            ob[4]=lista.get(i).getDireccion();
+            ob[5]=lista.get(i).getTelefono();
+            ob[6]=lista.get(i).getCorreo();
+            modeloClientes.addRow(ob);
+        }
+       tablaclientes.setModel(modeloClientes);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,7 +53,7 @@ public class Clientes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGuardar1 = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnicono = new RSMaterialComponent.RSButtonMaterialIconDos();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jpanelRound1 = new modelo.JpanelRound();
@@ -54,13 +81,13 @@ public class Clientes extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(238, 238, 238));
 
-        btnGuardar1.setBackground(new java.awt.Color(14, 76, 117));
-        btnGuardar1.setBackgroundHover(new java.awt.Color(14, 76, 117));
-        btnGuardar1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.GROUP);
-        btnGuardar1.setRound(25);
-        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
+        btnicono.setBackground(new java.awt.Color(14, 76, 117));
+        btnicono.setBackgroundHover(new java.awt.Color(14, 76, 117));
+        btnicono.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.GROUP);
+        btnicono.setRound(25);
+        btnicono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardar1ActionPerformed(evt);
+                btniconoActionPerformed(evt);
             }
         });
 
@@ -236,7 +263,7 @@ public class Clientes extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnicono, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -266,7 +293,7 @@ public class Clientes extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4))
-                    .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnicono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpanelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -283,13 +310,27 @@ public class Clientes extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+    private void btniconoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniconoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardar1ActionPerformed
+    }//GEN-LAST:event_btniconoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-       
+        c.setNombre(txtnombre.getText());
+        c.setApellido(txtapellido.getText());
+        c.setDocumento(txtdocumento.getText());
+        c.setDireccion(txtdireccion.getText());
+        c.setTelefono(txttelefono.getText());
+        c.setCorreo(txtcorreo.getText());
+        if(dao.insertar(c)){
+            JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
+            limpiarCampos();
+            limpiarTablaCategoria();
+            listarClientes();
+        }else{
+            JOptionPane.showMessageDialog(null, "No se pudo registrar el Cliente");
+        }
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -307,13 +348,29 @@ public class Clientes extends javax.swing.JPanel {
        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    void limpiarCampos(){
+        txtidcliente.setText("");
+        txtnombre.setText("");
+        txtapellido.setText("");
+        txtdocumento.setText("");
+        txtdireccion.setText("");
+        txttelefono.setText("");
+        txtcorreo.setText("");
+    }
+    
+    void limpiarTablaCategoria(){
+        for(int i=0;i<modeloClientes.getRowCount();i++){
+            modeloClientes.removeRow(i);
+            i=0-1;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEditar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEliminar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar1;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnicono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

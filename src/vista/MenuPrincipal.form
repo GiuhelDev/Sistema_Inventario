@@ -242,6 +242,9 @@
                   <Value id="GROUP"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientesActionPerformed"/>
+              </Events>
             </Component>
             <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnSalidas">
               <Properties>

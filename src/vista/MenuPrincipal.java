@@ -118,6 +118,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnClientes.setText("CLIENTES");
         btnClientes.setBackgroundHover(new java.awt.Color(50, 130, 181));
         btnClientes.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.GROUP);
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
 
         btnSalidas.setBackground(new java.awt.Color(14, 76, 117));
         btnSalidas.setText("SALIDAS");
@@ -242,6 +247,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnHome.setSelected(true);
         btnCategorias.setSelected(false);
+        btnClientes.setSelected(false);
         Home h=new Home();
         h.setSize(982,740);
         h.setLocation(0,0);
@@ -256,6 +262,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnCategorias.setSelected(true);
         btnHome.setSelected(false);
+        btnClientes.setSelected(false);
         Categorias c=new Categorias();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -270,6 +277,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        // TODO add your handling code here:
+        btnCategorias.setSelected(false);
+        btnHome.setSelected(false);
+        btnClientes.setSelected(true);
+        Clientes c=new Clientes();
+        c.setSize(982,740);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnClientesActionPerformed
 
     /**
      * @param args the command line arguments
