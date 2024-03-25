@@ -192,6 +192,11 @@ public class Clientes extends javax.swing.JPanel {
                 "ID", "Nombre", "Apellido", "Docuento", "Direccion", "Telefono", "Correo"
             }
         ));
+        tablaclientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaclientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaclientes);
 
         javax.swing.GroupLayout jpanelRound2Layout = new javax.swing.GroupLayout(jpanelRound2);
@@ -325,7 +330,7 @@ public class Clientes extends javax.swing.JPanel {
         if(dao.insertar(c)){
             JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
             limpiarCampos();
-            limpiarTablaCategoria();
+            limpiarTablaCLientes();
             listarClientes();
         }else{
             JOptionPane.showMessageDialog(null, "No se pudo registrar el Cliente");
@@ -335,7 +340,24 @@ public class Clientes extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-       
+       int fila=tablaclientes.getSelectedRow();
+        if(fila==-1&&txtidcliente.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
+        }else{
+            c.setIdCliente(Integer.parseInt(txtidcliente.getText()));
+            c.setNombre(txtnombre.getText());
+            c.setApellido(txtapellido.getText());
+            c.setDocumento(txtdocumento.getText());
+            c.setDireccion(txtdireccion.getText());
+            c.setTelefono(txttelefono.getText());
+            c.setCorreo(txtcorreo.getText());
+            if(dao.editar(c)){
+                JOptionPane.showMessageDialog(null, "Se modifico con exito");
+                limpiarTablaCLientes();
+                listarClientes();
+                limpiarCampos();
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -348,6 +370,18 @@ public class Clientes extends javax.swing.JPanel {
        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void tablaclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaclientesMouseClicked
+        // TODO add your handling code here:
+        int fila=tablaclientes.getSelectedRow();
+        txtidcliente.setText(tablaclientes.getValueAt(fila, 0).toString());
+        txtnombre.setText(tablaclientes.getValueAt(fila, 1).toString());
+        txtapellido.setText(tablaclientes.getValueAt(fila, 2).toString());
+        txtdocumento.setText(tablaclientes.getValueAt(fila, 3).toString());
+        txtdireccion.setText(tablaclientes.getValueAt(fila, 4).toString());
+        txttelefono.setText(tablaclientes.getValueAt(fila, 5).toString());
+        txtcorreo.setText(tablaclientes.getValueAt(fila, 6).toString());
+    }//GEN-LAST:event_tablaclientesMouseClicked
+
     void limpiarCampos(){
         txtidcliente.setText("");
         txtnombre.setText("");
@@ -358,7 +392,7 @@ public class Clientes extends javax.swing.JPanel {
         txtcorreo.setText("");
     }
     
-    void limpiarTablaCategoria(){
+    void limpiarTablaCLientes(){
         for(int i=0;i<modeloClientes.getRowCount();i++){
             modeloClientes.removeRow(i);
             i=0-1;

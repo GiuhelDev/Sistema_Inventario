@@ -57,7 +57,7 @@ public class DaoClientes {
                 c.setNombre(rs.getString(2));
                 c.setApellido(rs.getString(3));
                 c.setDocumento(rs.getString(4));
-                c.setDireccion(rs.getString(6));
+                c.setDireccion(rs.getString(5));
                 c.setTelefono(rs.getString(6));
                 c.setCorreo(rs.getString(7));
                 lista.add(c);
@@ -66,5 +66,29 @@ public class DaoClientes {
             JOptionPane.showConfirmDialog(null, e);
         }
         return lista;
+    }
+    
+    public boolean editar(clientes c){
+        String SQL="update clientes set nombre=?,apellido=?,documento=?,direccion=?,telefono=?,correo=? where idCliente=?";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setString(1, c.getNombre());
+            ps.setString(2, c.getApellido());
+            ps.setString(3, c.getDocumento());
+            ps.setString(4, c.getDireccion());
+            ps.setString(5, c.getTelefono());
+            ps.setString(6, c.getCorreo());
+            ps.setInt(7, c.getIdCliente());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
     }
 }
