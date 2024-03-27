@@ -91,4 +91,47 @@ public class DaoClientes {
             return false;
         }
     }
+    
+    public boolean eliminar(clientes c){
+        String SQL="delete from clientes where idCliente=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdCliente());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+    
+    public boolean buscar(clientes c){
+        String SQL="select * from clientes where documento=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setString(1, c.getDocumento());
+            rs=ps.executeQuery();
+            if(rs.next()){
+                c.setIdCliente(rs.getInt(1));
+                c.setNombre(rs.getString(2));
+                c.setApellido(rs.getString(3));
+                c.setDocumento(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setTelefono(rs.getString(6));
+                c.setCorreo(rs.getString(7));
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }

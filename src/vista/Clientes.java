@@ -362,12 +362,36 @@ public class Clientes extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-       
+       if(!txtidcliente.getText().isEmpty()){
+            int confirmacion=JOptionPane.showConfirmDialog(null, "¿Es tas seguro de eliminar el cliente?","Confirmar",2);
+            if(confirmacion==0){
+                c.setIdCliente(Integer.parseInt(txtidcliente.getText()));
+                dao.eliminar(c);
+                limpiarTablaCLientes();
+                listarClientes();
+                limpiarCampos();
+                JOptionPane.showMessageDialog(null, "Se Elimino con exito el Cliente");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-       
+       c.setDocumento(txtdocumento.getText());
+        if(dao.buscar(c)){
+            txtidcliente.setText(c.getIdCliente()+"");
+            txtnombre.setText(c.getNombre());
+            txtapellido.setText(c.getApellido());
+            txtdocumento.setText(c.getDocumento());
+            txtdireccion.setText(c.getDireccion());
+            txttelefono.setText(c.getTelefono());
+            txtcorreo.setText(c.getCorreo());
+        }else{
+            JOptionPane.showMessageDialog(null, "El Cliente No Existe");
+            limpiarCampos();
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tablaclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaclientesMouseClicked
