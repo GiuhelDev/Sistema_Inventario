@@ -6,6 +6,7 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import notification.Notification;
 
 /**
  *
@@ -326,6 +327,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 new MenuPrincipal().setVisible(true);
             }
         });
+    }
+   
+    public void exito(String texto){
+        Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, texto);
+        panel.showNotification();
+    }
+    
+    public void advertencia(String texto){
+        Notification panel = new Notification(this, Notification.Type.WARNING, Notification.Location.TOP_RIGHT, texto);
+        panel.showNotification();
+    }
+    
+    public void error(String texto){
+        Notification panel = new Notification(this, Notification.Type.ERROR, Notification.Location.TOP_RIGHT, texto);
+        panel.showNotification();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

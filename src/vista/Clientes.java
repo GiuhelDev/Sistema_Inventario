@@ -328,12 +328,16 @@ public class Clientes extends javax.swing.JPanel {
         c.setTelefono(txttelefono.getText());
         c.setCorreo(txtcorreo.getText());
         if(dao.insertar(c)){
-            JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
+            //JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
+            MenuPrincipal m=new MenuPrincipal();
+            m.exito("Cliente Registrado Con Exito");
             limpiarCampos();
             limpiarTablaCLientes();
             listarClientes();
         }else{
-            JOptionPane.showMessageDialog(null, "No se pudo registrar el Cliente");
+            //JOptionPane.showMessageDialog(null, "No se pudo registrar el Cliente");
+            MenuPrincipal m=new MenuPrincipal();
+            m.error("No se pudo registrar el Cliente");
         }
         
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -342,7 +346,9 @@ public class Clientes extends javax.swing.JPanel {
         // TODO add your handling code here:
        int fila=tablaclientes.getSelectedRow();
         if(fila==-1&&txtidcliente.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
+            //JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione un Cliente");
         }else{
             c.setIdCliente(Integer.parseInt(txtidcliente.getText()));
             c.setNombre(txtnombre.getText());
@@ -352,10 +358,15 @@ public class Clientes extends javax.swing.JPanel {
             c.setTelefono(txttelefono.getText());
             c.setCorreo(txtcorreo.getText());
             if(dao.editar(c)){
-                JOptionPane.showMessageDialog(null, "Se modifico con exito");
+                //JOptionPane.showMessageDialog(null, "Se modifico con exito");
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se modifico con exito");
                 limpiarTablaCLientes();
                 listarClientes();
                 limpiarCampos();
+            }else{
+                MenuPrincipal m=new MenuPrincipal();
+                m.error("Erorr al modificar el cliente");
             }
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -370,10 +381,13 @@ public class Clientes extends javax.swing.JPanel {
                 limpiarTablaCLientes();
                 listarClientes();
                 limpiarCampos();
-                JOptionPane.showMessageDialog(null, "Se Elimino con exito el Cliente");
+                //JOptionPane.showMessageDialog(null, "Se Elimino con exito el Cliente");
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se Elimino con exito el Cliente");
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione un cliente");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -389,7 +403,9 @@ public class Clientes extends javax.swing.JPanel {
             txttelefono.setText(c.getTelefono());
             txtcorreo.setText(c.getCorreo());
         }else{
-            JOptionPane.showMessageDialog(null, "El Cliente No Existe");
+            //JOptionPane.showMessageDialog(null, "El Cliente No Existe");
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("El Cliente No Existe");
             limpiarCampos();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

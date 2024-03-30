@@ -16,6 +16,8 @@ public class Categorias extends javax.swing.JPanel {
     DaoCategorias daoCt=new DaoCategorias();
     DefaultTableModel modeloCategoria=new DefaultTableModel();
     
+    MenuPrincipal m=new MenuPrincipal();
+    
 
     /**
      * Creates new form Categorias
@@ -263,9 +265,11 @@ public class Categorias extends javax.swing.JPanel {
         // TODO add your handling code here:
          ct.setNomCategoria(txtnomCategoria.getText());
         if(daoCt.insertar(ct)){
-            JOptionPane.showMessageDialog(null, "Categoria Registrada Con Exito");
+            //JOptionPane.showMessageDialog(null, "Categoria Registrada Con Exito");
+            m.exito("Categoria Registrada Con Exito");
         }else{
-            JOptionPane.showMessageDialog(null, "No se pudo registrar la Categoria");
+            //JOptionPane.showMessageDialog(null, "No se pudo registrar la Categoria");
+            m.error("No se pudo registrar la Categoria");
         }
         limpiarTablaCategoria();
         listarCategorias();
@@ -276,12 +280,14 @@ public class Categorias extends javax.swing.JPanel {
         // TODO add your handling code here:
         int fila=tblcategorias.getSelectedRow();
         if(fila==-1&&txtidcategoria.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+            //JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+            m.advertencia("Seleccione una categoria");
         }else{
             ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
             ct.setNomCategoria(txtnomCategoria.getText());
             if(daoCt.editar(ct)){
-                JOptionPane.showMessageDialog(null, "Se modifico con exito");
+                //JOptionPane.showMessageDialog(null, "Se modifico con exito");
+                m.exito("Se modifico con exito");
                 limpiarTablaCategoria();
                 listarCategorias();
                 limpiarCampos();
@@ -306,10 +312,12 @@ public class Categorias extends javax.swing.JPanel {
                 limpiarTablaCategoria();
                 listarCategorias();
                 limpiarCampos();
-                JOptionPane.showMessageDialog(null, "Se Elimino con exito la cetegoria");
+                //JOptionPane.showMessageDialog(null, "Se Elimino con exito la cetegoria");
+                m.exito("Se Elimino con exito la cetegoria");
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+            //JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+            m.advertencia("Seleccione una categoria");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -320,7 +328,8 @@ public class Categorias extends javax.swing.JPanel {
             txtidcategoria.setText(ct.getIdCategoria()+"");
             txtnomCategoria.setText(ct.getNomCategoria());
         }else{
-            JOptionPane.showMessageDialog(null, "La Categoria No Existe");
+            //JOptionPane.showMessageDialog(null, "La Categoria No Existe");
+            m.error("La Categoria No Existe");
             limpiarCampos();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

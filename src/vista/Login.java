@@ -9,7 +9,7 @@ import controlador.DaoUsuario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import modelo.usuarios;
-
+import notification.Notification;
 
 /**
  *
@@ -182,12 +182,16 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         us=daoU.login(txtusuario.getText(), txtpassword.getText());
         if(us.getUsaurio()!=null && us.getPassword()!=null){
-            JOptionPane.showMessageDialog(null, "Bienvenido");
+            //JOptionPane.showMessageDialog(null, "Bienvenido");
+            Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, "Bienvenido");
+            panel.showNotification();
             MenuPrincipal m=new MenuPrincipal();
             m.setVisible(true);
             dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Aceso denegado");
+            //JOptionPane.showMessageDialog(null, "Aceso denegado");
+            Notification panel = new Notification(this, Notification.Type.ERROR, Notification.Location.TOP_RIGHT, "Aceso denegado");
+            panel.showNotification();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
