@@ -114,6 +114,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEntradas.setText("ENTRADAS");
         btnEntradas.setBackgroundHover(new java.awt.Color(50, 130, 181));
         btnEntradas.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.KEYBOARD_ARROW_DOWN);
+        btnEntradas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntradasActionPerformed(evt);
+            }
+        });
 
         btnClientes.setBackground(new java.awt.Color(14, 76, 117));
         btnClientes.setText("CLIENTES");
@@ -264,6 +269,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCategorias.setSelected(true);
         btnHome.setSelected(false);
         btnClientes.setSelected(false);
+        btnEntradas.setSelected(false);
         Categorias c=new Categorias();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -284,6 +290,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCategorias.setSelected(false);
         btnHome.setSelected(false);
         btnClientes.setSelected(true);
+        btnEntradas.setSelected(false);
         Clientes c=new Clientes();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -293,6 +300,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         contenedor.revalidate();
         contenedor.repaint();
     }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradasActionPerformed
+        // TODO add your handling code here:
+        btnCategorias.setSelected(false);
+        btnHome.setSelected(false);
+        btnClientes.setSelected(false);
+        btnEntradas.setSelected(true);
+        Entradas c=new Entradas();
+        c.setSize(982,740);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnEntradasActionPerformed
 
     /**
      * @param args the command line arguments

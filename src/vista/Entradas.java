@@ -4,11 +4,17 @@
  */
 package vista;
 
+import controlador.DaoEntradas;
+import modelo.entradas;
+
 /**
  *
  * @author HELIO
  */
 public class Entradas extends javax.swing.JPanel {
+    
+    entradas e=new entradas();
+    DaoEntradas dao=new DaoEntradas();
 
     /**
      * Creates new form Entradas
@@ -442,8 +448,25 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        
-
+        e.setNomProd(txtnombreP.getText());
+        e.setStock(Integer.parseInt(txtstock.getText()));
+        e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+        e.setFecha(txtfecha.getText());
+        e.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
+        e.setPrecioE(Double.parseDouble(txtprecioE.getText()));
+        e.setPrecioV(Double.parseDouble(txtprecioV.getText()));
+        e.setSubtotal(Double.parseDouble(txtsubtotal.getText()));
+        e.setTotal(Double.parseDouble(txtTotal.getText()));
+        if(dao.insertar(e)){
+            MenuPrincipal m=new MenuPrincipal();
+            m.exito("Entrada Registrada Con Exito");
+            //limpiarCampos();
+            //limpiarTablaCLientes();
+            //listarClientes();
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.error("No se pudo registrar la entrada");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
