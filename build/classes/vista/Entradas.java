@@ -5,8 +5,6 @@
 package vista;
 
 import controlador.DaoEntradas;
-import java.sql.Date;
-import java.util.Calendar;
 import modelo.entradas;
 
 /**
@@ -49,9 +47,11 @@ public class Entradas extends javax.swing.JPanel {
         txtprecioE = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtprecioV = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtsubtotal = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
-        dateFecha = new com.toedter.calendar.JDateChooser();
+        txtfecha = new javax.swing.JTextField();
         jpanelRound2 = new modelo.JpanelRound();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -109,13 +109,9 @@ public class Entradas extends javax.swing.JPanel {
 
         jLabel7.setText("Precio Entrada.");
 
-        txtprecioE.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtprecioEKeyReleased(evt);
-            }
-        });
-
         jLabel8.setText("Precio Venta");
+
+        jLabel9.setText("Sub total");
 
         jLabel10.setText("Total");
 
@@ -128,6 +124,8 @@ public class Entradas extends javax.swing.JPanel {
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel10)
                     .addComponent(txtTotal)
+                    .addComponent(jLabel9)
+                    .addComponent(txtsubtotal)
                     .addComponent(jLabel8)
                     .addComponent(txtprecioV)
                     .addComponent(jLabel7)
@@ -143,7 +141,7 @@ public class Entradas extends javax.swing.JPanel {
                             .addComponent(txtidentrada)
                             .addComponent(txtnombreP)
                             .addComponent(txtstock, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
-                    .addComponent(dateFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtfecha))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jpanelRound1Layout.setVerticalGroup(
@@ -164,7 +162,7 @@ public class Entradas extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -173,11 +171,15 @@ public class Entradas extends javax.swing.JPanel {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtprecioV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         jpanelRound2.setBackground(new java.awt.Color(255, 255, 255));
@@ -446,29 +448,24 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        Calendar cal;
-        int d,m,a;
-        cal=dateFecha.getCalendar();
-        d=cal.get(Calendar.DAY_OF_MONTH);
-        m=cal.get(Calendar.MONTH);
-        a=cal.get(Calendar.YEAR)-1900;
         e.setNomProd(txtnombreP.getText());
         e.setStock(Integer.parseInt(txtstock.getText()));
         e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-        e.setFecha(new Date(a,m,d));
+        e.setFecha(txtfecha.getText());
         e.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
         e.setPrecioE(Double.parseDouble(txtprecioE.getText()));
         e.setPrecioV(Double.parseDouble(txtprecioV.getText()));
+        e.setSubtotal(Double.parseDouble(txtsubtotal.getText()));
         e.setTotal(Double.parseDouble(txtTotal.getText()));
         if(dao.insertar(e)){
-            MenuPrincipal menu=new MenuPrincipal();
-            menu.exito("Entrada Registrada Con Exito");
+            MenuPrincipal m=new MenuPrincipal();
+            m.exito("Entrada Registrada Con Exito");
             //limpiarCampos();
             //limpiarTablaCLientes();
             //listarClientes();
         }else{
-            MenuPrincipal menu=new MenuPrincipal();
-            menu.error("No se pudo registrar la entrada");
+            MenuPrincipal m=new MenuPrincipal();
+            m.error("No se pudo registrar la entrada");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -494,14 +491,6 @@ public class Entradas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscaProveedorActionPerformed
 
-    private void txtprecioEKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioEKeyReleased
-            // TODO add your handling code here:
-    double cant,precio;
-    cant=Double.parseDouble(txtstock.getText());
-    precio=Double.parseDouble(txtprecioE.getText());
-    txtTotal.setText(cant*precio+"");
-    }//GEN-LAST:event_txtprecioEKeyReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscaProveedor;
@@ -511,7 +500,6 @@ public class Entradas extends javax.swing.JPanel {
     private RSMaterialComponent.RSButtonMaterialIconDos btnEliminar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnicono;
-    private com.toedter.calendar.JDateChooser dateFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -527,6 +515,7 @@ public class Entradas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
@@ -534,6 +523,7 @@ public class Entradas extends javax.swing.JPanel {
     private javax.swing.JTable tablaEntradas;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtcategoria;
+    private javax.swing.JTextField txtfecha;
     private javax.swing.JTextField txtidcategoria;
     private javax.swing.JTextField txtidentrada;
     private javax.swing.JTextField txtidproveedor;
@@ -542,5 +532,6 @@ public class Entradas extends javax.swing.JPanel {
     private javax.swing.JTextField txtprecioV;
     private javax.swing.JTextField txtproveedor;
     private javax.swing.JTextField txtstock;
+    private javax.swing.JTextField txtsubtotal;
     // End of variables declaration//GEN-END:variables
 }

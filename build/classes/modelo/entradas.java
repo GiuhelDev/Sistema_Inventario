@@ -4,24 +4,23 @@
  */
 package modelo;
 
-import java.sql.Date;
-
 public class entradas {
     
    int identrada										;
    String nomProd;
    int stock;
    int idCategoria;
-   Date fecha;
+   String fecha;
    int idproveedor;
    double precioE;
    double precioV;
+   double subtotal;
    double total;
 
     public entradas() {
     }
 
-    public entradas(int identrada, String nomProd, int stock, int idCategoria, Date fecha, int idproveedor, double precioE, double precioV, double total) {
+    public entradas(int identrada, String nomProd, int stock, int idCategoria, String fecha, int idproveedor, double precioE, double precioV, double subtotal, double total) {
         this.identrada = identrada;
         this.nomProd = nomProd;
         this.stock = stock;
@@ -30,6 +29,7 @@ public class entradas {
         this.idproveedor = idproveedor;
         this.precioE = precioE;
         this.precioV = precioV;
+        this.subtotal = subtotal;
         this.total = total;
     }
 
@@ -91,7 +91,13 @@ public class entradas {
         this.precioV = precioV;
     }
 
-    
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
 
     public double getTotal() {
         return total;
@@ -101,11 +107,11 @@ public class entradas {
         this.total = total;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
    
