@@ -365,6 +365,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtidcategoria">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
@@ -372,6 +375,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtcategoria">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnBuscarCategoria">
           <Properties>

@@ -483,7 +483,8 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnBuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCategoriaActionPerformed
         // TODO add your handling code here:
-       
+        BuscaCategoria m=new BuscaCategoria();
+        m.setVisible(true);
     }//GEN-LAST:event_btnBuscarCategoriaActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
@@ -533,8 +534,8 @@ public class Entradas extends javax.swing.JPanel {
     private modelo.JpanelRound jpanelRound3;
     private javax.swing.JTable tablaEntradas;
     private javax.swing.JTextField txtTotal;
-    private javax.swing.JTextField txtcategoria;
-    private javax.swing.JTextField txtidcategoria;
+    public static javax.swing.JTextField txtcategoria;
+    public static javax.swing.JTextField txtidcategoria;
     private javax.swing.JTextField txtidentrada;
     private javax.swing.JTextField txtidproveedor;
     private javax.swing.JTextField txtnombreP;
