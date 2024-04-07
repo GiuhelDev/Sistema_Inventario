@@ -138,6 +138,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnProveedor.setBackground(new java.awt.Color(14, 76, 117));
         btnProveedor.setText("PROVEEDOR");
         btnProveedor.setBackgroundHover(new java.awt.Color(50, 130, 181));
+        btnProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedorActionPerformed(evt);
+            }
+        });
 
         btnAcercaDe.setBackground(new java.awt.Color(14, 76, 117));
         btnAcercaDe.setText("ACERCA DE");
@@ -254,6 +259,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnHome.setSelected(true);
         btnCategorias.setSelected(false);
         btnClientes.setSelected(false);
+        btnEntradas.setSelected(false);
+        btnProveedor.setSelected(false);
         Home h=new Home();
         h.setSize(982,740);
         h.setLocation(0,0);
@@ -270,6 +277,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnHome.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
+        btnProveedor.setSelected(false);
         Categorias c=new Categorias();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -291,6 +299,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnHome.setSelected(false);
         btnClientes.setSelected(true);
         btnEntradas.setSelected(false);
+        btnProveedor.setSelected(false);
         Clientes c=new Clientes();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -307,6 +316,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnHome.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(true);
+        btnProveedor.setSelected(false);
         Entradas c=new Entradas();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -316,6 +326,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         contenedor.revalidate();
         contenedor.repaint();
     }//GEN-LAST:event_btnEntradasActionPerformed
+
+    private void btnProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedorActionPerformed
+        // TODO add your handling code here:
+        btnCategorias.setSelected(false);
+        btnHome.setSelected(false);
+        btnClientes.setSelected(false);
+        btnEntradas.setSelected(false);
+        btnProveedor.setSelected(true);
+        Proveedor c=new Proveedor();
+        c.setSize(982,740);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnProveedorActionPerformed
 
     /**
      * @param args the command line arguments

@@ -273,6 +273,9 @@
                   <Color blue="b5" green="82" red="32" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProveedorActionPerformed"/>
+              </Events>
             </Component>
             <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnAcercaDe">
               <Properties>
