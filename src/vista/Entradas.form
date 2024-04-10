@@ -482,6 +482,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtidproveedor">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>
@@ -489,6 +492,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtproveedor">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnBuscaProveedor">
           <Properties>

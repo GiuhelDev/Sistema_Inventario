@@ -5,6 +5,7 @@
 package vista;
 
 import controlador.DaoProveedor;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.proveedor;
 
@@ -23,8 +24,26 @@ public class Proveedor extends javax.swing.JPanel {
      */
     public Proveedor() {
         initComponents();
+        listarProveedor();
     }
 
+   private void listarProveedor(){
+        List<proveedor> lista=dao.Listar();
+        modelo=(DefaultTableModel) tablaproveedores.getModel();
+        Object[] ob=new Object[8];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdProveedor();
+            ob[1]=lista.get(i).getNombre();
+            ob[2]=lista.get(i).getApellido();
+            ob[3]=lista.get(i).getDocumento();
+            ob[4]=lista.get(i).getRsocial();
+            ob[5]=lista.get(i).getDireccion();
+            ob[6]=lista.get(i).getTelefono();
+            ob[7]=lista.get(i).getCorreo();
+            modelo.addRow(ob);
+        }
+       tablaproveedores.setModel(modelo);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -331,14 +350,12 @@ public class Proveedor extends javax.swing.JPanel {
         p.setTelefono(txttelefono.getText());
         p.setCorreo(txtcorreo.getText());
         if(dao.insertar(p)){
-            //JOptionPane.showMessageDialog(null, "Cliente Registrado Con Exito");
             MenuPrincipal m=new MenuPrincipal();
             m.exito("Proveedor Registrado Con Exito");
-            //limpiarCampos();
-            //limpiarTablaCLientes();
-            //listarClientes();
+            limpiarCampos();
+            limpiarTablaProveedor();
+            listarProveedor();
         }else{
-            //JOptionPane.showMessageDialog(null, "No se pudo registrar el Cliente");
             MenuPrincipal m=new MenuPrincipal();
             m.error("No se pudo registrar el Proveedor");
         }
@@ -358,7 +375,23 @@ public class Proveedor extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-
+    void limpiarCampos(){
+        txtid.setText("");
+        txtnombre.setText("");
+        txtapellido.setText("");
+        txtdocumento.setText("");
+        txtdireccion.setText("");
+        txttelefono.setText("");
+        txtcorreo.setText("");
+        txtRsocial.setText("");
+    }
+    
+    void limpiarTablaProveedor(){
+        for(int i=0;i<modelo.getRowCount();i++){
+            modelo.removeRow(i);
+            i=0-1;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEditar;

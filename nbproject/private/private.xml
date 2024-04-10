@@ -5,9 +5,11 @@
         <group>
             <file>file:/D:/Giuhel/sis%20ventas%20java/Tutoriales/Sistema_Inventario/src/modelo/proveedor.java</file>
             <file>file:/D:/Giuhel/sis%20ventas%20java/Tutoriales/Sistema_Inventario/src/controlador/DaoProveedor.java</file>
+            <file>file:/D:/Giuhel/sis%20ventas%20java/Tutoriales/Sistema_Inventario/src/controlador/DaoCategorias.java</file>
             <file>file:/D:/Giuhel/sis%20ventas%20java/Tutoriales/Sistema_Inventario/src/vista/Entradas.java</file>
             <file>file:/D:/Giuhel/sis%20ventas%20java/Tutoriales/Sistema_Inventario/src/vista/Proveedor.java</file>
             <file>file:/D:/Giuhel/sis%20ventas%20java/Tutoriales/Sistema_Inventario/src/vista/MenuPrincipal.java</file>
+            <file>file:/D:/Giuhel/sis%20ventas%20java/Tutoriales/Sistema_Inventario/src/vista/BuscarDato.java</file>
         </group>
     </open-files>
 </project-private>

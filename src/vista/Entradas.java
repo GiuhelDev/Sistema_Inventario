@@ -483,7 +483,8 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnBuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCategoriaActionPerformed
         // TODO add your handling code here:
-        BuscaCategoria m=new BuscaCategoria();
+        BuscarDato.tipo=true;
+        BuscarDato m=new BuscarDato();
         m.setVisible(true);
     }//GEN-LAST:event_btnBuscarCategoriaActionPerformed
 
@@ -493,6 +494,10 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnBuscaProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaProveedorActionPerformed
         // TODO add your handling code here:
+        BuscarDato.tipo=false;
+        BuscarDato m=new BuscarDato();
+        m.setVisible(true);
+
     }//GEN-LAST:event_btnBuscaProveedorActionPerformed
 
     private void txtprecioEKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioEKeyReleased
@@ -537,11 +542,11 @@ public class Entradas extends javax.swing.JPanel {
     public static javax.swing.JTextField txtcategoria;
     public static javax.swing.JTextField txtidcategoria;
     private javax.swing.JTextField txtidentrada;
-    private javax.swing.JTextField txtidproveedor;
+    public static javax.swing.JTextField txtidproveedor;
     private javax.swing.JTextField txtnombreP;
     private javax.swing.JTextField txtprecioE;
     private javax.swing.JTextField txtprecioV;
-    private javax.swing.JTextField txtproveedor;
+    public static javax.swing.JTextField txtproveedor;
     private javax.swing.JTextField txtstock;
     // End of variables declaration//GEN-END:variables
 }

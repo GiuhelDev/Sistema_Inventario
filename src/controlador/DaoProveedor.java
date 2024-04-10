@@ -4,6 +4,8 @@ package controlador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.conexion;
 import modelo.proveedor;
@@ -37,5 +39,30 @@ public class DaoProveedor {
             JOptionPane.showConfirmDialog(null, e);
             return false;
         }
+    }
+
+ public List Listar(){
+        List<proveedor> lista=new ArrayList<>();
+        String SQL="select * from proveedor";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                proveedor c=new proveedor();
+                c.setIdProveedor(rs.getInt(1));
+                c.setNombre(rs.getString(2));
+                c.setApellido(rs.getString(3));
+                c.setDocumento(rs.getString(4));
+                c.setRsocial(rs.getString(5));
+                c.setDireccion(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setCorreo(rs.getString(8));
+                lista.add(c);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return lista;
     }
 }
