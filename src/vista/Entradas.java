@@ -7,6 +7,8 @@ package vista;
 import controlador.DaoEntradas;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import modelo.entradas;
 
 /**
@@ -17,14 +19,34 @@ public class Entradas extends javax.swing.JPanel {
     
     entradas e=new entradas();
     DaoEntradas dao=new DaoEntradas();
+    DefaultTableModel modelo=new DefaultTableModel();
 
     /**
      * Creates new form Entradas
      */
     public Entradas() {
         initComponents();
+        listarEntradas();
     }
 
+    private void listarEntradas(){
+        List<entradas> lista=dao.Listar();
+        modelo=(DefaultTableModel) tablaEntradas.getModel();
+        Object[] ob=new Object[9];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdentrada();
+            ob[1]=lista.get(i).getNomProd();
+            ob[2]=lista.get(i).getStock();
+            ob[3]=lista.get(i).getIdCategoria();
+            ob[4]=lista.get(i).getFecha();
+            ob[5]=lista.get(i).getIdproveedor();
+            ob[6]=lista.get(i).getPrecioE();
+            ob[7]=lista.get(i).getPrecioV();
+            ob[8]=lista.get(i).getTotal();
+            modelo.addRow(ob);
+        }
+       tablaEntradas.setModel(modelo);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,12 +88,13 @@ public class Entradas extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         txtproveedor = new javax.swing.JTextField();
         btnBuscaProveedor = new RSMaterialComponent.RSButtonMaterialIconDos();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaEntradas = new javax.swing.JTable();
         btnGuardar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnEditar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnEliminar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnBuscar1 = new RSMaterialComponent.RSButtonMaterialIconDos();
+        jpanelRound4 = new modelo.JpanelRound();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaEntradas = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(238, 238, 238));
         setPreferredSize(new java.awt.Dimension(982, 740));
@@ -124,27 +147,26 @@ public class Entradas extends javax.swing.JPanel {
         jpanelRound1Layout.setHorizontalGroup(
             jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanelRound1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel10)
-                    .addComponent(txtTotal)
-                    .addComponent(jLabel8)
-                    .addComponent(txtprecioV)
-                    .addComponent(jLabel7)
-                    .addComponent(txtprecioE)
-                    .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jpanelRound1Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(215, 215, 215))
+                .addContainerGap()
+                .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtnombreP)
+                    .addGroup(jpanelRound1Layout.createSequentialGroup()
                         .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel3)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2)
-                            .addComponent(txtidentrada)
-                            .addComponent(txtnombreP)
-                            .addComponent(txtstock, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
-                    .addComponent(dateFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(txtidentrada, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtstock)
+                    .addComponent(dateFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(txtprecioE)
+                    .addComponent(txtprecioV)
+                    .addComponent(txtTotal))
+                .addContainerGap())
         );
         jpanelRound1Layout.setVerticalGroup(
             jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,19 +336,6 @@ public class Entradas extends javax.swing.JPanel {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        tablaEntradas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaEntradas);
-
         btnGuardar.setBackground(new java.awt.Color(14, 76, 117));
         btnGuardar.setText("Guardar");
         btnGuardar.setBackgroundHover(new java.awt.Color(50, 130, 181));
@@ -371,6 +380,43 @@ public class Entradas extends javax.swing.JPanel {
             }
         });
 
+        jpanelRound4.setBackground(new java.awt.Color(255, 255, 255));
+        jpanelRound4.setRoundBottomLeft(25);
+        jpanelRound4.setRoundBottomRight(25);
+        jpanelRound4.setRoundTopLeft(25);
+        jpanelRound4.setRoundTopRight(25);
+
+        tablaEntradas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Producto", "Stock", "IDCategoria", "Fecha", "IDProveedor", "Precio E", "Precio V", "Total"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaEntradas);
+
+        javax.swing.GroupLayout jpanelRound4Layout = new javax.swing.GroupLayout(jpanelRound4);
+        jpanelRound4.setLayout(jpanelRound4Layout);
+        jpanelRound4Layout.setHorizontalGroup(
+            jpanelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 721, Short.MAX_VALUE)
+            .addGroup(jpanelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpanelRound4Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jpanelRound4Layout.setVerticalGroup(
+            jpanelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jpanelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpanelRound4Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -383,32 +429,30 @@ public class Entradas extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel1)))
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jpanelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jpanelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
                                 .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(jpanelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jpanelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jpanelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,16 +471,15 @@ public class Entradas extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jpanelRound2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jpanelRound3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(jpanelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -463,9 +506,9 @@ public class Entradas extends javax.swing.JPanel {
         if(dao.insertar(e)){
             MenuPrincipal menu=new MenuPrincipal();
             menu.exito("Entrada Registrada Con Exito");
-            //limpiarCampos();
-            //limpiarTablaCLientes();
-            //listarClientes();
+            limpiarCampos();
+            limpiarTablaEntradas();
+            listarEntradas();
         }else{
             MenuPrincipal menu=new MenuPrincipal();
             menu.error("No se pudo registrar la entrada");
@@ -509,6 +552,26 @@ public class Entradas extends javax.swing.JPanel {
     }//GEN-LAST:event_txtprecioEKeyReleased
 
 
+    void limpiarCampos(){
+        txtidcategoria.setText("");
+        txtnombreP.setText("");
+        txtstock.setText("");
+        txtprecioE.setText("");
+        txtprecioV.setText("");
+        txtTotal.setText("");
+        txtidcategoria.setText("");
+        txtcategoria.setText("");
+        txtidproveedor.setText("");
+        txtproveedor.setText("");
+    }
+    
+    void limpiarTablaEntradas(){
+        for(int i=0;i<modelo.getRowCount();i++){
+            modelo.removeRow(i);
+            i=0-1;
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscaProveedor;
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar1;
@@ -537,6 +600,7 @@ public class Entradas extends javax.swing.JPanel {
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
     private modelo.JpanelRound jpanelRound3;
+    private modelo.JpanelRound jpanelRound4;
     private javax.swing.JTable tablaEntradas;
     private javax.swing.JTextField txtTotal;
     public static javax.swing.JTextField txtcategoria;
