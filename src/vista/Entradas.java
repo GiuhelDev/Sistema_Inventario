@@ -4,12 +4,16 @@
  */
 package vista;
 
+import controlador.DaoCategorias;
 import controlador.DaoEntradas;
+import controlador.DaoProveedor;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import modelo.Categoria;
 import modelo.entradas;
+import modelo.proveedor;
 
 /**
  *
@@ -18,7 +22,11 @@ import modelo.entradas;
 public class Entradas extends javax.swing.JPanel {
     
     entradas e=new entradas();
+    Categoria ct=new Categoria();
+    proveedor pr=new proveedor();
     DaoEntradas dao=new DaoEntradas();
+    DaoCategorias daoC=new DaoCategorias();
+    DaoProveedor daoP=new DaoProveedor();
     DefaultTableModel modelo=new DefaultTableModel();
 
     /**
@@ -394,6 +402,11 @@ public class Entradas extends javax.swing.JPanel {
                 "ID", "Producto", "Stock", "IDCategoria", "Fecha", "IDProveedor", "Precio E", "Precio V", "Total"
             }
         ));
+        tablaEntradas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaEntradasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaEntradas);
 
         javax.swing.GroupLayout jpanelRound4Layout = new javax.swing.GroupLayout(jpanelRound4);
@@ -517,7 +530,39 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        
+        int fila=tablaEntradas.getSelectedRow();
+        if(fila==-1&&txtidentrada.getText().isEmpty()){
+            //JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione una Entrada");
+        }else{
+        Calendar cal;
+        int d,m,a;
+        cal=dateFecha.getCalendar();
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        m=cal.get(Calendar.MONTH);
+        a=cal.get(Calendar.YEAR)-1900;
+        e.setNomProd(txtnombreP.getText());
+        e.setStock(Integer.parseInt(txtstock.getText()));
+        e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+        e.setFecha(new Date(a,m,d));
+        e.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
+        e.setPrecioE(Double.parseDouble(txtprecioE.getText()));
+        e.setPrecioV(Double.parseDouble(txtprecioV.getText()));
+        e.setTotal(Double.parseDouble(txtTotal.getText()));
+        e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
+            if(dao.editar(e)){
+                //JOptionPane.showMessageDialog(null, "Se modifico con exito");
+                MenuPrincipal m1=new MenuPrincipal();
+                m1.exito("Se modifico con exito");
+                limpiarCampos();
+                limpiarTablaEntradas();
+                listarEntradas();
+            }else{
+                MenuPrincipal m2=new MenuPrincipal();
+                m2.error("Erorr al modificar la entrada");
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -550,6 +595,34 @@ public class Entradas extends javax.swing.JPanel {
     precio=Double.parseDouble(txtprecioE.getText());
     txtTotal.setText(cant*precio+"");
     }//GEN-LAST:event_txtprecioEKeyReleased
+
+    private void tablaEntradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEntradasMouseClicked
+        // TODO add your handling code here:
+        int fila=tablaEntradas.getSelectedRow();
+        txtidentrada.setText(tablaEntradas.getValueAt(fila, 0).toString());
+        txtnombreP.setText(tablaEntradas.getValueAt(fila, 1).toString());
+        txtstock.setText(tablaEntradas.getValueAt(fila, 2).toString());
+        txtidcategoria.setText(tablaEntradas.getValueAt(fila, 3).toString());
+        dateFecha.setDate(Date.valueOf(tablaEntradas.getValueAt(fila, 4).toString()));
+        txtidproveedor.setText(tablaEntradas.getValueAt(fila, 5).toString());
+        txtprecioE.setText(tablaEntradas.getValueAt(fila, 6).toString());
+        txtprecioV.setText(tablaEntradas.getValueAt(fila, 7).toString());
+        txtTotal.setText(tablaEntradas.getValueAt(fila, 8).toString());
+
+        ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+        if(daoC.buscar(ct)){
+            txtcategoria.setText(ct.getNomCategoria());
+        }else{
+            txtcategoria.setText("Error");
+        }
+
+        pr.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
+        if(daoP.buscar(pr)){
+            txtproveedor.setText(pr.getNombre());
+        }else{
+            txtproveedor.setText("Error");
+        }
+    }//GEN-LAST:event_tablaEntradasMouseClicked
 
 
     void limpiarCampos(){
