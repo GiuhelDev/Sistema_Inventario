@@ -10,6 +10,7 @@ import controlador.DaoProveedor;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
 import modelo.entradas;
@@ -133,6 +134,12 @@ public class Entradas extends javax.swing.JPanel {
         jLabel2.setText("ID");
 
         jLabel3.setText("Nombre Producto");
+
+        txtstock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtstockKeyReleased(evt);
+            }
+        });
 
         jLabel5.setText("Stock");
 
@@ -566,7 +573,21 @@ public class Entradas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       
+       if(!txtidentrada.getText().isEmpty()){
+            int confirmacion=JOptionPane.showConfirmDialog(null, "¿Es tas seguro de eliminar la entrada?","Confirmar",2);
+            if(confirmacion==0){
+                e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
+                dao.eliminar(e);
+                limpiarCampos();
+                limpiarTablaEntradas();
+                listarEntradas();
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se Elimino con exito La Entrada");
+            }
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione una Entrada");
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCategoriaActionPerformed
@@ -578,6 +599,36 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         // TODO add your handling code here:
+        e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
+        if(dao.buscar(e)){
+             txtidentrada.setText(e.getIdentrada()+"");
+            txtidcategoria.setText(e.getIdCategoria()+"");
+            txtnombreP.setText(e.getNomProd());
+            txtstock.setText(e.getStock()+"");
+            txtprecioE.setText(e.getPrecioE()+"");
+            txtprecioV.setText(e.getPrecioV()+"");
+            txtTotal.setText(e.getTotal()+"");
+            txtidcategoria.setText(e.getIdCategoria()+"");
+            txtidproveedor.setText(e.getIdproveedor()+"");
+            ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+            if(daoC.buscar(ct)){
+                txtcategoria.setText(ct.getNomCategoria());
+            }else{
+                txtcategoria.setText("Error");
+            }
+
+            pr.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
+            if(daoP.buscar(pr)){
+                txtproveedor.setText(pr.getNombre());
+            }else{
+                txtproveedor.setText("Error");
+            }
+            }else{
+            //JOptionPane.showMessageDialog(null, "El Cliente No Existe");
+                MenuPrincipal m=new MenuPrincipal();
+                m.advertencia("La Entrada No Existe");
+                limpiarCampos();
+        }
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void btnBuscaProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaProveedorActionPerformed
@@ -591,9 +642,12 @@ public class Entradas extends javax.swing.JPanel {
     private void txtprecioEKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioEKeyReleased
             // TODO add your handling code here:
     double cant,precio;
-    cant=Double.parseDouble(txtstock.getText());
-    precio=Double.parseDouble(txtprecioE.getText());
-    txtTotal.setText(cant*precio+"");
+    if(!txtstock.getText().isEmpty()){
+        cant=Double.parseDouble(txtstock.getText());
+        precio=Double.parseDouble(txtprecioE.getText());
+        txtTotal.setText(cant*precio+"");
+    }else{
+    }
     }//GEN-LAST:event_txtprecioEKeyReleased
 
     private void tablaEntradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEntradasMouseClicked
@@ -624,8 +678,20 @@ public class Entradas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tablaEntradasMouseClicked
 
+    private void txtstockKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtstockKeyReleased
+        // TODO add your handling code here:
+    double cant,precio;
+    if(!txtprecioE.getText().isEmpty()){
+        cant=Double.parseDouble(txtstock.getText());
+        precio=Double.parseDouble(txtprecioE.getText());
+        txtTotal.setText(cant*precio+"");
+    }else{
+    }
+    }//GEN-LAST:event_txtstockKeyReleased
+
 
     void limpiarCampos(){
+        txtidentrada.setText("");
         txtidcategoria.setText("");
         txtnombreP.setText("");
         txtstock.setText("");

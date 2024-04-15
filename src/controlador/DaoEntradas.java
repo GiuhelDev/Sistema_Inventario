@@ -97,4 +97,49 @@ public class DaoEntradas {
             return false;
         }
     }
+
+    public boolean eliminar(entradas c){
+        String SQL="delete from entrada where identrada=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdentrada());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+
+public boolean buscar(entradas c){
+        String SQL="select * from entrada where identrada=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdentrada());
+            rs=ps.executeQuery();
+            if(rs.next()){
+                c.setIdentrada(rs.getInt(1));
+                c.setNomProd(rs.getString(2));
+                c.setStock(rs.getInt(3));
+                c.setIdCategoria(rs.getInt(4));
+                c.setFecha(rs.getDate(5));
+                c.setIdproveedor(rs.getInt(6));
+                c.setPrecioE(rs.getDouble(7));
+                c.setPrecioV(rs.getDouble(8));
+                c.setTotal(rs.getDouble(9));
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }
