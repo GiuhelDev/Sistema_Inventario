@@ -337,7 +337,15 @@ public class Proveedor extends javax.swing.JPanel {
 
     private void tablaproveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaproveedoresMouseClicked
         // TODO add your handling code here:
-       
+        int fila=tablaproveedores.getSelectedRow();
+        txtid.setText(tablaproveedores.getValueAt(fila, 0).toString());
+        txtnombre.setText(tablaproveedores.getValueAt(fila, 1).toString());
+        txtapellido.setText(tablaproveedores.getValueAt(fila, 2).toString());
+        txtdocumento.setText(tablaproveedores.getValueAt(fila, 3).toString());
+        txtRsocial.setText(tablaproveedores.getValueAt(fila, 4).toString());
+        txtdireccion.setText(tablaproveedores.getValueAt(fila, 5).toString());
+        txttelefono.setText(tablaproveedores.getValueAt(fila, 6).toString());
+        txtcorreo.setText(tablaproveedores.getValueAt(fila, 7).toString());
     }//GEN-LAST:event_tablaproveedoresMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -363,7 +371,30 @@ public class Proveedor extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        
+        int fila=tablaproveedores.getSelectedRow();
+        if(fila==-1&&txtid.getText().isEmpty()){
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione un Proveedor");
+        }else{
+            p.setIdProveedor(Integer.parseInt(txtid.getText()));
+            p.setNombre(txtnombre.getText());
+            p.setApellido(txtapellido.getText());
+            p.setDocumento(txtdocumento.getText());
+            p.setRsocial(txtRsocial.getText());
+            p.setDireccion(txtdireccion.getText());
+            p.setTelefono(txttelefono.getText());
+            p.setCorreo(txtcorreo.getText());
+            if(dao.editar(p)){
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se modifico con exito");
+                limpiarCampos();
+                limpiarTablaProveedor();
+                listarProveedor();
+            }else{
+                MenuPrincipal m=new MenuPrincipal();
+                m.error("Erorr al modificar el Proveedor");
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed

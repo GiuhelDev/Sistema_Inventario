@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.clientes;
 import modelo.conexion;
-import vista.MenuPrincipal;
 
 public class DaoClientes {
     

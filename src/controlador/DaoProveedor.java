@@ -91,4 +91,30 @@ public class DaoProveedor {
             return false;
         }
     }
+
+    public boolean editar(proveedor c){
+        String SQL="update proveedor set nombre=?,apellido=?,documento=?,"
+            + "Rsocial=?,direccion=?,telefono=?,correo=? where idproveedor=?";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setString(1, c.getNombre());
+            ps.setString(2, c.getApellido());
+            ps.setString(3, c.getDocumento());
+            ps.setString(4, c.getRsocial());
+            ps.setString(5, c.getDireccion());
+            ps.setString(6, c.getTelefono());
+            ps.setString(7, c.getCorreo());
+            ps.setInt(8, c.getIdProveedor());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }
