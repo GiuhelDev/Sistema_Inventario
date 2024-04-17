@@ -117,4 +117,48 @@ public class DaoProveedor {
             return false;
         }
     }
+
+    public boolean eliminar(proveedor c){
+        String SQL="delete from proveedor where idproveedor=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdProveedor());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+
+    public boolean buscarDocumento(proveedor c){
+        String SQL="select * from proveedor where documento=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setString(1, c.getDocumento());
+            rs=ps.executeQuery();
+            if(rs.next()){
+                c.setIdProveedor(rs.getInt(1));
+                c.setNombre(rs.getString(2));
+                c.setApellido(rs.getString(3));
+                c.setDocumento(rs.getString(4));
+                c.setRsocial(rs.getString(5));
+                c.setDireccion(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setCorreo(rs.getString(8));
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }

@@ -6,6 +6,7 @@ package vista;
 
 import controlador.DaoProveedor;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.proveedor;
 
@@ -398,12 +399,40 @@ public class Proveedor extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
+        if(!txtid.getText().isEmpty()){
+            int confirmacion=JOptionPane.showConfirmDialog(null, "¿Es tas seguro de eliminar el Proveedor?","Confirmar",2);
+            if(confirmacion==0){
+                p.setIdProveedor(Integer.parseInt(txtid.getText()));
+                dao.eliminar(p);
+                limpiarCampos();
+                limpiarTablaProveedor();
+                listarProveedor();
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se Elimino con exito el Proveedor");
+            }
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione un Proveedor");
+        }        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        
+        p.setDocumento(txtdocumento.getText());
+        if(dao.buscarDocumento(p)){
+            txtid.setText(p.getIdProveedor()+"");
+            txtnombre.setText(p.getNombre());
+            txtapellido.setText(p.getApellido());
+            txtdocumento.setText(p.getDocumento());
+            txtRsocial.setText(p.getRsocial());
+            txtdireccion.setText(p.getDireccion());
+            txttelefono.setText(p.getTelefono());
+            txtcorreo.setText(p.getCorreo());
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("El Proveedor No Existe");
+            limpiarCampos();
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     void limpiarCampos(){
