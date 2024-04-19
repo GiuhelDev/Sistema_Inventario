@@ -4,12 +4,19 @@
  */
 package vista;
 
+import controlador.DaoSalida;
+import java.sql.Date;
+import java.util.Calendar;
+import modelo.salidas;
+
 /**
  *
  * @author HELIO
  */
 public class Salidas extends javax.swing.JPanel {
 
+salidas s=new salidas();
+DaoSalida daoS=new DaoSalida();
     /**
      * Creates new form Salidas
      */
@@ -171,9 +178,9 @@ public class Salidas extends javax.swing.JPanel {
                             .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnBucarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7))
+                .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtidcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -405,7 +412,29 @@ public class Salidas extends javax.swing.JPanel {
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         // TODO add your handling code here:
-       
+        s.setIdEntrada(Integer.parseInt(txtidEntrada.getText()));
+        s.setCantidad(Integer.parseInt(txtcantidad.getText()));
+        s.setIdCliente(Integer.parseInt(txtidcliente.getText()));
+        s.setSubtotal(Double.parseDouble(txtsubtotal.getText()));
+        s.setIgv(Double.parseDouble(txtsubtotal.getText()));
+        s.setTotal(Double.parseDouble(txtTotal.getText()));
+        Calendar cal;
+        int d,m,a;
+        cal=jcFecha.getCalendar();
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        m=cal.get(Calendar.MONTH);
+        a=cal.get(Calendar.YEAR)-1900;
+        s.setFecha(new Date(a,m,d));
+        if(daoS.insertar(s)){
+            MenuPrincipal m1=new MenuPrincipal();
+            m1.exito("Salida Registrada Con Exito");
+            //limpiarCampos();
+            //limpiarTablaCLientes();
+            //listarClientes();
+        }else{
+            MenuPrincipal m2=new MenuPrincipal();
+            m2.error("No se pudo registrar la Salida");
+        }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnBucarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBucarClienteActionPerformed

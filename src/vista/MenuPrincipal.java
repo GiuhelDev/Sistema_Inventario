@@ -134,6 +134,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnSalidas.setText("SALIDAS");
         btnSalidas.setBackgroundHover(new java.awt.Color(50, 130, 181));
         btnSalidas.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.KEYBOARD_ARROW_UP);
+        btnSalidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalidasActionPerformed(evt);
+            }
+        });
 
         btnProveedor.setBackground(new java.awt.Color(14, 76, 117));
         btnProveedor.setText("PROVEEDOR");
@@ -261,6 +266,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
+btnSalidas.setSelected(false);
         Home h=new Home();
         h.setSize(982,740);
         h.setLocation(0,0);
@@ -278,6 +284,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
+btnSalidas.setSelected(false);
         Categorias c=new Categorias();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -302,6 +309,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnClientes.setSelected(true);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
+btnSalidas.setSelected(false);
         Clientes c=new Clientes();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -319,6 +327,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnClientes.setSelected(false);
         btnEntradas.setSelected(true);
         btnProveedor.setSelected(false);
+btnSalidas.setSelected(false);
         Entradas c=new Entradas();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -336,6 +345,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(true);
+btnSalidas.setSelected(false);
         Proveedor c=new Proveedor();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -345,6 +355,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         contenedor.revalidate();
         contenedor.repaint();
     }//GEN-LAST:event_btnProveedorActionPerformed
+
+    private void btnSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidasActionPerformed
+        // TODO add your handling code here:
+        btnCategorias.setSelected(false);
+        btnHome.setSelected(false);
+        btnClientes.setSelected(false);
+        btnEntradas.setSelected(false);
+        btnProveedor.setSelected(false);
+btnSalidas.setSelected(true);
+        Salidas c=new Salidas();
+        c.setSize(982,740);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnSalidasActionPerformed
 
     /**
      * @param args the command line arguments
