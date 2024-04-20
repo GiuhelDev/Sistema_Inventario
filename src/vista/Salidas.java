@@ -4,9 +4,11 @@
  */
 package vista;
 
+import controlador.DaoClientes;
 import controlador.DaoSalida;
 import java.sql.Date;
 import java.util.Calendar;
+import modelo.clientes;
 import modelo.salidas;
 
 /**
@@ -17,6 +19,8 @@ public class Salidas extends javax.swing.JPanel {
 
 salidas s=new salidas();
 DaoSalida daoS=new DaoSalida();
+clientes c=new clientes();
+DaoClientes daoC=new DaoClientes();
     /**
      * Creates new form Salidas
      */
@@ -229,28 +233,28 @@ DaoSalida daoS=new DaoSalida();
         jpanelRound2Layout.setHorizontalGroup(
             jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanelRound2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelRound2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel14))
+                        .addComponent(jLabel14)
+                        .addGap(0, 205, Short.MAX_VALUE))
                     .addGroup(jpanelRound2Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(10, 10, 10)
                         .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtidEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(txtproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel13)
-                            .addComponent(jcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpanelRound2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpanelRound2Layout.createSequentialGroup()
+                                .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtidEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(txtproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                                .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtstock, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,7 +345,7 @@ DaoSalida daoS=new DaoSalida();
                             .addComponent(jLabel17)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpanelRound3Layout.setVerticalGroup(
             jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,15 +443,23 @@ DaoSalida daoS=new DaoSalida();
 
     private void btnBucarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBucarClienteActionPerformed
         // TODO add your handling code here:
-        BuscarDato.tipo=true;
-        BuscarDato m=new BuscarDato();
-        m.setVisible(true);
+        c.setDocumento(txtdocumento.getText());
+        if(daoC.buscar(c)){
+            txtidcliente.setText(c.getIdCliente()+"");
+            txtnombreCliente.setText(c.getNombre()+" "+c.getApellido());
+            txtdocumento.setText(c.getDocumento());
+            txtTelefono.setText(c.getTelefono());
+            txtcorreo.setText(c.getCorreo());
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("El Cliente No Existe");
+            //limpiarCampos();
+        }
     }//GEN-LAST:event_btnBucarClienteActionPerformed
 
     private void btnBuscarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntradaActionPerformed
         // TODO add your handling code here:
-        BuscarDato.tipo=false;
-        BuscarDato m=new BuscarDato();
+        BuscaEntradas m=new BuscaEntradas();
         m.setVisible(true);
     }//GEN-LAST:event_btnBuscarEntradaActionPerformed
 
@@ -485,12 +497,12 @@ DaoSalida daoS=new DaoSalida();
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtdocumento;
-    private javax.swing.JTextField txtidEntrada;
+    public static javax.swing.JTextField txtidEntrada;
     private javax.swing.JTextField txtidcliente;
     private javax.swing.JTextField txtnombreCliente;
-    private javax.swing.JTextField txtprecio;
-    private javax.swing.JTextField txtproducto;
-    private javax.swing.JTextField txtstock;
+    public static javax.swing.JTextField txtprecio;
+    public static javax.swing.JTextField txtproducto;
+    public static javax.swing.JTextField txtstock;
     private javax.swing.JTextField txtsubtotal;
     // End of variables declaration//GEN-END:variables
 }
