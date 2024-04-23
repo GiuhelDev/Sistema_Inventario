@@ -5,8 +5,6 @@ import java.sql.Date;
 public class salidas {
 
 int idSalida;
-int idEntrada;
-int cantidad;
 int idCliente;
 Date fecha;
 double subtotal;
@@ -18,8 +16,6 @@ double total;
 
     public salidas(int idSalida, int idEntrada, int cantidad, int idCliente, Date feca, double dubtotal, double igv, double total) {
         this.idSalida = idSalida;
-        this.idEntrada = idEntrada;
-        this.cantidad = cantidad;
         this.idCliente = idCliente;
         this.fecha = fecha;
         this.subtotal = dubtotal;
@@ -35,21 +31,7 @@ double total;
         this.idSalida = idSalida;
     }
 
-    public int getIdEntrada() {
-        return idEntrada;
-    }
-
-    public void setIdEntrada(int idEntrada) {
-        this.idEntrada = idEntrada;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
+  
 
     public int getIdCliente() {
         return idCliente;
