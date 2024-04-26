@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import modelo.conexion;
-import modelo.detalleSalida;
 
 public class DaoDetalleSalida {
     Connection con;
@@ -17,15 +16,12 @@ public class DaoDetalleSalida {
     PreparedStatement ps;
     ResultSet rs;
     
-    public boolean insertar(detalleSalida c){
-        String SQL="insert into detallesalida (idSalida,idEntrada,cantidad,importe) VALUES (?,?,?,?)";
+    public boolean insertar(int idSalida,int idEntrda,int cant,double importe){
+        String SQL="insert into detallesalida (idSalida,idEntrada,cantidad,importe) VALUES ("+idSalida+","
+        + ""+idEntrda+","+cant+","+importe+")";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setInt(1, c.getIdSalida());
-            ps.setInt(2, c.getIdEntrada());
-            ps.setInt(3, c.getCantidad());
-            ps.setDouble(4, c.getImporte());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;

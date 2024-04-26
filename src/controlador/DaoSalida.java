@@ -15,15 +15,16 @@ public class DaoSalida {
     ResultSet rs;
     
     public boolean insertar(salidas c){
-        String SQL="insert into salidas (idCliente,fecha,subtotal,igv,total) VALUES (?,?,?,?,?)";
+        String SQL="insert into salidas (numSalida,idCliente,fecha,subtotal,igv,total) VALUES (?,?,?,?,?,?)";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setInt(1, c.getIdCliente());
-            ps.setDate(2, c.getFecha());
-            ps.setDouble(3, c.getSubtotal());
-            ps.setDouble(4, c.getIgv());
-            ps.setDouble(5, c.getTotal());
+            ps.setString(1, c.getNumSalida());
+            ps.setInt(2, c.getIdCliente());
+            ps.setDate(3, c.getFecha());
+            ps.setDouble(4, c.getSubtotal());
+            ps.setDouble(5, c.getIgv());
+            ps.setDouble(6, c.getTotal());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -34,5 +35,21 @@ public class DaoSalida {
             JOptionPane.showConfirmDialog(null, e);
             return false;
         }
+    }
+
+    public String numSalida(){
+        String numero="";
+        String SQL="select max(idSalida) from salidas";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            while(rs.next()){
+            numero=rs.getString(1);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return numero;
     }
 }

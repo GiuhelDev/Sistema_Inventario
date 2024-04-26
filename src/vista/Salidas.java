@@ -5,6 +5,7 @@
 package vista;
 
 import controlador.DaoClientes;
+import controlador.DaoDetalleSalida;
 import controlador.DaoSalida;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class Salidas extends javax.swing.JPanel {
 
 salidas s=new salidas();
 DaoSalida daoS=new DaoSalida();
+DaoDetalleSalida daoDS=new DaoDetalleSalida();
 clientes c=new clientes();
 DaoClientes daoC=new DaoClientes();
 DefaultTableModel modelo=new DefaultTableModel();
@@ -29,8 +31,19 @@ DefaultTableModel modelo=new DefaultTableModel();
      */
     public Salidas() {
         initComponents();
+        numSalida();
     }
 
+    void numSalida(){
+        String numero=daoS.numSalida();
+        if(numero==null){
+        txtnsalida.setText("001");
+        }else{
+        int i=Integer.parseInt(numero);
+        i=i+1;
+        txtnsalida.setText("00"+i);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,6 +95,8 @@ DefaultTableModel modelo=new DefaultTableModel();
         jLabel18 = new javax.swing.JLabel();
         txtigv = new javax.swing.JTextField();
         btnAgregar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        txtnsalida = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(238, 238, 238));
 
@@ -306,7 +321,7 @@ DefaultTableModel modelo=new DefaultTableModel();
 
             },
             new String [] {
-                "IDSAlida", "ID Entrada", "Cantidad", "Importe"
+                "IDSAlida", "ID Entrada", "Producto", "Precio U.", "Cant.", "Importe"
             }
         ));
         jScrollPane1.setViewportView(tablaSalidas);
@@ -397,6 +412,12 @@ DefaultTableModel modelo=new DefaultTableModel();
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
+        txtnsalida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtnsalida.setText("sfsdf");
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel19.setText("Numero Salida");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -408,9 +429,16 @@ DefaultTableModel modelo=new DefaultTableModel();
                         .addComponent(btnicono, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtnsalida)
+                                .addGap(78, 78, 78))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -430,7 +458,10 @@ DefaultTableModel modelo=new DefaultTableModel();
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtnsalida)
+                            .addComponent(jLabel19)))
                     .addComponent(btnicono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -450,9 +481,10 @@ DefaultTableModel modelo=new DefaultTableModel();
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         // TODO add your handling code here:
+        s.setNumSalida(txtnsalida.getText());
         s.setIdCliente(Integer.parseInt(txtidcliente.getText()));
         s.setSubtotal(Double.parseDouble(txtsubtotal.getText()));
-        s.setIgv(Double.parseDouble(txtsubtotal.getText()));
+        s.setIgv(Double.parseDouble(txtigv.getText()));
         s.setTotal(Double.parseDouble(txtTotal.getText()));
         Calendar cal;
         int d,m,a;
@@ -462,6 +494,7 @@ DefaultTableModel modelo=new DefaultTableModel();
         a=cal.get(Calendar.YEAR)-1900;
         s.setFecha(new Date(a,m,d));
         if(daoS.insertar(s)){
+            guardarDetalle();
             MenuPrincipal m1=new MenuPrincipal();
             m1.exito("Salida Registrada Con Exito");
             //limpiarCampos();
@@ -504,22 +537,27 @@ DefaultTableModel modelo=new DefaultTableModel();
         double precio,total,importe;
         modelo=(DefaultTableModel) tablaSalidas.getModel();
         int idEntrada=Integer.parseInt(txtidEntrada.getText());
-        int idSalida=Integer.parseInt("1");
+        int idSalida=Integer.parseInt(txtnsalida.getText());
         int cantidad=Integer.parseInt(txtcantidad.getText());
         precio=Double.parseDouble(txtprecio.getText());
+        String prod=txtproducto.getText();
         importe=cantidad*precio;
         int stock=Integer.parseInt(txtstock.getText());
         ArrayList lista=new ArrayList();
         if(stock>0 && cantidad<=stock){
             lista.add(idSalida);
             lista.add(idEntrada);
+            lista.add(prod);
+            lista.add(precio);
             lista.add(cantidad);
             lista.add(importe);
-            Object[] ob=new Object[4];
+            Object[] ob=new Object[6];
             ob[0]=lista.get(0);
             ob[1]=lista.get(1);
             ob[2]=lista.get(2);
             ob[3]=lista.get(3);
+            ob[4]=lista.get(4);
+            ob[5]=lista.get(5);
             modelo.addRow(ob);
             tablaSalidas.setModel(modelo);
         }else{
@@ -527,6 +565,16 @@ DefaultTableModel modelo=new DefaultTableModel();
             m.error("Stock Insuficiente");
         }
     }
+
+void guardarDetalle(){
+for(int i=0;i<tablaSalidas.getRowCount();i++){
+int idSalida=Integer.parseInt(tablaSalidas.getValueAt(i, 0).toString());
+int idEntrada=Integer.parseInt(tablaSalidas.getValueAt(i, 1).toString());
+int cant=Integer.parseInt(tablaSalidas.getValueAt(i, 4).toString());
+Double importe=Double.parseDouble(tablaSalidas.getValueAt(i, 5).toString());
+daoDS.insertar(idSalida, idEntrada, cant, importe);
+}
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnAgregar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnBucarCliente;
@@ -543,6 +591,7 @@ DefaultTableModel modelo=new DefaultTableModel();
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -566,6 +615,7 @@ DefaultTableModel modelo=new DefaultTableModel();
     private javax.swing.JTextField txtidcliente;
     private javax.swing.JTextField txtigv;
     private javax.swing.JTextField txtnombreCliente;
+    private javax.swing.JLabel txtnsalida;
     public static javax.swing.JTextField txtprecio;
     public static javax.swing.JTextField txtproducto;
     public static javax.swing.JTextField txtstock;
