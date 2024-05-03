@@ -364,6 +364,9 @@ DefaultTableModel modelo=new DefaultTableModel();
 
         jLabel16.setText("Sub Total:");
 
+        txtsubtotal.setToolTipText("");
+        txtsubtotal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
         jLabel17.setText("Total:");
 
         btnGenerar.setBackground(new java.awt.Color(14, 76, 117));
@@ -623,9 +626,9 @@ DefaultTableModel modelo=new DefaultTableModel();
         total+=fila;
         igv=total*0.18;
         subtotal=total-igv;
-        txtTotal.setText(String.format("%.2f", total));
-        txtsubtotal.setText(String.format("%.2f", subtotal));
-        txtigv.setText(String.format("%.2f", igv));
+        txtTotal.setText(String.format("%.2f", total).replace(",", "."));
+        txtsubtotal.setText(String.format("%.2f", subtotal).replace(",", "."));
+        txtigv.setText(String.format("%.2f", igv).replace(",", "."));
         }
     }
 

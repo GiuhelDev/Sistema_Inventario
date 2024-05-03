@@ -158,6 +158,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnUsuarios.setText("USUARIOS");
         btnUsuarios.setBackgroundHover(new java.awt.Color(50, 130, 181));
         btnUsuarios.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.GROUP_ADD);
+        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuariosActionPerformed(evt);
+            }
+        });
 
         btnSalir.setBackground(new java.awt.Color(14, 76, 117));
         btnSalir.setText("SALIR");
@@ -266,6 +271,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
+btnUsuarios.setSelected(false);
 btnSalidas.setSelected(false);
         Home h=new Home();
         h.setSize(982,740);
@@ -284,6 +290,7 @@ btnSalidas.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
+btnUsuarios.setSelected(false);
 btnSalidas.setSelected(false);
         Categorias c=new Categorias();
         c.setSize(982,740);
@@ -309,6 +316,7 @@ btnSalidas.setSelected(false);
         btnClientes.setSelected(true);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
+btnUsuarios.setSelected(false);
 btnSalidas.setSelected(false);
         Clientes c=new Clientes();
         c.setSize(982,740);
@@ -327,6 +335,7 @@ btnSalidas.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(true);
         btnProveedor.setSelected(false);
+btnUsuarios.setSelected(false);
 btnSalidas.setSelected(false);
         Entradas c=new Entradas();
         c.setSize(982,740);
@@ -345,6 +354,7 @@ btnSalidas.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(true);
+btnUsuarios.setSelected(false);
 btnSalidas.setSelected(false);
         Proveedor c=new Proveedor();
         c.setSize(982,740);
@@ -363,7 +373,8 @@ btnSalidas.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
-btnSalidas.setSelected(true);
+btnUsuarios.setSelected(false);
+        btnSalidas.setSelected(true);
         Salidas c=new Salidas();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -373,6 +384,25 @@ btnSalidas.setSelected(true);
         contenedor.revalidate();
         contenedor.repaint();
     }//GEN-LAST:event_btnSalidasActionPerformed
+
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+        // TODO add your handling code here:
+        btnCategorias.setSelected(false);
+        btnHome.setSelected(false);
+        btnClientes.setSelected(false);
+        btnEntradas.setSelected(false);
+        btnProveedor.setSelected(false);
+        btnSalidas.setSelected(false);
+        btnUsuarios.setSelected(true);
+        Usuarios c=new Usuarios();
+        c.setSize(982,740);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnUsuariosActionPerformed
 
     /**
      * @param args the command line arguments

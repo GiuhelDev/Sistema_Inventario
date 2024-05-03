@@ -309,6 +309,9 @@
                   <Value id="GROUP_ADD"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuariosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnSalir">
               <Properties>

@@ -4,41 +4,41 @@
  */
 package modelo;
 
-public class usuarios {
-    
-    int idusuario;
-    String nombre;
-    String apellido;
-    String documento;
-    String direccion;
-    String telefono;
-    String correo;
-    String tipoUsuario;
-    String usaurio;
-    String password;
+public class usuario {
 
-    public usuarios() {
+    int idCliente;
+   String nombre;
+   String apellido;
+   String documento;
+   String direccion;
+   String telefono;
+   String correo;
+    String tipoUser;
+   String user;
+   String password;
+
+    public usuario() {
     }
 
-    public usuarios(int idusuario, String nombre, String apellido, String documento, String direccion, String telefono, String correo, String tipoUsuario, String usaurio, String password) {
-        this.idusuario = idusuario;
+    public usuario(int idCliente, String nombre, String apellido, String documento, String direccion, String telefono, String correo, String tipoUser, String user, String password) {
+        this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.documento = documento;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
-        this.tipoUsuario = tipoUsuario;
-        this.usaurio = usaurio;
+        this.tipoUser = tipoUser;
+        this.user = user;
         this.password = password;
     }
 
-    public int getIdusuario() {
-        return idusuario;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setIdusuario(int idusuario) {
-        this.idusuario = idusuario;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNombre() {
@@ -89,20 +89,20 @@ public class usuarios {
         this.correo = correo;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
+    public String getTipoUser() {
+        return tipoUser;
     }
 
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setTipoUser(String tipoUser) {
+        this.tipoUser = tipoUser;
     }
 
-    public String getUsaurio() {
-        return usaurio;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsaurio(String usaurio) {
-        this.usaurio = usaurio;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getPassword() {
@@ -112,6 +112,7 @@ public class usuarios {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+
     
 }
