@@ -6,12 +6,14 @@ package vista;
 
 import controlador.DaoClientes;
 import controlador.DaoDetalleSalida;
+import controlador.DaoEntradas;
 import controlador.DaoSalida;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
 import modelo.clientes;
+import modelo.entradas;
 import modelo.salidas;
 
 /**
@@ -26,6 +28,10 @@ DaoDetalleSalida daoDS=new DaoDetalleSalida();
 clientes c=new clientes();
 DaoClientes daoC=new DaoClientes();
 DefaultTableModel modelo=new DefaultTableModel();
+
+entradas e=new entradas();
+DaoEntradas DaoE=new DaoEntradas();
+int filaSeleccionada;
     /**
      * Creates new form Salidas
      */
@@ -81,10 +87,9 @@ DefaultTableModel modelo=new DefaultTableModel();
         txtprecio = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtcantidad = new javax.swing.JTextField();
-        btnBuscarEntrada = new RSMaterialComponent.RSButtonMaterialIconDos();
         jcFecha = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
-        btnNuevaSalida = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnBuscaEntrada = new RSMaterialComponent.RSButtonMaterialIconDos();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSalidas = new javax.swing.JTable();
         jpanelRound3 = new modelo.JpanelRound();
@@ -96,6 +101,7 @@ DefaultTableModel modelo=new DefaultTableModel();
         jLabel18 = new javax.swing.JLabel();
         txtigv = new javax.swing.JTextField();
         btnAgregar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnRefrecar = new RSMaterialComponent.RSButtonMaterialIconDos();
         txtnsalida = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
 
@@ -238,26 +244,15 @@ DefaultTableModel modelo=new DefaultTableModel();
 
         jLabel15.setText("Cantidad");
 
-        btnBuscarEntrada.setBackground(new java.awt.Color(240, 195, 117));
-        btnBuscarEntrada.setBackgroundHover(new java.awt.Color(240, 195, 117));
-        btnBuscarEntrada.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
-        btnBuscarEntrada.setRound(25);
-        btnBuscarEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarEntradaActionPerformed(evt);
-            }
-        });
-
         jLabel8.setText("Fecha Salida");
 
-        btnNuevaSalida.setBackground(new java.awt.Color(145, 213, 137));
-        btnNuevaSalida.setText("Nueva Salida");
-        btnNuevaSalida.setBackgroundHover(new java.awt.Color(240, 195, 117));
-        btnNuevaSalida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.NEW_RELEASES);
-        btnNuevaSalida.setRound(25);
-        btnNuevaSalida.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscaEntrada.setBackground(new java.awt.Color(240, 195, 117));
+        btnBuscaEntrada.setBackgroundHover(new java.awt.Color(240, 195, 117));
+        btnBuscaEntrada.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
+        btnBuscaEntrada.setRound(25);
+        btnBuscaEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaSalidaActionPerformed(evt);
+                btnBuscaEntradaActionPerformed(evt);
             }
         });
 
@@ -285,27 +280,16 @@ DefaultTableModel modelo=new DefaultTableModel();
                                     .addComponent(jLabel12))
                                 .addGap(18, 18, 18)
                                 .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpanelRound2Layout.createSequentialGroup()
-                                        .addGap(0, 117, Short.MAX_VALUE)
-                                        .addComponent(jcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jpanelRound2Layout.createSequentialGroup()
-                                        .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jpanelRound2Layout.createSequentialGroup()
-                                        .addComponent(jLabel15)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13)
                                     .addGroup(jpanelRound2Layout.createSequentialGroup()
                                         .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel13))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnBuscarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelRound2Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(btnNuevaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())))))
+                                            .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel15))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnBuscaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jpanelRound2Layout.setVerticalGroup(
             jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,25 +309,24 @@ DefaultTableModel modelo=new DefaultTableModel();
                         .addGap(12, 12, 12)
                         .addComponent(jLabel12))
                     .addGroup(jpanelRound2Layout.createSequentialGroup()
-                        .addComponent(btnNuevaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
+                        .addGap(35, 35, 35)
                         .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBuscarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpanelRound2Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         tablaSalidas.setModel(new javax.swing.table.DefaultTableModel(
@@ -354,6 +337,11 @@ DefaultTableModel modelo=new DefaultTableModel();
                 "IDSAlida", "ID Entrada", "Producto", "Precio U.", "Cant.", "Importe"
             }
         ));
+        tablaSalidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaSalidasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaSalidas);
 
         jpanelRound3.setBackground(new java.awt.Color(255, 255, 255));
@@ -393,6 +381,16 @@ DefaultTableModel modelo=new DefaultTableModel();
             }
         });
 
+        btnRefrecar.setBackground(new java.awt.Color(145, 213, 137));
+        btnRefrecar.setBackgroundHover(new java.awt.Color(240, 195, 117));
+        btnRefrecar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.REFRESH);
+        btnRefrecar.setRound(25);
+        btnRefrecar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrecarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpanelRound3Layout = new javax.swing.GroupLayout(jpanelRound3);
         jpanelRound3.setLayout(jpanelRound3Layout);
         jpanelRound3Layout.setHorizontalGroup(
@@ -400,7 +398,6 @@ DefaultTableModel modelo=new DefaultTableModel();
             .addGroup(jpanelRound3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpanelRound3Layout.createSequentialGroup()
                             .addGap(15, 15, 15)
@@ -416,7 +413,11 @@ DefaultTableModel modelo=new DefaultTableModel();
                         .addGroup(jpanelRound3Layout.createSequentialGroup()
                             .addComponent(jLabel16)
                             .addGap(18, 18, 18)
-                            .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpanelRound3Layout.createSequentialGroup()
+                        .addComponent(btnRefrecar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelRound3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -427,7 +428,9 @@ DefaultTableModel modelo=new DefaultTableModel();
             jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanelRound3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefrecar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -527,9 +530,14 @@ DefaultTableModel modelo=new DefaultTableModel();
             guardarDetalle();
             MenuPrincipal m1=new MenuPrincipal();
             m1.exito("Salida Registrada Con Exito");
-            //limpiarCampos();
-            //limpiarTablaCLientes();
-            //listarClientes();
+            restaStock();
+            numSalida();
+            limpiarDatosPod();
+            limpaDatosCliente();
+            txtTotal.setText("");
+            txtsubtotal.setText("");
+            txtigv.setText("");
+            limpiarTablaSalida();
         }else{
             MenuPrincipal m2=new MenuPrincipal();
             m2.error("No se pudo registrar la Salida");
@@ -552,11 +560,11 @@ DefaultTableModel modelo=new DefaultTableModel();
         }
     }//GEN-LAST:event_btnBucarClienteActionPerformed
 
-    private void btnBuscarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntradaActionPerformed
+    private void btnBuscaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaEntradaActionPerformed
         // TODO add your handling code here:
         BuscaEntradas m=new BuscaEntradas();
         m.setVisible(true);
-    }//GEN-LAST:event_btnBuscarEntradaActionPerformed
+    }//GEN-LAST:event_btnBuscaEntradaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
@@ -565,16 +573,29 @@ DefaultTableModel modelo=new DefaultTableModel();
         sumarTotal();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void btnNuevaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaSalidaActionPerformed
+    private void tablaSalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSalidasMouseClicked
         // TODO add your handling code here:
-        numSalida();
-        limpiarDatosPod();
-        limpaDatosCliente();
-        txtTotal.setText("");
-        txtsubtotal.setText("");
-        txtigv.setText("");
-        limpiarTablaSalida();
-    }//GEN-LAST:event_btnNuevaSalidaActionPerformed
+        filaSeleccionada=tablaSalidas.getSelectedRow();
+        txtidEntrada.setText(tablaSalidas.getValueAt(filaSeleccionada, 1).toString());
+        txtcantidad.setText(tablaSalidas.getValueAt(filaSeleccionada, 4).toString());
+        txtproducto.setText(tablaSalidas.getValueAt(filaSeleccionada, 2).toString());
+        txtprecio.setText(tablaSalidas.getValueAt(filaSeleccionada, 3).toString());
+
+        e.setIdentrada(Integer.parseInt(txtidEntrada.getText()));
+        if(DaoE.buscar(e)){
+           txtstock.setText(e.getStock()+"");
+        }
+    }//GEN-LAST:event_tablaSalidasMouseClicked
+
+    private void btnRefrecarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrecarActionPerformed
+        // TODO add your handling code here:
+        double precio,cant;
+        precio=Double.parseDouble(txtprecio.getText());
+        cant=Double.parseDouble(txtcantidad.getText());
+        modelo.setValueAt(txtcantidad.getText().trim(), filaSeleccionada, 4);
+        modelo.setValueAt((precio*cant)+"", filaSeleccionada, 5);
+        sumarTotal();
+    }//GEN-LAST:event_btnRefrecarActionPerformed
 
     private void agregaEntrada(){
         double precio,total,importe;
@@ -619,6 +640,14 @@ DefaultTableModel modelo=new DefaultTableModel();
         }
     }
 
+    void restaStock(){
+        for(int i=0;i<tablaSalidas.getRowCount();i++){
+        int idEntrada=Integer.parseInt(tablaSalidas.getValueAt(i, 1).toString());
+        int cant=Integer.parseInt(tablaSalidas.getValueAt(i, 4).toString());
+        daoS.restarStock(idEntrada, cant);
+        }
+    }
+
     void sumarTotal(){
         double fila,igv,subtotal,total = 0.00;
         for(int i=0;i<tablaSalidas.getRowCount();i++){
@@ -657,9 +686,9 @@ DefaultTableModel modelo=new DefaultTableModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnAgregar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnBucarCliente;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnBuscarEntrada;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnBuscaEntrada;
     private RSMaterialComponent.RSButtonMaterialIconDos btnGenerar;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnNuevaSalida;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnRefrecar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnicono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
