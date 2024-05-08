@@ -8,13 +8,23 @@ import controlador.DaoClientes;
 import controlador.DaoDetalleSalida;
 import controlador.DaoEntradas;
 import controlador.DaoSalida;
+import java.io.File;
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import modelo.clientes;
+import modelo.conexion;
 import modelo.entradas;
 import modelo.salidas;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -531,6 +541,7 @@ int filaSeleccionada;
             MenuPrincipal m1=new MenuPrincipal();
             m1.exito("Salida Registrada Con Exito");
             restaStock();
+            GenerarPDF(txtnsalida.getText());
             numSalida();
             limpiarDatosPod();
             limpaDatosCliente();
@@ -681,6 +692,25 @@ int filaSeleccionada;
         for(int i=0;i<modelo.getRowCount();i++){
             modelo.removeRow(i);
             i=0-1;
+        }
+    }
+
+private Connection conection=new conexion().conectar();
+
+    void GenerarPDF(String numSalida){
+        Map p=new HashMap();
+        p.put("numSalida", numSalida);
+        JasperReport report;
+        JasperPrint print;
+
+        try{
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/Salida.jrxml");
+            print=JasperFillManager.fillReport(report, p, conection);
+            JasperViewer view=new JasperViewer(print,false);
+            view.setTitle("Documento Salida N° "+numSalida);
+            view.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
