@@ -69,6 +69,7 @@ int filaSeleccionada;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGenerar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnicono = new RSMaterialComponent.RSButtonMaterialIconDos();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -107,7 +108,6 @@ int filaSeleccionada;
         txtsubtotal = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
-        btnGenerar = new RSMaterialComponent.RSButtonMaterialIconDos();
         jLabel18 = new javax.swing.JLabel();
         txtigv = new javax.swing.JTextField();
         btnAgregar = new RSMaterialComponent.RSButtonMaterialIconDos();
@@ -115,6 +115,17 @@ int filaSeleccionada;
         btnDelete = new RSMaterialComponent.RSButtonMaterialIconDos();
         txtnsalida = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+
+        btnGenerar.setBackground(new java.awt.Color(14, 76, 117));
+        btnGenerar.setText("Generar");
+        btnGenerar.setBackgroundHover(new java.awt.Color(50, 130, 181));
+        btnGenerar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGenerar.setRound(25);
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
 
         setBackground(new java.awt.Color(238, 238, 238));
 
@@ -368,23 +379,14 @@ int filaSeleccionada;
 
         jLabel17.setText("Total:");
 
-        btnGenerar.setBackground(new java.awt.Color(14, 76, 117));
-        btnGenerar.setText("Generar");
-        btnGenerar.setBackgroundHover(new java.awt.Color(50, 130, 181));
-        btnGenerar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
-        btnGenerar.setRound(25);
-        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarActionPerformed(evt);
-            }
-        });
-
         jLabel18.setText("IGV:");
 
         btnAgregar.setBackground(new java.awt.Color(14, 76, 117));
         btnAgregar.setText("Agregar");
         btnAgregar.setBackgroundHover(new java.awt.Color(50, 130, 181));
         btnAgregar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnAgregar.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        btnAgregar.setPadding(1);
         btnAgregar.setRound(25);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,10 +445,6 @@ int filaSeleccionada;
                         .addComponent(btnRefrecar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelRound3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         jpanelRound3Layout.setVerticalGroup(
             jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,9 +466,7 @@ int filaSeleccionada;
                 .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addGap(32, 32, 32)
-                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         txtnsalida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
