@@ -6,6 +6,7 @@ package vista;
 
 import controlador.DaoCategorias;
 import controlador.DaoEntradas;
+import controlador.DaoProductos;
 import controlador.DaoProveedor;
 import java.io.File;
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
 import modelo.conexion;
 import modelo.entradas;
+import modelo.productos;
 import modelo.proveedor;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -35,6 +37,8 @@ public class Entradas extends javax.swing.JPanel {
     entradas e=new entradas();
     Categoria ct=new Categoria();
     proveedor pr=new proveedor();
+    productos p=new productos();
+    DaoProductos daoPr=new DaoProductos();
     DaoEntradas dao=new DaoEntradas();
     DaoCategorias daoC=new DaoCategorias();
     DaoProveedor daoP=new DaoProveedor();
@@ -551,7 +555,16 @@ public class Entradas extends javax.swing.JPanel {
         e.setPrecioE(Double.parseDouble(txtprecioE.getText()));
         e.setPrecioV(Double.parseDouble(txtprecioV.getText()));
         e.setTotal(Double.parseDouble(txtTotal.getText()));
+
+        p.setNomProd(txtnombreP.getText());
+        p.setStock(Integer.parseInt(txtstock.getText()));
+        p.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+        p.setFecha(new Date(a,m,d));
+        p.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
+        p.setPrecioV(Double.parseDouble(txtprecioV.getText()));
         if(dao.insertar(e)){
+            if(daoPr.insertar(p)){
+            }
             MenuPrincipal menu=new MenuPrincipal();
             menu.exito("Entrada Registrada Con Exito");
             limpiarCampos();
@@ -561,6 +574,7 @@ public class Entradas extends javax.swing.JPanel {
             MenuPrincipal menu=new MenuPrincipal();
             menu.error("No se pudo registrar la entrada");
         }
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
