@@ -89,7 +89,7 @@ int filaSeleccionada;
         jpanelRound2 = new modelo.JpanelRound();
         jLabel14 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtidEntrada = new javax.swing.JTextField();
+        txtidProducto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtproducto = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -254,7 +254,7 @@ int filaSeleccionada;
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(238, 173, 61));
-        jLabel14.setText("Datos de la Entrada");
+        jLabel14.setText("Datos del Producto");
 
         jLabel9.setText("ID");
 
@@ -294,7 +294,7 @@ int filaSeleccionada;
                             .addComponent(txtstock, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpanelRound2Layout.createSequentialGroup()
                                 .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtidEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtidProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10)
                                     .addComponent(txtproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,7 +323,7 @@ int filaSeleccionada;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtidEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtidProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -584,14 +584,15 @@ int filaSeleccionada;
 
     private void btnBuscaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaEntradaActionPerformed
         // TODO add your handling code here:
-        BuscaEntradas m=new BuscaEntradas();
+        BuscaProductos.tipo=true;
+        BuscaProductos m=new BuscaProductos();
         m.setVisible(true);
     }//GEN-LAST:event_btnBuscaEntradaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here
         for(int i=0;i<tablaSalidas.getRowCount();i++){
-            if(tablaSalidas.getValueAt(i, 1).toString().equals(txtidEntrada.getText())){
+            if(tablaSalidas.getValueAt(i, 1).toString().equals(txtidProducto.getText())){
                 MenuPrincipal m=new MenuPrincipal();
                 m.advertencia("El Producto ya esta agregado");
                 modelo.removeRow(i);
@@ -605,12 +606,12 @@ int filaSeleccionada;
     private void tablaSalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSalidasMouseClicked
         // TODO add your handling code here:
         filaSeleccionada=tablaSalidas.getSelectedRow();
-        txtidEntrada.setText(tablaSalidas.getValueAt(filaSeleccionada, 1).toString());
+        txtidProducto.setText(tablaSalidas.getValueAt(filaSeleccionada, 1).toString());
         txtcantidad.setText(tablaSalidas.getValueAt(filaSeleccionada, 4).toString());
         txtproducto.setText(tablaSalidas.getValueAt(filaSeleccionada, 2).toString());
         txtprecio.setText(tablaSalidas.getValueAt(filaSeleccionada, 3).toString());
 
-        e.setIdentrada(Integer.parseInt(txtidEntrada.getText()));
+        e.setIdentrada(Integer.parseInt(txtidProducto.getText()));
         if(DaoE.buscar(e)){
            txtstock.setText(e.getStock()+"");
         }
@@ -640,7 +641,7 @@ int filaSeleccionada;
     private void agregaEntrada(){
         double precio,total,importe;
         modelo=(DefaultTableModel) tablaSalidas.getModel();
-        int idEntrada=Integer.parseInt(txtidEntrada.getText());
+        int idEntrada=Integer.parseInt(txtidProducto.getText());
         int idSalida=Integer.parseInt(txtnsalida.getText());
         int cantidad=Integer.parseInt(txtcantidad.getText());
         precio=Double.parseDouble(txtprecio.getText());
@@ -702,7 +703,7 @@ int filaSeleccionada;
     }
 
     void limpiarDatosPod(){
-        txtidEntrada.setText("");
+        txtidProducto.setText("");
         txtproducto.setText("");
         txtstock.setText("");
         txtprecio.setText("");
@@ -780,7 +781,7 @@ private Connection conection=new conexion().conectar();
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtdocumento;
-    public static javax.swing.JTextField txtidEntrada;
+    public static javax.swing.JTextField txtidProducto;
     private javax.swing.JTextField txtidcliente;
     private javax.swing.JTextField txtigv;
     private javax.swing.JTextField txtnombreCliente;

@@ -4,45 +4,45 @@
  */
 package vista;
 
-import controlador.DaoEntradas;
+import controlador.DaoProductos;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import modelo.entradas;
-import static vista.Entradas.txtidcategoria;
+import modelo.productos;
 
 /**
  *
  * @author HELIO
  */
-public class BuscaEntradas extends javax.swing.JFrame {
+public class BuscaProductos extends javax.swing.JFrame {
 
 DefaultTableModel modelo=new DefaultTableModel();
-entradas e=new entradas();
-DaoEntradas dao=new DaoEntradas();
+productos p=new productos();
+DaoProductos dao=new DaoProductos();
+public static boolean tipo;
 
     /**
      * Creates new form BuscaEntradas
      */
-    public BuscaEntradas() {
+    public BuscaProductos() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0,0,0,0));
-        listarEntradas();
+        listarProductos();
     }
 
-    private void listarEntradas(){
-        List<entradas> lista=dao.Listar();
-        modelo=(DefaultTableModel) entradas.getModel();
+    private void listarProductos(){
+        List<productos> lista=dao.Listar();
+        modelo=(DefaultTableModel) prodcutos.getModel();
         Object[] ob=new Object[4];
         for(int i=0;i<lista.size();i++){
-            ob[0]=lista.get(i).getIdentrada();
+            ob[0]=lista.get(i).getIdProducto();
             ob[1]=lista.get(i).getNomProd();
             ob[2]=lista.get(i).getStock();
             ob[3]=lista.get(i).getPrecioV();
             modelo.addRow(ob);
         }
-       entradas.setModel(modelo);
+       prodcutos.setModel(modelo);
     }
 
     /**
@@ -56,7 +56,7 @@ DaoEntradas dao=new DaoEntradas();
 
         jpanelRound1 = new modelo.JpanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
-        entradas = new javax.swing.JTable();
+        prodcutos = new javax.swing.JTable();
         txtid = new javax.swing.JTextField();
         txtnombre = new javax.swing.JTextField();
         txtstock = new javax.swing.JTextField();
@@ -73,7 +73,7 @@ DaoEntradas dao=new DaoEntradas();
         jpanelRound1.setRoundTopLeft(25);
         jpanelRound1.setRoundTopRight(25);
 
-        entradas.setModel(new javax.swing.table.DefaultTableModel(
+        prodcutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -81,12 +81,12 @@ DaoEntradas dao=new DaoEntradas();
                 "ID", "Nombre", "Stock", "Precio"
             }
         ));
-        entradas.addMouseListener(new java.awt.event.MouseAdapter() {
+        prodcutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                entradasMouseClicked(evt);
+                prodcutosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(entradas);
+        jScrollPane1.setViewportView(prodcutos);
 
         btnCerrar.setBackground(new java.awt.Color(244, 33, 70));
         btnCerrar.setText("Cerrar");
@@ -175,21 +175,27 @@ DaoEntradas dao=new DaoEntradas();
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
-        Salidas.txtidEntrada.setText(txtid.getText());
+       if(tipo==true){
+        Salidas.txtidProducto.setText(txtid.getText());
         Salidas.txtprecio.setText(txtprecio.getText());
         Salidas.txtproducto.setText(txtnombre.getText());
         Salidas.txtstock.setText(txtstock.getText());
+       }else{
+        Entradas.txtnombreP.setText(txtnombre.getText());
+        Entradas.txtprecioV.setText(txtprecio.getText());
+        Entradas.txtidProducto.setText(txtid.getText());
+       }
         dispose();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
-    private void entradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entradasMouseClicked
+    private void prodcutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prodcutosMouseClicked
         // TODO add your handling code here:
-        int fila=entradas.getSelectedRow();
-        txtid.setText(entradas.getValueAt(fila, 0).toString());
-        txtnombre.setText(entradas.getValueAt(fila, 1).toString());
-        txtstock.setText(entradas.getValueAt(fila, 2).toString());
-        txtprecio.setText(entradas.getValueAt(fila, 3).toString());
-    }//GEN-LAST:event_entradasMouseClicked
+        int fila=prodcutos.getSelectedRow();
+        txtid.setText(prodcutos.getValueAt(fila, 0).toString());
+        txtnombre.setText(prodcutos.getValueAt(fila, 1).toString());
+        txtstock.setText(prodcutos.getValueAt(fila, 2).toString());
+        txtprecio.setText(prodcutos.getValueAt(fila, 3).toString());
+    }//GEN-LAST:event_prodcutosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -208,20 +214,21 @@ DaoEntradas dao=new DaoEntradas();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuscaEntradas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuscaEntradas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuscaEntradas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscaEntradas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuscaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuscaEntradas().setVisible(true);
+                new BuscaProductos().setVisible(true);
             }
         });
     }
@@ -229,9 +236,9 @@ DaoEntradas dao=new DaoEntradas();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnCerrar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEnviar;
-    private javax.swing.JTable entradas;
     private javax.swing.JScrollPane jScrollPane1;
     private modelo.JpanelRound jpanelRound1;
+    private javax.swing.JTable prodcutos;
     private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtprecio;

@@ -8,33 +8,31 @@ import java.sql.Date;
 
 public class productos {
     
-   int identrada										;
+   int idproducto										;
    String nomProd;
    int stock;
    int idCategoria;
-   Date fecha;
    int idproveedor;
    double precioV;
 
     public productos() {
     }
 
-    public productos(int identrada, String nomProd, int stock, int idCategoria, Date fecha, int idproveedor, double precioV) {
-        this.identrada = identrada;
+    public productos(int idproducto, String nomProd, int stock, int idCategoria, int idproveedor, double precioV) {
+        this.idproducto = idproducto;
         this.nomProd = nomProd;
         this.stock = stock;
         this.idCategoria = idCategoria;
-        this.fecha = fecha;
         this.idproveedor = idproveedor;
         this.precioV = precioV;
     }
 
-    public int getIdentrada() {
-        return identrada;
+    public int getIdProducto() {
+        return idproducto;
     }
 
-    public void setIdentrada(int identrada) {
-        this.identrada = identrada;
+    public void setIDProducto(int identrada) {
+        this.idproducto = identrada;
     }
 
     public String getNomProd() {
@@ -61,14 +59,7 @@ public class productos {
         this.idCategoria = idCategoria;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
+   
     public int getIdproveedor() {
         return idproveedor;
     }
