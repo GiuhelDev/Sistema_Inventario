@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package vista;
 
 import controlador.DaoCategorias;
@@ -59,7 +56,7 @@ public class Entradas extends javax.swing.JPanel {
         Object[] ob=new Object[9];
         for(int i=0;i<lista.size();i++){
             ob[0]=lista.get(i).getIdentrada();
-            ob[1]=lista.get(i).getNomProd();
+            ob[1]=lista.get(i).getIdproducto();
             ob[2]=lista.get(i).getStock();
             ob[3]=lista.get(i).getIdCategoria();
             ob[4]=lista.get(i).getFecha();
@@ -611,39 +608,16 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        Calendar cal;
-        int d,m,a;
-        cal=dateFecha.getCalendar();
-        d=cal.get(Calendar.DAY_OF_MONTH);
-        m=cal.get(Calendar.MONTH);
-        a=cal.get(Calendar.YEAR)-1900;
-        e.setNomProd(txtnombreP.getText());
-        e.setStock(Integer.parseInt(txtstock.getText()));
-        e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-        e.setFecha(new Date(a,m,d));
-        e.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
-        e.setPrecioE(Double.parseDouble(txtprecioE.getText()));
-        e.setPrecioV(Double.parseDouble(txtprecioV.getText()));
-        e.setTotal(Double.parseDouble(txtTotal.getText()));
-
-        p.setNomProd(txtnombreP.getText());
-        p.setStock(Integer.parseInt(txtstock.getText()));
-        p.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-        p.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
-        p.setPrecioV(Double.parseDouble(txtprecioV.getText()));
-        if(dao.insertar(e)){
-            if(daoPr.insertar(p)){
-            }
-            MenuPrincipal menu=new MenuPrincipal();
-            menu.exito("Entrada Registrada Con Exito");
-            limpiarCampos();
-            limpiarTablaEntradas();
-            listarEntradas();
+        p.setIDProducto(Integer.parseInt(txtidProducto.getText()));
+        if(daoPr.buscar(p)){
+           agregarEntrada(true);  
         }else{
-            MenuPrincipal menu=new MenuPrincipal();
-            menu.error("No se pudo registrar la entrada");
+           agregarEntrada(false);  
         }
-        
+        limpiarCampos();
+        limpiarTablaEntradas();
+        listarEntradas();
+        numProducto();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -660,7 +634,7 @@ public class Entradas extends javax.swing.JPanel {
         d=cal.get(Calendar.DAY_OF_MONTH);
         m=cal.get(Calendar.MONTH);
         a=cal.get(Calendar.YEAR)-1900;
-        e.setNomProd(txtnombreP.getText());
+        e.setIdproducto(Integer.parseInt(txtidProducto.getText()));
         e.setStock(Integer.parseInt(txtstock.getText()));
         e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
         e.setFecha(new Date(a,m,d));
@@ -714,7 +688,7 @@ public class Entradas extends javax.swing.JPanel {
         if(dao.buscar(e)){
              txtidentrada.setText(e.getIdentrada()+"");
             txtidcategoria.setText(e.getIdCategoria()+"");
-            txtnombreP.setText(e.getNomProd());
+            //txtnombreP.setText(e.getNomProd());
             txtstock.setText(e.getStock()+"");
             txtprecioE.setText(e.getPrecioE()+"");
             txtprecioV.setText(e.getPrecioV()+"");
@@ -850,6 +824,45 @@ public class Entradas extends javax.swing.JPanel {
             i=0-1;
         }
     }
+
+  void agregarEntrada(boolean verifica){
+            Calendar cal;
+            int d,m,a;
+            cal=dateFecha.getCalendar();
+            d=cal.get(Calendar.DAY_OF_MONTH);
+            m=cal.get(Calendar.MONTH);
+            a=cal.get(Calendar.YEAR)-1900;
+            e.setIdproducto(Integer.parseInt(txtidProducto.getText()));
+            e.setStock(Integer.parseInt(txtstock.getText()));
+            e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+            e.setFecha(new Date(a,m,d));
+            e.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
+            e.setPrecioE(Double.parseDouble(txtprecioE.getText()));
+            e.setPrecioV(Double.parseDouble(txtprecioV.getText()));
+            e.setTotal(Double.parseDouble(txtTotal.getText()));
+            if(verifica==true){
+                if(dao.insertar(e)&&daoPr.sumarStock(Integer.parseInt(txtidProducto.getText()), Integer.parseInt(txtstock.getText()))){
+                    MenuPrincipal menu=new MenuPrincipal();
+                    menu.exito("Entrada Registrada Con Exito");
+                }else{
+                    MenuPrincipal menu=new MenuPrincipal();
+                    menu.error("No se pudo registrar la entrada");
+                }
+            }else{
+                p.setNomProd(txtnombreP.getText());
+                p.setStock(Integer.parseInt(txtstock.getText()));
+                p.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+                p.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
+                p.setPrecioV(Double.parseDouble(txtprecioV.getText()));
+                if(dao.insertar(e)&&daoPr.insertar(p)){
+                  MenuPrincipal menu=new MenuPrincipal();
+                  menu.exito("Entrada Registrada Con Exito");
+                }else{
+                    MenuPrincipal menu=new MenuPrincipal();
+                    menu.error("No se pudo registrar la entrada");
+                }
+            }
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscaProveedor;

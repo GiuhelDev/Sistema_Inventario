@@ -21,11 +21,11 @@ public class DaoEntradas {
     ResultSet rs;
     
     public boolean insertar(entradas c){
-        String SQL="insert into entrada (nomProd,stock,idCategoria,fecha,idproveedor,precioE,precioV,total) VALUES (?,?,?,?,?,?,?,?)";
+        String SQL="insert into entrada (idproducto,stock,idCategoria,fecha,idproveedor,precioE,precioV,total) VALUES (?,?,?,?,?,?,?,?)";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setString(1, c.getNomProd());
+            ps.setInt(1, c.getIdproducto());
             ps.setInt(2, c.getStock());
             ps.setInt(3, c.getIdCategoria());
             ps.setDate(4, c.getFecha());
@@ -55,7 +55,7 @@ public class DaoEntradas {
             while(rs.next()){
                 entradas c=new entradas();
                 c.setIdentrada(rs.getInt(1));
-                c.setNomProd(rs.getString(2));
+                c.setIdproducto(rs.getInt(2));
                 c.setStock(rs.getInt(3));
                 c.setIdCategoria(rs.getInt(4));
                 c.setFecha(rs.getDate(5));
@@ -73,11 +73,11 @@ public class DaoEntradas {
 
 
     public boolean editar(entradas c){
-        String SQL="update entrada set nomProd=?,stock=?,idCategoria=?,fecha=?,idproveedor=?,precioE=?,precioV=?,total=? where identrada=?";
+        String SQL="update entrada set idproducto=?,stock=?,idCategoria=?,fecha=?,idproveedor=?,precioE=?,precioV=?,total=? where identrada=?";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setString(1, c.getNomProd());
+            ps.setInt(1, c.getIdproducto());
             ps.setInt(2, c.getStock());
             ps.setInt(3, c.getIdCategoria());
             ps.setDate(4, c.getFecha());
@@ -125,7 +125,7 @@ public boolean buscar(entradas c){
             rs=ps.executeQuery();
             if(rs.next()){
                 c.setIdentrada(rs.getInt(1));
-                c.setNomProd(rs.getString(2));
+                c.setIdproducto(rs.getInt(2));
                 c.setStock(rs.getInt(3));
                 c.setIdCategoria(rs.getInt(4));
                 c.setFecha(rs.getDate(5));
