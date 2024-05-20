@@ -5,29 +5,30 @@
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
+
      entrada.`identrada` AS entrada_identrada,
-     entrada.`nomProd` AS entrada_nomProd,
      entrada.`stock` AS entrada_stock,
-     entrada.`idCategoria` AS entrada_idCategoria,
      entrada.`fecha` AS entrada_fecha,
-     entrada.`idproveedor` AS entrada_idproveedor,
      entrada.`precioE` AS entrada_precioE,
      entrada.`precioV` AS entrada_precioV,
      entrada.`total` AS entrada_total,
-     proveedor.`Rsocial` AS proveedor_Rsocial
+     proveedor.`Rsocial` AS proveedor_Rsocial,
+     productos.`nombre` AS productos_nombre
 FROM
-     `proveedor` proveedor INNER JOIN `entrada` entrada ON proveedor.`idproveedor` = entrada.`idproveedor`]]>
+     `proveedor` proveedor INNER JOIN `entrada` entrada ON proveedor.`idproveedor` = entrada.`idproveedor`
+     INNER JOIN `productos` productos ON entrada.`idproducto` = productos.`idproducto`;]]>
 	</queryString>
 	<field name="entrada_identrada" class="java.lang.Integer"/>
-	<field name="entrada_nomProd" class="java.lang.String"/>
 	<field name="entrada_stock" class="java.lang.Integer"/>
-	<field name="entrada_idCategoria" class="java.lang.Integer"/>
 	<field name="entrada_fecha" class="java.sql.Date"/>
-	<field name="entrada_idproveedor" class="java.lang.Integer"/>
 	<field name="entrada_precioE" class="java.math.BigDecimal"/>
 	<field name="entrada_precioV" class="java.math.BigDecimal"/>
 	<field name="entrada_total" class="java.math.BigDecimal"/>
 	<field name="proveedor_Rsocial" class="java.lang.String"/>
+	<field name="productos_nombre" class="java.lang.String"/>
+	<variable name="entrada_total_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{entrada_total}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -76,7 +77,7 @@ FROM
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Stock]]></text>
+				<text><![CDATA[Cant.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="200" y="5" width="100" height="20" forecolor="#FFFFFF" uuid="200d8b1c-e7b7-4a58-92fc-6240334c34b1"/>
@@ -97,7 +98,7 @@ FROM
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Precio V]]></text>
+				<text><![CDATA[Importe]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="303" y="5" width="73" height="20" forecolor="#FFFFFF" uuid="019641a4-f017-4e21-a79d-dcca47a4a908"/>
@@ -111,32 +112,32 @@ FROM
 	<detail>
 		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="5" y="0" width="28" height="20" uuid="aa280e95-0e3c-4a1b-aa29-de2c59e7199a"/>
+				<reportElement x="0" y="5" width="34" height="20" uuid="570262fd-f320-480d-91f1-04013a5aced2"/>
 				<textFieldExpression><![CDATA[$F{entrada_identrada}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="39" y="0" width="99" height="20" uuid="0ca28684-d957-439f-9e18-278cfcba7581"/>
-				<textFieldExpression><![CDATA[$F{entrada_nomProd}]]></textFieldExpression>
+				<reportElement x="42" y="5" width="100" height="20" uuid="72e88ddb-9867-4d1d-bc9f-2ff3db9331b8"/>
+				<textFieldExpression><![CDATA[$F{productos_nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="145" y="0" width="49" height="20" uuid="c85bc784-f04a-445b-b5c3-6f1e2513101f"/>
-				<textFieldExpression><![CDATA[$F{entrada_stock}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="200" y="0" width="100" height="20" uuid="c1d67fb1-8589-40ad-ae78-b28fa5d40170"/>
+				<reportElement x="200" y="5" width="100" height="20" uuid="b85135d2-31bb-485b-a2f9-b08fd3993448"/>
 				<textFieldExpression><![CDATA[$F{entrada_fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="412" y="0" width="57" height="20" uuid="5ee1dbb2-f746-4f8e-9fd6-1878baf6f022"/>
+				<reportElement x="144" y="5" width="49" height="20" uuid="37db28a2-1433-4796-9820-49e2cf0d6b90"/>
+				<textFieldExpression><![CDATA[$F{entrada_stock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="5" width="97" height="20" uuid="db48dce3-55dd-4b5c-85cf-0f33d640c534"/>
+				<textFieldExpression><![CDATA[$F{proveedor_Rsocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="5" width="58" height="20" uuid="b00d268b-6fef-4b3b-b0a2-546d6cdf3c6c"/>
 				<textFieldExpression><![CDATA[$F{entrada_precioE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="488" y="0" width="58" height="20" uuid="cfb0dbab-02ba-435e-9aef-c1f79a065ea3"/>
-				<textFieldExpression><![CDATA[$F{entrada_precioV}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="300" y="0" width="100" height="20" uuid="a50b0aed-794c-42b9-8e0c-0f550e8c115f"/>
-				<textFieldExpression><![CDATA[$F{proveedor_Rsocial}]]></textFieldExpression>
+				<reportElement x="488" y="5" width="58" height="20" uuid="d5a88491-948f-4444-ad54-b474f32a276e"/>
+				<textFieldExpression><![CDATA[$F{entrada_total}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -147,6 +148,11 @@ FROM
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="488" y="12" width="58" height="20" uuid="81747b8d-6d23-4329-ade8-e484dbb41da7"/>
+				<textFieldExpression><![CDATA[$V{entrada_total_1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>
