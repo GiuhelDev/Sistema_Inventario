@@ -65,7 +65,7 @@ public class BuscarDato extends javax.swing.JFrame {
         Object[] ob=new Object[2];
         for(int i=0;i<lista.size();i++){
             ob[0]=lista.get(i).getIdProveedor();
-            ob[1]=lista.get(i).getNombre();
+            ob[1]=lista.get(i).getRsocial();
             modelo.addRow(ob);
         }
        tabla.setModel(modelo);

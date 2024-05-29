@@ -41,13 +41,14 @@ public class Entradas extends javax.swing.JPanel {
     DaoProveedor daoP=new DaoProveedor();
     DefaultTableModel modelo=new DefaultTableModel();
 
+    public static int idpNuevo;
+
     /**
      * Creates new form Entradas
      */
     public Entradas() {
         initComponents();
         listarEntradas();
-        numProducto();
     }
 
     private void listarEntradas(){
@@ -442,6 +443,9 @@ public class Entradas extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaEntradasMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tablaEntradasMouseEntered(evt);
+            }
         });
         jScrollPane1.setViewportView(tablaEntradas);
 
@@ -547,10 +551,10 @@ public class Entradas extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jpanelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -558,31 +562,29 @@ public class Entradas extends javax.swing.JPanel {
                                 .addComponent(jpanelRound5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jpanelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jpanelRound4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnREPORTE, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnReporteProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jpanelRound4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btnicono, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(btnicono, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnREPORTE, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReporteProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -604,15 +606,16 @@ public class Entradas extends javax.swing.JPanel {
                             .addComponent(jpanelRound5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(21, 21, 21)
                         .addComponent(jpanelRound4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnREPORTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReporteProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnREPORTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReporteProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -622,7 +625,7 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        p.setIDProducto(Integer.parseInt(txtidProducto.getText()));
+        p.setIdproducto(Integer.parseInt(txtidProducto.getText()));
         if(daoPr.buscar(p)){
            agregarEntrada(true);  
         }else{
@@ -638,7 +641,6 @@ public class Entradas extends javax.swing.JPanel {
         // TODO add your handling code here:
         int fila=tablaEntradas.getSelectedRow();
         if(fila==-1&&txtidentrada.getText().isEmpty()){
-            //JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
             MenuPrincipal m=new MenuPrincipal();
             m.advertencia("Seleccione una Entrada");
         }else{
@@ -676,6 +678,10 @@ public class Entradas extends javax.swing.JPanel {
             int confirmacion=JOptionPane.showConfirmDialog(null, "¿Es tas seguro de eliminar la entrada?","Confirmar",2);
             if(confirmacion==0){
                 e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
+                dao.buscar(e);
+                int idP=e.getIdproducto();
+                int cant=e.getStock();
+                daoPr.restarStock(idP, cant);
                 dao.eliminar(e);
                 limpiarCampos();
                 limpiarTablaEntradas();
@@ -707,8 +713,9 @@ public class Entradas extends javax.swing.JPanel {
             txtprecioE.setText(e.getPrecioE()+"");
             txtprecioV.setText(e.getPrecioV()+"");
             txtTotal.setText(e.getTotal()+"");
-            txtidcategoria.setText(e.getIdCategoria()+"");
+            txtidProducto.setText(e.getIdproducto()+"");
             txtidproveedor.setText(e.getIdproveedor()+"");
+            dateFecha.setDate(e.getFecha());
             ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
             if(daoC.buscar(ct)){
                 txtcategoria.setText(ct.getNomCategoria());
@@ -721,6 +728,12 @@ public class Entradas extends javax.swing.JPanel {
                 txtproveedor.setText(pr.getNombre());
             }else{
                 txtproveedor.setText("Error");
+            }
+            p.setIdproducto(Integer.parseInt(txtidProducto.getText()));
+            if(daoPr.buscar(p)){
+               txtnombreP.setText(p.getNomProd());
+            }else{
+                txtnombreP.setText("Error");
             }
             }else{
             //JOptionPane.showMessageDialog(null, "El Cliente No Existe");
@@ -753,7 +766,7 @@ public class Entradas extends javax.swing.JPanel {
         // TODO add your handling code here:
         int fila=tablaEntradas.getSelectedRow();
         txtidentrada.setText(tablaEntradas.getValueAt(fila, 0).toString());
-        txtnombreP.setText(tablaEntradas.getValueAt(fila, 1).toString());
+        txtidProducto.setText(tablaEntradas.getValueAt(fila, 1).toString());
         txtstock.setText(tablaEntradas.getValueAt(fila, 2).toString());
         txtidcategoria.setText(tablaEntradas.getValueAt(fila, 3).toString());
         dateFecha.setDate(Date.valueOf(tablaEntradas.getValueAt(fila, 4).toString()));
@@ -768,10 +781,15 @@ public class Entradas extends javax.swing.JPanel {
         }else{
             txtcategoria.setText("Error");
         }
-
         pr.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
         if(daoP.buscar(pr)){
-            txtproveedor.setText(pr.getNombre());
+            txtproveedor.setText(pr.getRsocial() );
+        }else{
+            txtproveedor.setText("Error");
+        }
+        p.setIdproducto(Integer.parseInt(txtidProducto.getText()));
+        if(daoPr.buscar(p)){
+           txtnombreP.setText(p.getNomProd());
         }else{
             txtproveedor.setText("Error");
         }
@@ -804,6 +822,10 @@ public class Entradas extends javax.swing.JPanel {
         // TODO add your handling code here:
         GenerarPDF("reporteProductos");
     }//GEN-LAST:event_btnReporteProductosActionPerformed
+
+    private void tablaEntradasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEntradasMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaEntradasMouseEntered
 
     private Connection conection=new conexion().conectar();
 
@@ -868,12 +890,12 @@ public class Entradas extends javax.swing.JPanel {
                     menu.error("No se pudo registrar la entrada");
                 }
             }else{
+                p.setIdproducto(Integer.parseInt(txtidProducto.getText()));
                 p.setNomProd(txtnombreP.getText());
                 p.setStock(Integer.parseInt(txtstock.getText()));
                 p.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-                p.setIdproveedor(Integer.parseInt(txtidproveedor.getText()));
                 p.setPrecioV(Double.parseDouble(txtprecioV.getText()));
-                if(dao.insertar(e)&&daoPr.insertar(p)){
+                if(daoPr.insertar(p)&&dao.insertar(e)){
                   MenuPrincipal menu=new MenuPrincipal();
                   menu.exito("Entrada Registrada Con Exito");
                 }else{

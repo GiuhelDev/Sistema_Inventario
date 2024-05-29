@@ -17,7 +17,7 @@ public class DaoDetalleSalida {
     ResultSet rs;
     
     public boolean insertar(int idSalida,int idEntrda,int cant,double importe){
-        String SQL="insert into detallesalida (idSalida,idEntrada,cantidad,importe) VALUES ("+idSalida+","
+        String SQL="insert into detallesalida (idSalida,idproducto,cantidad,importe) VALUES ("+idSalida+","
         + ""+idEntrda+","+cant+","+importe+")";
         try{
             con=cn.conectar();

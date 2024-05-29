@@ -36,7 +36,7 @@ public static boolean tipo;
         modelo=(DefaultTableModel) prodcutos.getModel();
         Object[] ob=new Object[4];
         for(int i=0;i<lista.size();i++){
-            ob[0]=lista.get(i).getIdProducto();
+            ob[0]=lista.get(i).getIdproducto();
             ob[1]=lista.get(i).getNomProd();
             ob[2]=lista.get(i).getStock();
             ob[3]=lista.get(i).getPrecioV();
@@ -184,6 +184,7 @@ public static boolean tipo;
         Entradas.txtnombreP.setText(txtnombre.getText());
         Entradas.txtprecioV.setText(txtprecio.getText());
         Entradas.txtidProducto.setText(txtid.getText());
+        Entradas.idpNuevo=Integer.parseInt(txtid.getText());
        }
         dispose();
     }//GEN-LAST:event_btnEnviarActionPerformed

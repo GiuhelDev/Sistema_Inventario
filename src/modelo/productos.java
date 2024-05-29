@@ -4,7 +4,6 @@
  */
 package modelo;
 
-import java.sql.Date;
 
 public class productos {
     
@@ -12,28 +11,28 @@ public class productos {
    String nomProd;
    int stock;
    int idCategoria;
-   int idproveedor;
    double precioV;
 
     public productos() {
     }
 
-    public productos(int idproducto, String nomProd, int stock, int idCategoria, int idproveedor, double precioV) {
+    public productos(int idproducto, String nomProd, int stock, int idCategoria, double precioV) {
         this.idproducto = idproducto;
         this.nomProd = nomProd;
         this.stock = stock;
         this.idCategoria = idCategoria;
-        this.idproveedor = idproveedor;
         this.precioV = precioV;
     }
 
-    public int getIdProducto() {
+    public int getIdproducto() {
         return idproducto;
     }
 
-    public void setIDProducto(int identrada) {
-        this.idproducto = identrada;
+    public void setIdproducto(int idproducto) {
+        this.idproducto = idproducto;
     }
+
+    
 
     public String getNomProd() {
         return nomProd;
@@ -57,15 +56,6 @@ public class productos {
 
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
-    }
-
-   
-    public int getIdproveedor() {
-        return idproveedor;
-    }
-
-    public void setIdproveedor(int idproveedor) {
-        this.idproveedor = idproveedor;
     }
 
     public double getPrecioV() {

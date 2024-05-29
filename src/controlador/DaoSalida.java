@@ -53,20 +53,5 @@ public class DaoSalida {
         return numero;
     }
 
-    public boolean restarStock(int idSalida,int cant){
-        String SQL="UPDATE entrada set stock=stock-"+cant+" WHERE identrada="+idSalida;
-        try{
-            con=cn.conectar();
-            ps=con.prepareStatement(SQL);
-            int n=ps.executeUpdate();
-            if(n!=0){
-                return true;
-            }else{
-                return false;
-            }
-        }catch(Exception e){
-            JOptionPane.showConfirmDialog(null, e);
-            return false;
-        }
-    }
+    
 }

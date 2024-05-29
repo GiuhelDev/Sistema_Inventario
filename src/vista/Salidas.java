@@ -7,6 +7,7 @@ package vista;
 import controlador.DaoClientes;
 import controlador.DaoDetalleSalida;
 import controlador.DaoEntradas;
+import controlador.DaoProductos;
 import controlador.DaoSalida;
 import java.io.File;
 import java.sql.Connection;
@@ -41,6 +42,7 @@ DefaultTableModel modelo=new DefaultTableModel();
 
 entradas e=new entradas();
 DaoEntradas DaoE=new DaoEntradas();
+DaoProductos daoPR=new DaoProductos();
 int filaSeleccionada;
     /**
      * Creates new form Salidas
@@ -69,7 +71,6 @@ int filaSeleccionada;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGenerar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnicono = new RSMaterialComponent.RSButtonMaterialIconDos();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -113,19 +114,9 @@ int filaSeleccionada;
         btnAgregar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnRefrecar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnDelete = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnGenerar = new RSMaterialComponent.RSButtonMaterialIconDos();
         txtnsalida = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-
-        btnGenerar.setBackground(new java.awt.Color(14, 76, 117));
-        btnGenerar.setText("Generar");
-        btnGenerar.setBackgroundHover(new java.awt.Color(50, 130, 181));
-        btnGenerar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
-        btnGenerar.setRound(25);
-        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarActionPerformed(evt);
-            }
-        });
 
         setBackground(new java.awt.Color(238, 238, 238));
 
@@ -414,6 +405,17 @@ int filaSeleccionada;
             }
         });
 
+        btnGenerar.setBackground(new java.awt.Color(14, 76, 117));
+        btnGenerar.setText("Generar");
+        btnGenerar.setBackgroundHover(new java.awt.Color(50, 130, 181));
+        btnGenerar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGenerar.setRound(25);
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpanelRound3Layout = new javax.swing.GroupLayout(jpanelRound3);
         jpanelRound3.setLayout(jpanelRound3Layout);
         jpanelRound3Layout.setHorizontalGroup(
@@ -422,29 +424,33 @@ int filaSeleccionada;
                 .addContainerGap()
                 .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelRound3Layout.createSequentialGroup()
-                        .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpanelRound3Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpanelRound3Layout.createSequentialGroup()
-                                        .addComponent(jLabel18)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtigv, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jpanelRound3Layout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jpanelRound3Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jpanelRound3Layout.createSequentialGroup()
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRefrecar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpanelRound3Layout.createSequentialGroup()
+                        .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpanelRound3Layout.createSequentialGroup()
+                                    .addGap(15, 15, 15)
+                                    .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jpanelRound3Layout.createSequentialGroup()
+                                            .addComponent(jLabel18)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtigv, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jpanelRound3Layout.createSequentialGroup()
+                                            .addComponent(jLabel17)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jpanelRound3Layout.createSequentialGroup()
+                                    .addComponent(jLabel16)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jpanelRound3Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jpanelRound3Layout.setVerticalGroup(
             jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,7 +472,9 @@ int filaSeleccionada;
                 .addGroup(jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         txtnsalida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -685,7 +693,7 @@ int filaSeleccionada;
         for(int i=0;i<tablaSalidas.getRowCount();i++){
         int idEntrada=Integer.parseInt(tablaSalidas.getValueAt(i, 1).toString());
         int cant=Integer.parseInt(tablaSalidas.getValueAt(i, 4).toString());
-        daoS.restarStock(idEntrada, cant);
+        daoPR.restarStock(idEntrada, cant);
         }
     }
 

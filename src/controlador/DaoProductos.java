@@ -18,16 +18,15 @@ public class DaoProductos {
     ResultSet rs;
     
     public boolean insertar(productos c){
-        String SQL="insert into productos (idproducto,nombre,stock,idCategoria,idproveedor,precioV) VALUES (?,?,?,?,?,?)";
+        String SQL="insert into productos (idproducto,nombre,stock,idCategoria,precioV) VALUES (?,?,?,?,?)";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setInt(1, c.getIdProducto());
+            ps.setInt(1, c.getIdproducto());
             ps.setString(2, c.getNomProd());
             ps.setInt(3, c.getStock());
             ps.setInt(4, c.getIdCategoria());
-            ps.setInt(5, c.getIdproveedor());
-            ps.setDouble(6, c.getPrecioV());
+            ps.setDouble(5, c.getPrecioV());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -49,12 +48,11 @@ public List Listar(){
             rs=ps.executeQuery();
             while(rs.next()){
                 productos c=new productos();
-                c.setIDProducto(rs.getInt(1));
+                c.setIdproducto(rs.getInt(1));
                 c.setNomProd(rs.getString(2));
                 c.setStock(rs.getInt(3));
                 c.setIdCategoria(rs.getInt(4));
-                c.setIdproveedor(rs.getInt(5));
-                c.setPrecioV(rs.getDouble(6));
+                c.setPrecioV(rs.getDouble(5));
                 lista.add(c);
             }
         }catch(Exception e){
@@ -63,20 +61,42 @@ public List Listar(){
         return lista;
     }
 
+   
     public boolean buscar(productos c){
         String SQL="select * from productos where idproducto=?";
          try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setInt(1, c.getIdProducto());
+            ps.setInt(1, c.getIdproducto());
             rs=ps.executeQuery();
             if(rs.next()){
-                c.setIDProducto(rs.getInt(1));
+                c.setIdproducto(rs.getInt(1));
                 c.setNomProd(rs.getString(2));
                 c.setStock(rs.getInt(3));
                 c.setIdCategoria(rs.getInt(4));
-                c.setIdproveedor(rs.getInt(5));
-                c.setPrecioV(rs.getDouble(6));
+                c.setPrecioV(rs.getDouble(5));
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+
+    public boolean editar(productos c,int idp){
+        String SQL="update entrada set nombre=?,stock=?,idCategoria=?,precioV where idproducto="+idp;
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setString(1, c.getNomProd());
+            ps.setInt(2, c.getStock());
+            ps.setInt(3, c.getIdCategoria());
+            ps.setInt(4, c.getIdCategoria());
+            ps.setDouble(5, c.getPrecioV());
+            int n=ps.executeUpdate();
+            if(n!=0){
                 return true;
             }else{
                 return false;
@@ -104,6 +124,22 @@ public List Listar(){
             }
         }
 
+    public boolean restarStock(int idp,int cant){
+        String SQL="UPDATE productos set stock=stock-"+cant+" WHERE idproducto="+idp;
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 
      public int numProducto(){
             int numero=0;
