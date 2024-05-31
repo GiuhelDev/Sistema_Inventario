@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-03-2024 a las 23:49:03
+-- Tiempo de generación: 31-05-2024 a las 01:09:11
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -38,7 +38,8 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`idCategoria`, `catergoria`) VALUES
 (1, 'Bebidas'),
-(2, 'Enlatado');
+(2, 'Enlatado'),
+(5, 'Perecibles');
 
 -- --------------------------------------------------------
 
@@ -61,8 +62,31 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`idCliente`, `nombre`, `apellido`, `documento`, `direccion`, `telefono`, `correo`) VALUES
-(1, 'julio', 'remirez menez', '85236587', 'calle los testes 13', '963258741', 'julio.r@gmail.com'),
-(2, 'claudia', 'torrez perez', '12345678', 'calle los duraznos 26', '96325871', 'claudia.t@gmail.com');
+(1, 'susana', 'torrez damian', '96325874', 'av los angeles 12', '963258741', 'susana@gmail.com'),
+(3, 'julio', 'dominguex damian', '85217785', 'av los programadores 12', '952369874', 'julio@gmail.com'),
+(4, 'sofia', 'gonzales gutierrez', '8521478', 'av las flores 25', '963258745', 'sofi.g@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detallesalida`
+--
+
+CREATE TABLE `detallesalida` (
+  `id` int(11) NOT NULL,
+  `idSalida` int(11) NOT NULL,
+  `idproducto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `importe` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detallesalida`
+--
+
+INSERT INTO `detallesalida` (`id`, `idSalida`, `idproducto`, `cantidad`, `importe`) VALUES
+(1, 2, 1, 2, '20.00'),
+(2, 2, 2, 1, '25.00');
 
 -- --------------------------------------------------------
 
@@ -72,16 +96,50 @@ INSERT INTO `clientes` (`idCliente`, `nombre`, `apellido`, `documento`, `direcci
 
 CREATE TABLE `entrada` (
   `identrada` int(11) NOT NULL,
-  `nomProd` varchar(30) NOT NULL,
+  `idproducto` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
   `idCategoria` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `idproveedor` int(11) NOT NULL,
   `precioE` decimal(10,2) NOT NULL,
   `precioV` decimal(10,2) NOT NULL,
-  `subtotal` decimal(10,2) NOT NULL,
-  `total` decimal(10,2) NOT NULL
+  `total` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `entrada`
+--
+
+INSERT INTO `entrada` (`identrada`, `idproducto`, `stock`, `idCategoria`, `fecha`, `idproveedor`, `precioE`, `precioV`, `total`) VALUES
+(1, 1, 10, 1, '2024-05-17', 3, '8.00', '10.00', '80.00'),
+(2, 2, 15, 5, '2024-05-17', 1, '22.00', '25.00', '330.00'),
+(3, 1, 5, 1, '2024-05-17', 3, '8.00', '10.00', '40.00'),
+(6, 3, 16, 1, '2024-05-22', 4, '5.00', '6.50', '80.00'),
+(8, 2, 10, 5, '2024-05-30', 4, '23.00', '25.00', '230.00'),
+(9, 3, 8, 1, '2024-05-30', 4, '5.00', '6.50', '40.00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE `productos` (
+  `idproducto` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `idCategoria` int(11) NOT NULL,
+  `precioV` decimal(8,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`idproducto`, `nombre`, `stock`, `idCategoria`, `precioV`) VALUES
+(1, 'inka cola 3L', 12, 1, '10.00'),
+(2, 'arroz 5k costeña', 14, 5, '25.00'),
+(3, 'Coca cola 1L', 21, 1, '6.50');
 
 -- --------------------------------------------------------
 
@@ -94,10 +152,21 @@ CREATE TABLE `proveedor` (
   `nombre` varchar(30) NOT NULL,
   `apellido` varchar(30) NOT NULL,
   `documento` varchar(12) NOT NULL,
+  `Rsocial` varchar(100) NOT NULL,
   `direccion` varchar(100) NOT NULL,
   `telefono` varchar(11) NOT NULL,
   `correo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`idproveedor`, `nombre`, `apellido`, `documento`, `Rsocial`, `direccion`, `telefono`, `correo`) VALUES
+(1, 'julio', 'ramirez', '85214785698', 'golosinas sac', 'av los girasoles 25', '963258741', 'julio@gmail.com'),
+(2, 'rosa', 'muñoz dominguez', '96325874125', 'enlatados sac', 'av los girasoles 25', '963258741', 'rosa.m@gmail.com'),
+(3, 'daniel', 'torres miranda', '852147856987', 'golosinas 1', 'av los rosales', '963258741', 'daniel.T@gmail.com'),
+(4, 'Enrique', 'Dominguez Torres', '963258741257', 'Alicorp', 'av girasoles 20', '963258740', 'alicorP@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -107,13 +176,21 @@ CREATE TABLE `proveedor` (
 
 CREATE TABLE `salidas` (
   `idSalida` int(11) NOT NULL,
-  `idEntrada` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `numSalida` varchar(10) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `subtotal` decimal(10,2) NOT NULL,
+  `igv` decimal(10,2) NOT NULL,
   `total` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `salidas`
+--
+
+INSERT INTO `salidas` (`idSalida`, `numSalida`, `idCliente`, `fecha`, `subtotal`, `igv`, `total`) VALUES
+(1, '001', 4, '2024-05-28', '25.83', '5.67', '31.50'),
+(2, '002', 4, '2024-05-28', '36.90', '8.10', '45.00');
 
 -- --------------------------------------------------------
 
@@ -158,12 +235,27 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`idCliente`);
 
 --
+-- Indices de la tabla `detallesalida`
+--
+ALTER TABLE `detallesalida`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_salida` (`idSalida`),
+  ADD KEY `fk_productos` (`idproducto`);
+
+--
 -- Indices de la tabla `entrada`
 --
 ALTER TABLE `entrada`
   ADD PRIMARY KEY (`identrada`),
   ADD KEY `fk_proveedor` (`idproveedor`),
-  ADD KEY `fk_categoria` (`idCategoria`);
+  ADD KEY `fk_categoria` (`idCategoria`),
+  ADD KEY `fk_producto` (`idproducto`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`idproducto`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -176,7 +268,6 @@ ALTER TABLE `proveedor`
 --
 ALTER TABLE `salidas`
   ADD PRIMARY KEY (`idSalida`),
-  ADD KEY `fk_entrada` (`idEntrada`),
   ADD KEY `fk_cliente` (`idCliente`);
 
 --
@@ -193,31 +284,37 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `detallesalida`
+--
+ALTER TABLE `detallesalida`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `entrada`
 --
 ALTER TABLE `entrada`
-  MODIFY `identrada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `identrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idproveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idproveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `salidas`
 --
 ALTER TABLE `salidas`
-  MODIFY `idSalida` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSalida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -230,18 +327,25 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- Filtros para la tabla `detallesalida`
+--
+ALTER TABLE `detallesalida`
+  ADD CONSTRAINT `fk_productos` FOREIGN KEY (`idproducto`) REFERENCES `productos` (`idproducto`),
+  ADD CONSTRAINT `fk_salida` FOREIGN KEY (`idSalida`) REFERENCES `salidas` (`idSalida`);
+
+--
 -- Filtros para la tabla `entrada`
 --
 ALTER TABLE `entrada`
   ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`),
+  ADD CONSTRAINT `fk_producto` FOREIGN KEY (`idproducto`) REFERENCES `productos` (`idproducto`),
   ADD CONSTRAINT `fk_proveedor` FOREIGN KEY (`idproveedor`) REFERENCES `proveedor` (`idproveedor`);
 
 --
 -- Filtros para la tabla `salidas`
 --
 ALTER TABLE `salidas`
-  ADD CONSTRAINT `fk_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`),
-  ADD CONSTRAINT `fk_entrada` FOREIGN KEY (`idEntrada`) REFERENCES `entrada` (`identrada`);
+  ADD CONSTRAINT `fk_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

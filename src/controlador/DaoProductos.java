@@ -85,16 +85,16 @@ public List Listar(){
         }
     }
 
-    public boolean editar(productos c,int idp){
-        String SQL="update entrada set nombre=?,stock=?,idCategoria=?,precioV where idproducto="+idp;
+    public boolean editar(productos c){
+        String SQL="update entrada set nombre=?,stock=?,idCategoria=?,precioV where idproducto=?";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
             ps.setString(1, c.getNomProd());
             ps.setInt(2, c.getStock());
             ps.setInt(3, c.getIdCategoria());
-            ps.setInt(4, c.getIdCategoria());
-            ps.setDouble(5, c.getPrecioV());
+            ps.setDouble(4, c.getPrecioV());
+            ps.setDouble(5, c.getIdproducto());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;
