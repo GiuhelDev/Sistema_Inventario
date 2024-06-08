@@ -665,21 +665,23 @@ public class Entradas extends javax.swing.JPanel {
             e.setPrecioV(Double.parseDouble(txtprecioV.getText()));
             e.setTotal(Double.parseDouble(txtTotal.getText()));
             e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
-            if(idpOld==idpNuevo){
-               if(cantNueva>cant){
-                  int c=cantNueva-cant;
-                  daoPr.sumarStock(idpOld, c);
-               }else{
-                    int c=cant-cantNueva;
-                  daoPr.restarStock(idpOld, c);
-               }
-            }
-            p.setNomProd(txtnombreP.getText());
-            p.setStock(Integer.parseInt(txtstock.getText()));
-            p.setIdCategoria(cantNueva);
-            p.setPrecioV(Double.parseDouble(txtprecioV.getText()));
-            p.setIdproducto(Integer.parseInt(txtidProducto.getText()));
-            if(dao.editar(e)&&daoPr.editar(p)){
+ 
+            DaoProductos daoPro=new DaoProductos();
+            if(dao.editar(e)){
+                 if(idpOld==idpNuevo){
+                    if(cantNueva>cant){
+                       int c=cantNueva-cant;
+                        if(daoPro.sumarStock(idpOld, c)){ 
+                        }
+                    }else{
+                         int c=cant-cantNueva;
+                       if(daoPro.restarStock(idpOld, c)){
+                        }
+                    }
+                }else{
+                daoPro.restarStock(idpOld, cant);
+                daoPro.sumarStock(idpNuevo, Integer.parseInt(txtstock.getText()));
+                }
                 MenuPrincipal m1=new MenuPrincipal();
                 m1.exito("Se modifico con exito");
                 limpiarCampos();
@@ -815,6 +817,9 @@ public class Entradas extends javax.swing.JPanel {
         }else{
             txtproveedor.setText("Error");
         }
+        idpOld=Integer.parseInt(txtidProducto.getText());
+        cant=Integer.parseInt(txtstock.getText());
+        idpNuevo=Integer.parseInt(txtidProducto.getText());
     }//GEN-LAST:event_tablaEntradasMouseClicked
 
     private void txtstockKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtstockKeyReleased

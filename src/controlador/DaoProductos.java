@@ -86,7 +86,7 @@ public List Listar(){
     }
 
     public boolean editar(productos c){
-        String SQL="update entrada set nombre=?,stock=?,idCategoria=?,precioV where idproducto=?";
+        String SQL="update productos set nombre=?,stock=?,idCategoria=?,precioV=? where idproducto=?";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
