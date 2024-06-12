@@ -44,4 +44,24 @@ public class DaoUsuario {
         }
         return us;
     }
+
+    public boolean insertar(String nombre,String apellido,String documento,String direccion,String telefono,String correo,
+                            String tipouser,String user,String pass){
+        String SQL="insert into usuarios (nombre,apellido,documento,direccion,telefono,correo,tipoUsuario,usuario,pass) "
+                + "VALUES ('"+nombre+"','"+apellido+"','"+documento+"','"+direccion+"','"+telefono+"','"+correo+"','"+tipouser+"'"
+                + ",'"+user+"',aes_encrypt('"+pass+"','clave'))";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }

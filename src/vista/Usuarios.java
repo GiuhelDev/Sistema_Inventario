@@ -4,12 +4,16 @@
  */
 package vista;
 
+import controlador.DaoUsuario;
+import modelo.usuarios;
+
 /**
  *
  * @author HELIO
  */
 public class Usuarios extends javax.swing.JPanel {
-
+    usuarios u=new usuarios();
+    DaoUsuario dao=new DaoUsuario();
     /**
      * Creates new form Usuarios
      */
@@ -328,6 +332,26 @@ public class Usuarios extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        u.setNombre(txtnombre.getText());
+        u.setApellido(txtapellido.getText());
+        u.setDocumento(txtdocumento.getText());
+        u.setDireccion(txtdireccion.getText()); 
+        u.setTelefono(txttelefono.getText());
+        u.setCorreo(txtcorreo.getText());
+        u.setTipoUsuario(cmbTipoUsuario.getSelectedItem().toString());
+        u.setUsaurio(txtusuario.getText());
+        u.setPassword(txtpass.getText());        
+        if(dao.insertar(u.getNombre(),u.getApellido(),u.getDocumento(),u.getDireccion(),
+            u.getTelefono(),u.getCorreo(),u.getTipoUsuario(),u.getUsaurio(),u.getPassword())){
+            MenuPrincipal m=new MenuPrincipal();
+            m.exito("Usuario Registrado Con Exito");
+            /*limpiarCampos();
+            limpiarTablaProveedor();
+            listarProveedor();*/
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.error("No se pudo registrar el Usuario");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void tablaclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaclientesMouseClicked
