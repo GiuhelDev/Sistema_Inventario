@@ -5,6 +5,8 @@
 package vista;
 
 import controlador.DaoUsuario;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import modelo.usuarios;
 
 /**
@@ -14,13 +16,34 @@ import modelo.usuarios;
 public class Usuarios extends javax.swing.JPanel {
     usuarios u=new usuarios();
     DaoUsuario dao=new DaoUsuario();
+    DefaultTableModel modelo=new DefaultTableModel();
     /**
      * Creates new form Usuarios
      */
     public Usuarios() {
         initComponents();
+        listarUsuarios();
     }
 
+private void listarUsuarios(){
+        List<usuarios> lista=dao.Listar();
+        modelo=(DefaultTableModel) tablaUsuarios.getModel();
+        Object[] ob=new Object[10];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdusuario();
+            ob[1]=lista.get(i).getNombre();
+            ob[2]=lista.get(i).getApellido();
+            ob[3]=lista.get(i).getDocumento();
+            ob[4]=lista.get(i).getDireccion();
+            ob[5]=lista.get(i).getTelefono();
+            ob[6]=lista.get(i).getCorreo();
+            ob[7]=lista.get(i).getTipoUsuario();
+            ob[8]=lista.get(i).getUsaurio();
+            ob[9]=lista.get(i).getPassword();
+            modelo.addRow(ob);
+        }
+       tablaUsuarios.setModel(modelo);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,7 +80,7 @@ public class Usuarios extends javax.swing.JPanel {
         btnGuardar = new RSMaterialComponent.RSButtonMaterialIconDos();
         jpanelRound2 = new modelo.JpanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaclientes = new javax.swing.JTable();
+        tablaUsuarios = new javax.swing.JTable();
         btnEditar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnEliminar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnBuscar = new RSMaterialComponent.RSButtonMaterialIconDos();
@@ -204,7 +227,7 @@ public class Usuarios extends javax.swing.JPanel {
         jpanelRound2.setRoundTopLeft(25);
         jpanelRound2.setRoundTopRight(25);
 
-        tablaclientes.setModel(new javax.swing.table.DefaultTableModel(
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -212,12 +235,12 @@ public class Usuarios extends javax.swing.JPanel {
                 "ID", "Nombre", "Apellido", "Docuento", "Direccion", "Telefono", "Correo", "TipoUser", "Usuario", "Password"
             }
         ));
-        tablaclientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaclientesMouseClicked(evt);
+                tablaUsuariosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tablaclientes);
+        jScrollPane1.setViewportView(tablaUsuarios);
 
         javax.swing.GroupLayout jpanelRound2Layout = new javax.swing.GroupLayout(jpanelRound2);
         jpanelRound2.setLayout(jpanelRound2Layout);
@@ -345,19 +368,19 @@ public class Usuarios extends javax.swing.JPanel {
             u.getTelefono(),u.getCorreo(),u.getTipoUsuario(),u.getUsaurio(),u.getPassword())){
             MenuPrincipal m=new MenuPrincipal();
             m.exito("Usuario Registrado Con Exito");
-            /*limpiarCampos();
-            limpiarTablaProveedor();
-            listarProveedor();*/
+            limpiarCampos();
+            limpiarTablaUsuarios();
+            listarUsuarios();
         }else{
             MenuPrincipal m=new MenuPrincipal();
             m.error("No se pudo registrar el Usuario");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void tablaclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaclientesMouseClicked
+    private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_tablaclientesMouseClicked
+    }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
@@ -374,7 +397,24 @@ public class Usuarios extends javax.swing.JPanel {
        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-
+    void limpiarCampos(){
+        txtidusuarios.setText("");
+        txtnombre.setText("");
+        txtapellido.setText("");
+        txtdocumento.setText("");
+        txtdireccion.setText("");
+        txttelefono.setText("");
+        txtcorreo.setText("");
+        txtusuario.setText("");
+        txtpass.setText("");
+    }
+    
+    void limpiarTablaUsuarios(){
+        for(int i=0;i<modelo.getRowCount();i++){
+            modelo.removeRow(i);
+            i=0-1;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEditar;
@@ -397,7 +437,7 @@ public class Usuarios extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
-    private javax.swing.JTable tablaclientes;
+    private javax.swing.JTable tablaUsuarios;
     private javax.swing.JTextField txtapellido;
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtdireccion;

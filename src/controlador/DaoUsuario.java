@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.conexion;
 import modelo.usuarios;
@@ -63,5 +65,32 @@ public class DaoUsuario {
             JOptionPane.showConfirmDialog(null, e);
             return false;
         }
+    }
+
+    public List Listar(){
+        List<usuarios> lista=new ArrayList<>();
+        String SQL="select * from usuarios";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                usuarios c=new usuarios();
+                c.setIdusuario(rs.getInt(1));
+                c.setNombre(rs.getString(2));
+                c.setApellido(rs.getString(3));
+                c.setDocumento(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setTelefono(rs.getString(6));
+                c.setCorreo(rs.getString(7));
+                c.setTipoUsuario(rs.getString(8));
+                c.setUsaurio(rs.getString(9));
+                c.setPassword(rs.getString(10));
+                lista.add(c);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return lista;
     }
 }
