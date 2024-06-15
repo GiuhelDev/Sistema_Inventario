@@ -93,4 +93,53 @@ public class DaoUsuario {
         }
         return lista;
     }
+
+    public boolean buscar(usuarios c){
+        String SQL="SELECT idUsuario,nombre,apellido,documento,direccion,telefono,correo,tipoUsuario,usuario,"
+                    + "aes_decrypt(usuarios.pass,'clave')as pass from usuarios WHERE documento=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setString(1, c.getDocumento());
+            rs=ps.executeQuery();
+            if(rs.next()){
+                c.setIdusuario(rs.getInt(1));
+                c.setNombre(rs.getString(2));
+                c.setApellido(rs.getString(3));
+                c.setDocumento(rs.getString(4));
+                c.setDireccion(rs.getString(5));
+                c.setTelefono(rs.getString(6));
+                c.setCorreo(rs.getString(7));
+                c.setTipoUsuario(rs.getString(8));
+                c.setUsaurio(rs.getString(9));
+                c.setPassword(rs.getString(10));
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+
+    public boolean editar(String nombre,String apellido,String documento,String dire,
+                            String tel,String correo,String tusuario,String user,String pass,int id){
+
+        String SQL="update usuarios SET nombre='"+nombre+"',apellido='"+apellido+"',documento='"+documento+"',direccion='"+dire+"',telefono='"+tel+"'\n" +
+                    ",correo='"+correo+"',tipoUsuario='"+tusuario+"',usuario='"+user+"',pass=aes_encrypt('"+pass+"','clave') WHERE idUsuario="+id;
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }

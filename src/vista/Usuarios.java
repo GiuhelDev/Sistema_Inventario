@@ -351,6 +351,7 @@ private void listarUsuarios(){
 
     private void btniconoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniconoActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btniconoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -394,7 +395,23 @@ private void listarUsuarios(){
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-       
+        u.setDocumento(txtdocumento.getText());
+        if(dao.buscar(u)){
+            txtidusuarios.setText(u.getIdusuario()+"");
+            txtnombre.setText(u.getNombre());
+            txtapellido.setText(u.getApellido());
+            txtdocumento.setText(u.getDocumento());
+            txtdireccion.setText(u.getDireccion());
+            txttelefono.setText(u.getTelefono());
+            txtcorreo.setText(u.getCorreo());
+            txtusuario.setText(u.getUsaurio());
+            txtpass.setText(u.getPassword());
+            cmbTipoUsuario.setSelectedItem(u.getTipoUsuario());
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("El Usuario No Existe");
+            limpiarCampos();
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     void limpiarCampos(){
