@@ -6,6 +6,7 @@ package vista;
 
 import controlador.DaoUsuario;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.usuarios;
 
@@ -380,17 +381,70 @@ private void listarUsuarios(){
 
     private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
         // TODO add your handling code here:
-        
+        int fila=tablaUsuarios.getSelectedRow();
+        txtidusuarios.setText(tablaUsuarios.getValueAt(fila, 0).toString());
+        txtnombre.setText(tablaUsuarios.getValueAt(fila, 1).toString());
+        txtapellido.setText(tablaUsuarios.getValueAt(fila, 2).toString());
+        txtdocumento.setText(tablaUsuarios.getValueAt(fila, 3).toString());
+        txtdireccion.setText(tablaUsuarios.getValueAt(fila, 4).toString());
+        txttelefono.setText(tablaUsuarios.getValueAt(fila, 5).toString());
+        txtcorreo.setText(tablaUsuarios.getValueAt(fila, 6).toString());
+        cmbTipoUsuario.setSelectedItem(tablaUsuarios.getValueAt(fila, 7).toString());
+        txtusuario.setText(tablaUsuarios.getValueAt(fila, 8).toString());
+        u.setDocumento(txtdocumento.getText());
+        if(dao.buscar(u)){
+            txtpass.setText(u.getPassword());
+        }
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        
+        int fila=tablaUsuarios.getSelectedRow();
+        if(fila==-1&&txtidusuarios.getText().isEmpty()){
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione un Usuario");
+        }else{
+            u.setIdusuario(Integer.parseInt(txtidusuarios.getText()));
+            u.setNombre(txtnombre.getText());
+            u.setApellido(txtapellido.getText());
+            u.setDocumento(txtdocumento.getText());
+            u.setDireccion(txtdireccion.getText());
+            u.setTelefono(txttelefono.getText());
+            u.setCorreo(txtcorreo.getText());
+            u.setTipoUsuario(cmbTipoUsuario.getSelectedItem().toString());
+            u.setUsaurio(txtusuario.getText());
+            u.setPassword(txtpass.getText());
+            if(dao.editar(u.getNombre(),u.getApellido(),u.getDocumento(),u.getDireccion()
+                ,u.getTelefono(),u.getCorreo(),u.getTipoUsuario(),u.getUsaurio(),u.getPassword(),u.getIdusuario())){
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se modifico con exito");
+                limpiarCampos();
+                limpiarTablaUsuarios();
+                listarUsuarios();
+            }else{
+                MenuPrincipal m=new MenuPrincipal();
+                m.error("Erorr al modificar el Usuario");
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        
+        if(!txtidusuarios.getText().isEmpty()){
+            int confirmacion=JOptionPane.showConfirmDialog(null, "¿Es tas seguro de eliminar el Usuario?","Confirmar",2);
+            if(confirmacion==0){
+                u.setIdusuario(Integer.parseInt(txtidusuarios.getText()));
+                dao.eliminar(u);
+                limpiarCampos();
+                limpiarTablaUsuarios();
+                listarUsuarios();
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se Elimino con exito el Usuario");
+            }
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione un Usuario");
+        }        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

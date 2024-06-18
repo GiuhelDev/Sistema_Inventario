@@ -142,4 +142,22 @@ public class DaoUsuario {
             return false;
         }
     }
+
+    public boolean eliminar(usuarios c){
+        String SQL="delete from usuarios where idUsuario=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdusuario());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }
