@@ -456,14 +456,14 @@ btnUsuarios.setSelected(false);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnAcercaDe;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnCategorias;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnClientes;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnEntradas;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnCategorias;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnClientes;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnEntradas;
     private RSMaterialComponent.RSButtonMaterialIconDos btnHome;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnProveedor;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnSalidas;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnProveedor;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnSalidas;
     private RSMaterialComponent.RSButtonMaterialIconDos btnSalir;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnUsuarios;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnUsuarios;
     private javax.swing.JPanel contenedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;

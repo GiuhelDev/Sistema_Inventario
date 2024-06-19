@@ -182,10 +182,25 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         us=daoU.login(txtusuario.getText(), txtpassword.getText());
         if(us.getUsaurio()!=null && us.getPassword()!=null){
-            //JOptionPane.showMessageDialog(null, "Bienvenido");
+            MenuPrincipal m=new MenuPrincipal();
+//Administrador Vendedor Almacenero
+           if(us.getTipoUsuario().equals("Vendedor")){
+               m.btnSalidas.setEnabled(true);
+               m.btnCategorias.setVisible(false);
+               m.btnClientes.setEnabled(true);
+               m.btnEntradas.setVisible(false);
+               m.btnProveedor.setVisible(false);
+               m.btnUsuarios.setVisible(false);
+            }else if(us.getTipoUsuario().equals("Almacenero")){
+                m.btnSalidas.setVisible(false);
+                m.btnCategorias.setEnabled(true);
+                m.btnClientes.setVisible(false);
+                m.btnEntradas.setEnabled(true);
+                m.btnProveedor.setEnabled(true);
+                m.btnUsuarios.setVisible(false);
+            }
             Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, "Bienvenido");
             panel.showNotification();
-            MenuPrincipal m=new MenuPrincipal();
             m.setVisible(true);
             dispose();
         }else{
