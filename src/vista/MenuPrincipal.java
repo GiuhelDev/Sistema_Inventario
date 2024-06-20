@@ -56,6 +56,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnUsuarios = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnSalir = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnProductos = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -174,6 +175,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnProductos.setBackground(new java.awt.Color(14, 76, 117));
+        btnProductos.setText("PRODUCTOS");
+        btnProductos.setBackgroundHover(new java.awt.Color(50, 130, 181));
+        btnProductos.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.KEYBOARD_ARROW_DOWN);
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpanelRound2Layout = new javax.swing.GroupLayout(jpanelRound2);
         jpanelRound2.setLayout(jpanelRound2Layout);
         jpanelRound2Layout.setHorizontalGroup(
@@ -188,19 +199,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpanelRound2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpanelRound2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpanelRound2Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jpanelRound2Layout.setVerticalGroup(
@@ -215,6 +230,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,7 +245,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGap(90, 90, 90))
         );
 
         javax.swing.GroupLayout jpanelRound3Layout = new javax.swing.GroupLayout(jpanelRound3);
@@ -264,43 +281,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         // TODO add your handling code here:
-        btnHome.setSelected(true);
         btnCategorias.setSelected(false);
-        btnClientes.setSelected(false);
-        btnEntradas.setSelected(false);
-        btnProveedor.setSelected(false);
-btnUsuarios.setSelected(false);
-btnSalidas.setSelected(false);
-        Home h=new Home();
-        h.setSize(982,740);
-        h.setLocation(0,0);
-        
-        contenedor.removeAll();
-        contenedor.add(h,BorderLayout.CENTER);
-        contenedor.revalidate();
-        contenedor.repaint();
-    }//GEN-LAST:event_btnHomeActionPerformed
-
-    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        // TODO add your handling code here:
-        btnCategorias.setSelected(true);
         btnHome.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
-btnUsuarios.setSelected(false);
-btnSalidas.setSelected(false);
-        Categorias c=new Categorias();
+        btnSalidas.setSelected(false);
+        btnUsuarios.setSelected(false);
+        btnProductos.setSelected(true);
+        Productos c=new Productos();
         c.setSize(982,740);
         c.setLocation(0,0);
-        
+
         contenedor.removeAll();
         contenedor.add(c,BorderLayout.CENTER);
         contenedor.revalidate();
         contenedor.repaint();
-    }//GEN-LAST:event_btnCategoriasActionPerformed
+    }//GEN-LAST:event_btnProductosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
@@ -309,43 +308,25 @@ btnSalidas.setSelected(false);
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        // TODO add your handling code here:
-        btnCategorias.setSelected(false);
-        btnHome.setSelected(false);
-        btnClientes.setSelected(true);
-        btnEntradas.setSelected(false);
-        btnProveedor.setSelected(false);
-btnUsuarios.setSelected(false);
-btnSalidas.setSelected(false);
-        Clientes c=new Clientes();
-        c.setSize(982,740);
-        c.setLocation(0,0);
-        
-        contenedor.removeAll();
-        contenedor.add(c,BorderLayout.CENTER);
-        contenedor.revalidate();
-        contenedor.repaint();
-    }//GEN-LAST:event_btnClientesActionPerformed
-
-    private void btnEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradasActionPerformed
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         // TODO add your handling code here:
         btnCategorias.setSelected(false);
         btnHome.setSelected(false);
         btnClientes.setSelected(false);
-        btnEntradas.setSelected(true);
+        btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
-btnUsuarios.setSelected(false);
-btnSalidas.setSelected(false);
-        Entradas c=new Entradas();
+        btnSalidas.setSelected(false);
+        btnProductos.setSelected(false);
+        btnUsuarios.setSelected(true);
+        Usuarios c=new Usuarios();
         c.setSize(982,740);
         c.setLocation(0,0);
-        
+
         contenedor.removeAll();
         contenedor.add(c,BorderLayout.CENTER);
         contenedor.revalidate();
         contenedor.repaint();
-    }//GEN-LAST:event_btnEntradasActionPerformed
+    }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedorActionPerformed
         // TODO add your handling code here:
@@ -354,12 +335,13 @@ btnSalidas.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(true);
-btnUsuarios.setSelected(false);
-btnSalidas.setSelected(false);
+        btnUsuarios.setSelected(false);
+        btnSalidas.setSelected(false);
+        btnProductos.setSelected(false);
         Proveedor c=new Proveedor();
         c.setSize(982,740);
         c.setLocation(0,0);
-        
+
         contenedor.removeAll();
         contenedor.add(c,BorderLayout.CENTER);
         contenedor.revalidate();
@@ -373,36 +355,97 @@ btnSalidas.setSelected(false);
         btnClientes.setSelected(false);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
-btnUsuarios.setSelected(false);
+        btnUsuarios.setSelected(false);
         btnSalidas.setSelected(true);
         Salidas c=new Salidas();
         c.setSize(982,740);
         c.setLocation(0,0);
-        
+
         contenedor.removeAll();
         contenedor.add(c,BorderLayout.CENTER);
         contenedor.revalidate();
         contenedor.repaint();
     }//GEN-LAST:event_btnSalidasActionPerformed
 
-    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         // TODO add your handling code here:
         btnCategorias.setSelected(false);
         btnHome.setSelected(false);
-        btnClientes.setSelected(false);
+        btnClientes.setSelected(true);
         btnEntradas.setSelected(false);
         btnProveedor.setSelected(false);
+        btnUsuarios.setSelected(false);
         btnSalidas.setSelected(false);
-        btnUsuarios.setSelected(true);
-        Usuarios c=new Usuarios();
+        btnProductos.setSelected(false);
+        Clientes c=new Clientes();
         c.setSize(982,740);
         c.setLocation(0,0);
-        
+
         contenedor.removeAll();
         contenedor.add(c,BorderLayout.CENTER);
         contenedor.revalidate();
         contenedor.repaint();
-    }//GEN-LAST:event_btnUsuariosActionPerformed
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnEntradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradasActionPerformed
+        // TODO add your handling code here:
+        btnCategorias.setSelected(false);
+        btnHome.setSelected(false);
+        btnClientes.setSelected(false);
+        btnEntradas.setSelected(true);
+        btnProveedor.setSelected(false);
+        btnUsuarios.setSelected(false);
+        btnSalidas.setSelected(false);
+        btnProductos.setSelected(false);
+        Entradas c=new Entradas();
+        c.setSize(982,740);
+        c.setLocation(0,0);
+
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnEntradasActionPerformed
+
+    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
+        // TODO add your handling code here:
+        btnCategorias.setSelected(true);
+        btnHome.setSelected(false);
+        btnClientes.setSelected(false);
+        btnEntradas.setSelected(false);
+        btnProveedor.setSelected(false);
+        btnUsuarios.setSelected(false);
+        btnSalidas.setSelected(false);
+        btnProductos.setSelected(false);
+        Categorias c=new Categorias();
+        c.setSize(982,740);
+        c.setLocation(0,0);
+
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnCategoriasActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+        btnHome.setSelected(true);
+        btnCategorias.setSelected(false);
+        btnClientes.setSelected(false);
+        btnEntradas.setSelected(false);
+        btnProveedor.setSelected(false);
+        btnUsuarios.setSelected(false);
+        btnSalidas.setSelected(false);
+        btnProductos.setSelected(false);
+        Home h=new Home();
+        h.setSize(982,740);
+        h.setLocation(0,0);
+
+        contenedor.removeAll();
+        contenedor.add(h,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -460,6 +503,7 @@ btnUsuarios.setSelected(false);
     public static RSMaterialComponent.RSButtonMaterialIconDos btnClientes;
     public static RSMaterialComponent.RSButtonMaterialIconDos btnEntradas;
     private RSMaterialComponent.RSButtonMaterialIconDos btnHome;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnProductos;
     public static RSMaterialComponent.RSButtonMaterialIconDos btnProveedor;
     public static RSMaterialComponent.RSButtonMaterialIconDos btnSalidas;
     private RSMaterialComponent.RSButtonMaterialIconDos btnSalir;

@@ -116,22 +116,29 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnCategorias" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnHome" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnEntradas" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnClientes" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSalidas" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnUsuarios" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jSeparator1" min="-2" pref="222" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnAcercaDe" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSeparator1" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnAcercaDe" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="btnEntradas" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnSalidas" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnProductos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="btnUsuarios" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -151,6 +158,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnClientes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnProductos" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnEntradas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnProveedor" min="-2" max="-2" attributes="0"/>
@@ -164,7 +173,7 @@
                       <Component id="btnAcercaDe" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="143" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -347,6 +356,26 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnProductos">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="75" green="4c" red="e" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="PRODUCTOS"/>
+                <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="82" red="32" type="rgb"/>
+                </Property>
+                <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
+                  <Value id="KEYBOARD_ARROW_DOWN"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProductosActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

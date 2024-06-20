@@ -191,6 +191,7 @@ public class Login extends javax.swing.JFrame {
                m.btnEntradas.setVisible(false);
                m.btnProveedor.setVisible(false);
                m.btnUsuarios.setVisible(false);
+                m.btnProductos.setVisible(false);
             }else if(us.getTipoUsuario().equals("Almacenero")){
                 m.btnSalidas.setVisible(false);
                 m.btnCategorias.setEnabled(true);
@@ -198,6 +199,7 @@ public class Login extends javax.swing.JFrame {
                 m.btnEntradas.setEnabled(true);
                 m.btnProveedor.setEnabled(true);
                 m.btnUsuarios.setVisible(false);
+                m.btnProductos.setVisible(true);
             }
             Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, "Bienvenido");
             panel.showNotification();
