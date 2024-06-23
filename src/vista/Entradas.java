@@ -719,6 +719,7 @@ public class Entradas extends javax.swing.JPanel {
     private void btnBuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCategoriaActionPerformed
         // TODO add your handling code here:
         BuscarDato.tipo=true;
+        BuscarDato.entrada=true;
         BuscarDato m=new BuscarDato();
         m.setVisible(true);
     }//GEN-LAST:event_btnBuscarCategoriaActionPerformed

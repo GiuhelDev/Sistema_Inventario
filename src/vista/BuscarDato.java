@@ -23,6 +23,7 @@ public class BuscarDato extends javax.swing.JFrame {
     DaoProveedor daoP=new DaoProveedor();
     DefaultTableModel modelo=new DefaultTableModel();
     public static boolean tipo;
+    public static boolean entrada;
 
     /**
      * Creates new form BuscaCategoria
@@ -206,8 +207,13 @@ public class BuscarDato extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         if(tipo==true){ 
-            Entradas.txtidcategoria.setText(txtID.getText());
-            Entradas.txtcategoria.setText(txtnombre.getText());
+            if(entrada==true){
+                Entradas.txtidcategoria.setText(txtID.getText());
+                Entradas.txtcategoria.setText(txtnombre.getText());
+            }else{
+                Productos.txtNomCategoria.setText(txtnombre.getText());
+                Productos.txtidCategoria.setText(txtID.getText());
+            }
         }else{
             Entradas.txtidproveedor.setText(txtID.getText());
             Entradas.txtproveedor.setText(txtnombre.getText());

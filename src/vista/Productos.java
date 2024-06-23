@@ -23,6 +23,7 @@ public class Productos extends javax.swing.JPanel {
     public Productos() {
         initComponents();
         listarProductos();
+        numProducto();
     }
 
     private void listarProductos(){
@@ -38,6 +39,17 @@ public class Productos extends javax.swing.JPanel {
             modelo.addRow(ob);
         }
        tablaProductos.setModel(modelo);
+    }
+
+    void numProducto(){
+        int numero=daoP.numProducto();
+        if(numero==0){
+        txtid.setText("1");
+        }else{
+        int i=numero;
+        i=i+1;
+        txtid.setText(i+"");
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -344,8 +356,22 @@ public class Productos extends javax.swing.JPanel {
 
     private void btnGuardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar2ActionPerformed
         // TODO add your handling code here:
-       
-
+        p.setIdproducto(Integer.parseInt(txtid.getText()));
+        p.setNomProd(txtnombre.getText());
+        //p.setStock(Integer.parseInt(txtstock.getText()));
+        p.setIdCategoria(Integer.parseInt(txtidCategoria.getText()));
+       // p.setPrecioV(Double.parseDouble(txttprecio.getText()));
+        if(daoP.insertar(p)){
+            MenuPrincipal m=new MenuPrincipal();
+            m.exito("Producto Registrado Con Exito");
+            limpiarCampos();
+            limpiarTablaProductos();
+            listarProductos();
+            numProducto();
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.error("No se pudo registrar el Producto");
+        }
     }//GEN-LAST:event_btnGuardar2ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -371,16 +397,32 @@ public class Productos extends javax.swing.JPanel {
 
     private void btnBuscaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaCategoriaActionPerformed
         // TODO add your handling code here:
+        BuscarDato.tipo=true;
+        BuscarDato.entrada=false;
+        BuscarDato m=new BuscarDato();
+        m.setVisible(true);
     }//GEN-LAST:event_btnBuscaCategoriaActionPerformed
 
+    private void limpiarTablaProductos() {
+       for(int i=0;i<modelo.getRowCount();i++){
+            modelo.removeRow(i);
+            i=0-1;
+        }
+    }
 
+    private void limpiarCampos() {
+       txtid.setText("");
+txtnombre.setText("");
+txtstock.setText("");
+txtNomCategoria.setText("");
+txttprecio.setText("");
+txtidCategoria.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscaCategoria;
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEditar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEliminar;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar1;
     private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar2;
     private RSMaterialComponent.RSButtonMaterialIconDos btnPdf;
     private RSMaterialComponent.RSButtonMaterialIconDos btnicono;
@@ -396,11 +438,13 @@ public class Productos extends javax.swing.JPanel {
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
     private javax.swing.JTable tablaProductos;
-    private javax.swing.JTextField txtNomCategoria;
+    public static javax.swing.JTextField txtNomCategoria;
     private javax.swing.JTextField txtid;
-    private javax.swing.JTextField txtidCategoria;
+    public static javax.swing.JTextField txtidCategoria;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtstock;
     private javax.swing.JTextField txttprecio;
     // End of variables declaration//GEN-END:variables
+
+   
 }
