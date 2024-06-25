@@ -4,9 +4,11 @@
  */
 package vista;
 
+import controlador.DaoCategorias;
 import controlador.DaoProductos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import modelo.Categoria;
 import modelo.productos;
 
 /**
@@ -17,6 +19,9 @@ public class Productos extends javax.swing.JPanel {
     productos p=new productos();
     DaoProductos daoP=new DaoProductos();
     DefaultTableModel modelo=new DefaultTableModel();
+
+    Categoria ct=new Categoria();
+    DaoCategorias daoCt=new DaoCategorias();
     /**
      * Creates new form Productos
      */
@@ -376,8 +381,26 @@ public class Productos extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        
-       
+        int fila=tablaProductos.getSelectedRow();
+        if(fila==-1&&txtid.getText().isEmpty()){
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione un Proveedor");
+        }else{
+            p.setIdproducto(Integer.parseInt(txtid.getText()));
+            p.setNomProd(txtnombre.getText());
+            p.setIdCategoria(Integer.parseInt(txtidCategoria.getText()));
+            p.setPrecioV(Double.parseDouble(txttprecio.getText()));
+            if(daoP.editar(p)){
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se modifico con exito");
+                limpiarCampos();
+                limpiarTablaProductos();
+                listarProductos();
+            }else{
+                MenuPrincipal m=new MenuPrincipal();
+                m.error("Erorr al modificar el Producto");
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -387,7 +410,22 @@ public class Productos extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-      
+        p.setIdproducto(Integer.parseInt(txtid.getText()));
+        if(daoP.buscar(p)){
+            txtid.setText(p.getIdproducto()+"");
+            txtnombre.setText(p.getNomProd());
+            txtidCategoria.setText(p.getIdCategoria()+"");
+            txttprecio.setText(p.getPrecioV()+"");
+            txtstock.setText(p.getStock()+"");
+            ct.setIdCategoria(Integer.parseInt(txtidCategoria.getText()));
+            if(daoCt.buscar(ct)){
+                txtNomCategoria.setText(ct.getNomCategoria());
+            }
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("El Producto No Existe");
+            limpiarCampos();
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdfActionPerformed

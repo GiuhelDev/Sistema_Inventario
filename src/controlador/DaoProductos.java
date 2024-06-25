@@ -107,6 +107,25 @@ public List Listar(){
         }
     }
 
+    public boolean editarPrecioV(productos c){
+        String SQL="update productos set precioV=? where idproducto=?";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setDouble(1, c.getPrecioV());
+            ps.setDouble(2, c.getIdproducto());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+
     public boolean sumarStock(int idproducto,int cant){
             String SQL="UPDATE productos set stock=stock+"+cant+" WHERE idproducto="+idproducto;
             try{

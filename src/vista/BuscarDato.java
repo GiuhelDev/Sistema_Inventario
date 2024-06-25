@@ -208,8 +208,8 @@ public class BuscarDato extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(tipo==true){ 
             if(entrada==true){
-                Entradas.txtidcategoria.setText(txtID.getText());
-                Entradas.txtcategoria.setText(txtnombre.getText());
+                //Entradas.txtidcategoria.setText(txtID.getText());
+                //Entradas.txtcategoria.setText(txtnombre.getText());
             }else{
                 Productos.txtNomCategoria.setText(txtnombre.getText());
                 Productos.txtidCategoria.setText(txtID.getText());

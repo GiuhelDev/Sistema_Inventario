@@ -21,18 +21,17 @@ public class DaoEntradas {
     ResultSet rs;
     
     public boolean insertar(entradas c){
-        String SQL="insert into entrada (idproducto,stock,idCategoria,fecha,idproveedor,precioE,precioV,total) VALUES (?,?,?,?,?,?,?,?)";
+        String SQL="insert into entrada (idproducto,stock,fecha,idproveedor,precioE,precioV,total) VALUES (?,?,?,?,?,?,?)";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
             ps.setInt(1, c.getIdproducto());
             ps.setInt(2, c.getStock());
-            ps.setInt(3, c.getIdCategoria());
-            ps.setDate(4, c.getFecha());
-            ps.setInt(5, c.getIdproveedor());
-            ps.setDouble(6, c.getPrecioE());
-            ps.setDouble(7, c.getPrecioV());
-            ps.setDouble(8, c.getTotal());
+            ps.setDate(3, c.getFecha());
+            ps.setInt(4, c.getIdproveedor());
+            ps.setDouble(5, c.getPrecioE());
+            ps.setDouble(6, c.getPrecioV());
+            ps.setDouble(7, c.getTotal());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -57,12 +56,11 @@ public class DaoEntradas {
                 c.setIdentrada(rs.getInt(1));
                 c.setIdproducto(rs.getInt(2));
                 c.setStock(rs.getInt(3));
-                c.setIdCategoria(rs.getInt(4));
-                c.setFecha(rs.getDate(5));
-                c.setIdproveedor(rs.getInt(6));
-                c.setPrecioE(rs.getDouble(7));
-                c.setPrecioV(rs.getDouble(8));
-                c.setTotal(rs.getDouble(9));
+                c.setFecha(rs.getDate(4));
+                c.setIdproveedor(rs.getInt(5));
+                c.setPrecioE(rs.getDouble(6));
+                c.setPrecioV(rs.getDouble(7));
+                c.setTotal(rs.getDouble(8));
                 lista.add(c);
             }
         }catch(Exception e){
@@ -73,19 +71,18 @@ public class DaoEntradas {
 
 
     public boolean editar(entradas c){
-        String SQL="update entrada set idproducto=?,stock=?,idCategoria=?,fecha=?,idproveedor=?,precioE=?,precioV=?,total=? where identrada=?";
+        String SQL="update entrada set idproducto=?,stock=?,fecha=?,idproveedor=?,precioE=?,precioV=?,total=? where identrada=?";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
             ps.setInt(1, c.getIdproducto());
             ps.setInt(2, c.getStock());
-            ps.setInt(3, c.getIdCategoria());
-            ps.setDate(4, c.getFecha());
-            ps.setInt(5, c.getIdproveedor());
-            ps.setDouble(6, c.getPrecioE());
-            ps.setDouble(7, c.getPrecioV());
-            ps.setDouble(8, c.getTotal());
-            ps.setInt(9, c.getIdentrada());
+            ps.setDate(3, c.getFecha());
+            ps.setInt(4, c.getIdproveedor());
+            ps.setDouble(5, c.getPrecioE());
+            ps.setDouble(6, c.getPrecioV());
+            ps.setDouble(7, c.getTotal());
+            ps.setInt(8, c.getIdentrada());
             int n=ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -127,12 +124,11 @@ public boolean buscar(entradas c){
                 c.setIdentrada(rs.getInt(1));
                 c.setIdproducto(rs.getInt(2));
                 c.setStock(rs.getInt(3));
-                c.setIdCategoria(rs.getInt(4));
-                c.setFecha(rs.getDate(5));
-                c.setIdproveedor(rs.getInt(6));
-                c.setPrecioE(rs.getDouble(7));
-                c.setPrecioV(rs.getDouble(8));
-                c.setTotal(rs.getDouble(9));
+                c.setFecha(rs.getDate(4));
+                c.setIdproveedor(rs.getInt(5));
+                c.setPrecioE(rs.getDouble(6));
+                c.setPrecioV(rs.getDouble(7));
+                c.setTotal(rs.getDouble(8));
                 return true;
             }else{
                 return false;

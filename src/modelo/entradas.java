@@ -11,7 +11,6 @@ public class entradas {
    int identrada										;
    int idproducto;
    int stock;
-   int idCategoria;
    Date fecha;
    int idproveedor;
    double precioE;
@@ -21,11 +20,10 @@ public class entradas {
     public entradas() {
     }
 
-    public entradas(int identrada, int idproducto, int stock, int idCategoria, Date fecha, int idproveedor, double precioE, double precioV, double total) {
+    public entradas(int identrada, int idproducto, int stock, Date fecha, int idproveedor, double precioE, double precioV, double total) {
         this.identrada = identrada;
         this.idproducto = idproducto;
         this.stock = stock;
-        this.idCategoria = idCategoria;
         this.fecha = fecha;
         this.idproveedor = idproveedor;
         this.precioE = precioE;
@@ -61,13 +59,7 @@ public class entradas {
         this.stock = stock;
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
-    }
+ 
 
     public int getIdproveedor() {
         return idproveedor;
