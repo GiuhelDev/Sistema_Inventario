@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2024 a las 01:09:11
+-- Tiempo de generación: 27-06-2024 a las 06:45:50
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -39,7 +39,8 @@ CREATE TABLE `categorias` (
 INSERT INTO `categorias` (`idCategoria`, `catergoria`) VALUES
 (1, 'Bebidas'),
 (2, 'Enlatado'),
-(5, 'Perecibles');
+(5, 'Perecibles'),
+(7, 'abarrote');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,9 @@ CREATE TABLE `detallesalida` (
 
 INSERT INTO `detallesalida` (`id`, `idSalida`, `idproducto`, `cantidad`, `importe`) VALUES
 (1, 2, 1, 2, '20.00'),
-(2, 2, 2, 1, '25.00');
+(2, 2, 2, 1, '25.00'),
+(3, 3, 4, 5, '27.50'),
+(4, 3, 3, 5, '32.50');
 
 -- --------------------------------------------------------
 
@@ -98,7 +101,6 @@ CREATE TABLE `entrada` (
   `identrada` int(11) NOT NULL,
   `idproducto` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
-  `idCategoria` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `idproveedor` int(11) NOT NULL,
   `precioE` decimal(10,2) NOT NULL,
@@ -110,13 +112,25 @@ CREATE TABLE `entrada` (
 -- Volcado de datos para la tabla `entrada`
 --
 
-INSERT INTO `entrada` (`identrada`, `idproducto`, `stock`, `idCategoria`, `fecha`, `idproveedor`, `precioE`, `precioV`, `total`) VALUES
-(1, 1, 10, 1, '2024-05-17', 3, '8.00', '10.00', '80.00'),
-(2, 2, 15, 5, '2024-05-17', 1, '22.00', '25.00', '330.00'),
-(3, 1, 5, 1, '2024-05-17', 3, '8.00', '10.00', '40.00'),
-(6, 3, 16, 1, '2024-05-22', 4, '5.00', '6.50', '80.00'),
-(8, 2, 10, 5, '2024-05-30', 4, '23.00', '25.00', '230.00'),
-(9, 3, 8, 1, '2024-05-30', 4, '5.00', '6.50', '40.00');
+INSERT INTO `entrada` (`identrada`, `idproducto`, `stock`, `fecha`, `idproveedor`, `precioE`, `precioV`, `total`) VALUES
+(1, 1, 10, '2024-05-17', 3, '8.00', '10.00', '80.00'),
+(2, 2, 15, '2024-05-17', 1, '22.00', '25.00', '330.00'),
+(3, 1, 5, '2024-05-17', 3, '8.00', '10.00', '40.00'),
+(6, 3, 16, '2024-05-22', 4, '5.00', '6.50', '80.00'),
+(8, 2, 10, '2024-05-30', 4, '23.00', '25.00', '230.00'),
+(9, 3, 8, '2024-05-30', 4, '5.00', '6.50', '40.00'),
+(10, 2, 10, '2024-06-05', 4, '9.00', '25.00', '90.00'),
+(11, 2, 6, '2024-06-05', 2, '22.00', '25.00', '132.00'),
+(12, 2, 8, '2024-06-05', 2, '23.00', '25.00', '184.00'),
+(13, 2, 10, '2024-06-06', 4, '22.00', '25.00', '220.00'),
+(14, 2, 10, '2024-06-06', 1, '8.50', '25.00', '85.00'),
+(15, 2, 6, '2024-06-07', 4, '5.00', '25.00', '30.00'),
+(16, 4, 10, '2024-06-21', 2, '10.00', '11.50', '100.00'),
+(17, 4, 10, '2024-06-24', 4, '9.00', '10.50', '90.00'),
+(18, 4, 20, '2024-06-24', 3, '10.00', '10.50', '200.00'),
+(19, 4, 5, '2024-06-24', 2, '10.50', '11.00', '52.50'),
+(20, 1, 5, '2024-06-24', 4, '10.00', '11.00', '50.00'),
+(21, 5, 15, '2024-06-24', 4, '13.00', '14.00', '195.00');
 
 -- --------------------------------------------------------
 
@@ -137,9 +151,11 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`idproducto`, `nombre`, `stock`, `idCategoria`, `precioV`) VALUES
-(1, 'inka cola 3L', 12, 1, '10.00'),
-(2, 'arroz 5k costeña', 14, 5, '25.00'),
-(3, 'Coca cola 1L', 21, 1, '6.50');
+(1, 'inka cola 3L', 40, 1, '11.00'),
+(2, 'arroz 5k costeña', 36, 1, '25.00'),
+(3, 'Coca cola 1L', 50, 1, '6.50'),
+(4, 'Atun', 40, 2, '5.50'),
+(5, 'arroz 5kg', 15, 7, '14.00');
 
 -- --------------------------------------------------------
 
@@ -190,7 +206,8 @@ CREATE TABLE `salidas` (
 
 INSERT INTO `salidas` (`idSalida`, `numSalida`, `idCliente`, `fecha`, `subtotal`, `igv`, `total`) VALUES
 (1, '001', 4, '2024-05-28', '25.83', '5.67', '31.50'),
-(2, '002', 4, '2024-05-28', '36.90', '8.10', '45.00');
+(2, '002', 4, '2024-05-28', '36.90', '8.10', '45.00'),
+(3, '003', 4, '2024-06-24', '49.20', '10.80', '60.00');
 
 -- --------------------------------------------------------
 
@@ -216,7 +233,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `nombre`, `apellido`, `documento`, `direccion`, `telefono`, `correo`, `tipoUsuario`, `usuario`, `pass`) VALUES
-(1, 'helio', 'pizarro puentes', '85214785', 'av las flores 15', '985698547', 'helio@gmail.com', 'Administrador', 'giuhel', 0x7bc5570986930e0067e31f15eccc6c86);
+(1, 'helio', 'pizarro', '74850994', 'ventanilla', '963258741', 'helio@gmail.com', 'Administrador', 'giuhel', 0x7bc5570986930e0067e31f15eccc6c86),
+(2, 'sofia', 'dominguez perez', '85214785', 'av rosales 35', '985698587', 'sofia@gmail.com', 'Vendedor', 'sofia', 0x7976caddb3e4198c549371c7fae894a3),
+(4, 'pedro', 'puentes torres', '85214785', 'av los pinos 25', '963258789', 'pedro.p@gmail.com', 'Almacenero', 'pedro', 0x7bc5570986930e0067e31f15eccc6c86);
 
 --
 -- Índices para tablas volcadas
@@ -248,7 +267,6 @@ ALTER TABLE `detallesalida`
 ALTER TABLE `entrada`
   ADD PRIMARY KEY (`identrada`),
   ADD KEY `fk_proveedor` (`idproveedor`),
-  ADD KEY `fk_categoria` (`idCategoria`),
   ADD KEY `fk_producto` (`idproducto`);
 
 --
@@ -284,7 +302,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -296,13 +314,13 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `detallesalida`
 --
 ALTER TABLE `detallesalida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `entrada`
 --
 ALTER TABLE `entrada`
-  MODIFY `identrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `identrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -314,13 +332,13 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `salidas`
 --
 ALTER TABLE `salidas`
-  MODIFY `idSalida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idSalida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -337,7 +355,6 @@ ALTER TABLE `detallesalida`
 -- Filtros para la tabla `entrada`
 --
 ALTER TABLE `entrada`
-  ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`),
   ADD CONSTRAINT `fk_producto` FOREIGN KEY (`idproducto`) REFERENCES `productos` (`idproducto`),
   ADD CONSTRAINT `fk_proveedor` FOREIGN KEY (`idproveedor`) REFERENCES `proveedor` (`idproveedor`);
 
