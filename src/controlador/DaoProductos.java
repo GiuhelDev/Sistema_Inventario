@@ -39,7 +39,7 @@ public class DaoProductos {
         }
     }
 
-public List Listar(){
+    public List Listar(){
         List<productos> lista=new ArrayList<>();
         String SQL="select * from productos";
         try{
@@ -175,4 +175,22 @@ public List Listar(){
             }
             return numero;
         }
+
+    public boolean eliminar(productos c){
+        String SQL="delete from productos where idproducto=?";
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdproducto());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }

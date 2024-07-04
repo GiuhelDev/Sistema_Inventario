@@ -6,10 +6,21 @@ package vista;
 
 import controlador.DaoCategorias;
 import controlador.DaoProductos;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
+import modelo.conexion;
 import modelo.productos;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -356,7 +367,17 @@ public class Productos extends javax.swing.JPanel {
 
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
         // TODO add your handling code here:
-        
+        int fila=tablaProductos.getSelectedRow();
+        txtid.setText(tablaProductos.getValueAt(fila, 0).toString());
+        txtnombre.setText(tablaProductos.getValueAt(fila, 1).toString());
+        txtstock.setText(tablaProductos.getValueAt(fila, 2).toString());
+        txtidCategoria.setText(tablaProductos.getValueAt(fila, 3).toString());
+        txttprecio.setText(tablaProductos.getValueAt(fila, 4).toString());
+
+        ct.setIdCategoria(Integer.parseInt(txtidCategoria.getText()));
+        if(daoCt.buscar(ct)){
+            txtNomCategoria.setText(ct.getNomCategoria());
+        }
     }//GEN-LAST:event_tablaProductosMouseClicked
 
     private void btnGuardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar2ActionPerformed
@@ -405,7 +426,21 @@ public class Productos extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        
+        if(!txtid.getText().isEmpty()){
+            int confirmacion=JOptionPane.showConfirmDialog(null, "¿Es tas seguro de eliminar el Producto?","Confirmar",2);
+            if(confirmacion==0){
+                p.setIdproducto(Integer.parseInt(txtid.getText()));
+                daoP.eliminar(p);
+                limpiarCampos();
+                limpiarTablaProductos();
+                listarProductos();
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se Elimino con exito el Producto");
+            }
+        }else{
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione un Producto");
+        }        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -430,7 +465,7 @@ public class Productos extends javax.swing.JPanel {
 
     private void btnPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdfActionPerformed
         // TODO add your handling code here:
-       
+       GenerarPDF("reporteProductos");
     }//GEN-LAST:event_btnPdfActionPerformed
 
     private void btnBuscaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaCategoriaActionPerformed
@@ -455,6 +490,22 @@ txtstock.setText("");
 txtNomCategoria.setText("");
 txttprecio.setText("");
 txtidCategoria.setText("");
+    }
+private Connection conection=new conexion().conectar();
+void GenerarPDF(String reporte){
+        Map p=new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try{
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/"+reporte+".jrxml");
+            print=JasperFillManager.fillReport(report,p, conection);
+            JasperViewer view=new JasperViewer(print,false);
+            view.setTitle("Lista De Entradas");
+            view.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscaCategoria;

@@ -4,33 +4,25 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT p.*,pr.Rsocial,c.catergoria from productos p INNER JOIN proveedor pr on p.idproveedor=pr.idproveedor
-INNER JOIN categorias c ON p.idCategoria=c.idCategoria;]]>
+		<![CDATA[SELECT
+     productos.`nombre` AS productos_nombre,
+     productos.`stock` AS productos_stock,
+     productos.`precioV` AS productos_precioV,
+     categorias.`catergoria` AS categorias_catergoria,
+     productos.`idproducto` AS productos_idproducto,
+     entrada.`precioE` AS entrada_precioE,
+     entrada.`precioV` AS entrada_precioV
+FROM
+     `categorias` categorias INNER JOIN `productos` productos ON categorias.`idCategoria` = productos.`idCategoria`
+     INNER JOIN `entrada` entrada ON productos.`idproducto` = entrada.`idproducto`]]>
 	</queryString>
-	<field name="idproducto" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="nombre" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="stock" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="idCategoria" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="idproveedor" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="precioV" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="Rsocial" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="catergoria" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="productos_nombre" class="java.lang.String"/>
+	<field name="productos_stock" class="java.lang.Integer"/>
+	<field name="productos_precioV" class="java.math.BigDecimal"/>
+	<field name="categorias_catergoria" class="java.lang.String"/>
+	<field name="productos_idproducto" class="java.lang.Integer"/>
+	<field name="entrada_precioE" class="java.math.BigDecimal"/>
+	<field name="entrada_precioV" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -68,67 +60,67 @@ INNER JOIN categorias c ON p.idCategoria=c.idCategoria;]]>
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="51" y="7" width="100" height="20" uuid="788a5235-7673-46c7-8b3a-f3e29d29a0e4"/>
+				<reportElement x="60" y="7" width="100" height="20" uuid="788a5235-7673-46c7-8b3a-f3e29d29a0e4"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Producto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="162" y="7" width="45" height="20" uuid="2c05c1cc-8323-485e-b389-c4e8c6c5c1ca"/>
+				<reportElement x="172" y="6" width="45" height="20" uuid="2c05c1cc-8323-485e-b389-c4e8c6c5c1ca"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[STOCK]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="448" y="7" width="100" height="20" uuid="6bc586e3-2577-4dee-a8c8-576d22d547cb"/>
+				<reportElement x="474" y="6" width="76" height="20" uuid="6bc586e3-2577-4dee-a8c8-576d22d547cb"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Precio Venta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="222" y="7" width="100" height="20" uuid="4c72745a-e616-44e5-8614-d9dcd28a892f"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Rsocial]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="338" y="6" width="100" height="20" uuid="4d983c64-dcd0-47b3-aa10-0b3d9f175941"/>
+				<reportElement x="289" y="7" width="100" height="20" uuid="4d983c64-dcd0-47b3-aa10-0b3d9f175941"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Catergoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="6" width="94" height="20" uuid="53d5e866-5418-4843-8cb3-2318e2eefd0d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio Entrada]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="27" splitType="Stretch">
 			<textField>
-				<reportElement x="221" y="4" width="100" height="20" uuid="c0d1e951-198b-4b33-ba35-6d91f932cc47"/>
-				<textFieldExpression><![CDATA[$F{Rsocial}]]></textFieldExpression>
+				<reportElement x="7" y="7" width="24" height="20" uuid="13b14747-b766-42b6-8e37-31bde1fb1b6b"/>
+				<textFieldExpression><![CDATA[$F{productos_idproducto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="337" y="4" width="100" height="20" uuid="9b962406-34b6-4365-9d45-9edda9cba32f"/>
-				<textFieldExpression><![CDATA[$F{catergoria}]]></textFieldExpression>
+				<reportElement x="60" y="7" width="100" height="20" uuid="ca282a46-9d1e-4bff-91a7-9a39b61072e2"/>
+				<textFieldExpression><![CDATA[$F{productos_nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="7" y="7" width="28" height="20" uuid="696a47da-6203-430b-b2dc-0b2189db60e8"/>
-				<textFieldExpression><![CDATA[$F{idproducto}]]></textFieldExpression>
+				<reportElement x="172" y="7" width="100" height="20" uuid="4f5c22f5-1df8-4ada-92d5-8c513b392a72"/>
+				<textFieldExpression><![CDATA[$F{productos_stock}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="51" y="6" width="100" height="20" uuid="52ae3d60-8ed1-4832-a716-e6021a4c3eb0"/>
-				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				<reportElement x="289" y="7" width="100" height="20" uuid="87570ebf-2c57-41a3-878f-796053fd3cba"/>
+				<textFieldExpression><![CDATA[$F{categorias_catergoria}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="162" y="4" width="45" height="20" uuid="2366a1b2-aedf-4b64-a64b-f41d9b84c2e5"/>
-				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+				<reportElement x="469" y="7" width="76" height="20" uuid="f9e37b76-2a54-4aac-b52f-00306c992419"/>
+				<textFieldExpression><![CDATA[$F{entrada_precioV}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="448" y="4" width="100" height="20" uuid="b969ab4c-13a6-408c-9d77-4554f6b17ce0"/>
-				<textFieldExpression><![CDATA[$F{precioV}]]></textFieldExpression>
+				<reportElement x="389" y="7" width="67" height="20" uuid="3f685219-2eba-42fa-8962-1af813fa66fe"/>
+				<textFieldExpression><![CDATA[$F{entrada_precioE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
