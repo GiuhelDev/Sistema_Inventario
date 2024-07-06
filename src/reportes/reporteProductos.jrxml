@@ -14,7 +14,7 @@
      entrada.`precioV` AS entrada_precioV
 FROM
      `categorias` categorias INNER JOIN `productos` productos ON categorias.`idCategoria` = productos.`idCategoria`
-     INNER JOIN `entrada` entrada ON productos.`idproducto` = entrada.`idproducto`]]>
+     INNER JOIN `entrada` entrada ON productos.`idproducto` = entrada.`idproducto` GROUP BY productos.idproducto]]>
 	</queryString>
 	<field name="productos_nombre" class="java.lang.String"/>
 	<field name="productos_stock" class="java.lang.Integer"/>

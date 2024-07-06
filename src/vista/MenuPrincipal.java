@@ -57,6 +57,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnUsuarios = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnSalir = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnProductos = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnSalida = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -132,7 +133,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         btnSalidas.setBackground(new java.awt.Color(14, 76, 117));
-        btnSalidas.setText("SALIDAS");
+        btnSalidas.setText("SALIDA");
         btnSalidas.setBackgroundHover(new java.awt.Color(50, 130, 181));
         btnSalidas.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.KEYBOARD_ARROW_UP);
         btnSalidas.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +186,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnSalida.setBackground(new java.awt.Color(14, 76, 117));
+        btnSalida.setText("SALIDAS");
+        btnSalida.setBackgroundHover(new java.awt.Color(50, 130, 181));
+        btnSalida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.KEYBOARD_ARROW_UP);
+        btnSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpanelRound2Layout = new javax.swing.GroupLayout(jpanelRound2);
         jpanelRound2.setLayout(jpanelRound2Layout);
         jpanelRound2Layout.setHorizontalGroup(
@@ -195,12 +206,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addComponent(jLabel1))
                     .addGroup(jpanelRound2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpanelRound2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,14 +213,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(8, 8, 8)
                                 .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                    .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jpanelRound2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jpanelRound2Layout.setVerticalGroup(
@@ -223,7 +233,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jpanelRound2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addGap(67, 67, 67)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,10 +246,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(btnSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,6 +303,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnSalidas.setSelected(false);
         btnUsuarios.setSelected(false);
         btnProductos.setSelected(true);
+        btnSalida.setSelected(false);
         Productos c=new Productos();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -318,6 +331,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnSalidas.setSelected(false);
         btnProductos.setSelected(false);
         btnUsuarios.setSelected(true);
+        btnSalida.setSelected(false);
         Usuarios c=new Usuarios();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -338,6 +352,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnUsuarios.setSelected(false);
         btnSalidas.setSelected(false);
         btnProductos.setSelected(false);
+        btnSalida.setSelected(false);
         Proveedor c=new Proveedor();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -357,6 +372,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnProveedor.setSelected(false);
         btnUsuarios.setSelected(false);
         btnSalidas.setSelected(true);
+        btnSalida.setSelected(false);
         Salidas c=new Salidas();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -377,6 +393,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnUsuarios.setSelected(false);
         btnSalidas.setSelected(false);
         btnProductos.setSelected(false);
+        btnSalida.setSelected(false);
         Clientes c=new Clientes();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -397,6 +414,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnUsuarios.setSelected(false);
         btnSalidas.setSelected(false);
         btnProductos.setSelected(false);
+        btnSalida.setSelected(false);
         Entradas c=new Entradas();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -417,6 +435,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnUsuarios.setSelected(false);
         btnSalidas.setSelected(false);
         btnProductos.setSelected(false);
+        btnSalida.setSelected(false);
         Categorias c=new Categorias();
         c.setSize(982,740);
         c.setLocation(0,0);
@@ -436,6 +455,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnProveedor.setSelected(false);
         btnUsuarios.setSelected(false);
         btnSalidas.setSelected(false);
+        btnSalida.setSelected(false);
         btnProductos.setSelected(false);
         Home h=new Home();
         h.setSize(982,740);
@@ -446,6 +466,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         contenedor.revalidate();
         contenedor.repaint();
     }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void btnSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidaActionPerformed
+        // TODO add your handling code here:
+        btnHome.setSelected(false);
+        btnCategorias.setSelected(false);
+        btnClientes.setSelected(false);
+        btnEntradas.setSelected(false);
+        btnProveedor.setSelected(false);
+        btnUsuarios.setSelected(false);
+        btnSalidas.setSelected(false);
+        btnSalida.setSelected(true);
+        btnProductos.setSelected(false);
+         ListaSalidas h=new ListaSalidas();
+        h.setSize(982,740);
+        h.setLocation(0,0);
+
+        contenedor.removeAll();
+        contenedor.add(h,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }//GEN-LAST:event_btnSalidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -505,6 +546,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private RSMaterialComponent.RSButtonMaterialIconDos btnHome;
     public static RSMaterialComponent.RSButtonMaterialIconDos btnProductos;
     public static RSMaterialComponent.RSButtonMaterialIconDos btnProveedor;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnSalida;
     public static RSMaterialComponent.RSButtonMaterialIconDos btnSalidas;
     private RSMaterialComponent.RSButtonMaterialIconDos btnSalir;
     public static RSMaterialComponent.RSButtonMaterialIconDos btnUsuarios;

@@ -112,14 +112,6 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnCategorias" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnHome" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnClientes" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jSeparator1" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
@@ -128,17 +120,22 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnAcercaDe" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="btnEntradas" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="btnSalidas" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="btnProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="btnProductos" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="btnUsuarios" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                   </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnCategorias" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnHome" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnClientes" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnEntradas" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnSalidas" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnProductos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnUsuarios" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnSalida" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -151,7 +148,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnHome" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCategorias" min="-2" max="-2" attributes="0"/>
@@ -164,10 +161,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnProveedor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnSalida" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Component id="btnSalidas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnUsuarios" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnAcercaDe" min="-2" max="-2" attributes="0"/>
@@ -272,7 +271,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="75" green="4c" red="e" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="SALIDAS"/>
+                <Property name="text" type="java.lang.String" value="SALIDA"/>
                 <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="b5" green="82" red="32" type="rgb"/>
                 </Property>
@@ -372,6 +371,26 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProductosActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </Component>
+            <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnSalida">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="75" green="4c" red="e" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="SALIDAS"/>
+                <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="82" red="32" type="rgb"/>
+                </Property>
+                <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
+                  <Value id="KEYBOARD_ARROW_UP"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalidaActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

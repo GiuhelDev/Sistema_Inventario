@@ -98,7 +98,7 @@ FROM
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Precio V]]></text>
+				<text><![CDATA[Importe]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="303" y="5" width="73" height="20" forecolor="#FFFFFF" uuid="019641a4-f017-4e21-a79d-dcca47a4a908"/>

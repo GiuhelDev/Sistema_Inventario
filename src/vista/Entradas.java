@@ -681,11 +681,11 @@ public class Entradas extends javax.swing.JPanel {
         txtidentrada.setText(tablaEntradas.getValueAt(fila, 0).toString());
         txtidProducto.setText(tablaEntradas.getValueAt(fila, 1).toString());
         txtstock.setText(tablaEntradas.getValueAt(fila, 2).toString());
-        dateFecha.setDate(Date.valueOf(tablaEntradas.getValueAt(fila, 4).toString()));
-        txtidproveedor.setText(tablaEntradas.getValueAt(fila, 5).toString());
-        txtprecioE.setText(tablaEntradas.getValueAt(fila, 6).toString());
-        txtprecioV.setText(tablaEntradas.getValueAt(fila, 7).toString());
-        txtTotal.setText(tablaEntradas.getValueAt(fila, 8).toString());
+        dateFecha.setDate(Date.valueOf(tablaEntradas.getValueAt(fila, 3).toString()));
+        txtidproveedor.setText(tablaEntradas.getValueAt(fila, 4).toString());
+        txtprecioE.setText(tablaEntradas.getValueAt(fila, 5).toString());
+        txtprecioV.setText(tablaEntradas.getValueAt(fila, 6).toString());
+        txtTotal.setText(tablaEntradas.getValueAt(fila, 7).toString());
 
         
         pr.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
