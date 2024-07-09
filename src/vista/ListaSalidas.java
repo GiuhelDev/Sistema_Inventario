@@ -4,17 +4,54 @@
  */
 package vista;
 
+import controlador.DaoSalida;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+import modelo.conexion;
+import modelo.salidas;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author HELIO
  */
 public class ListaSalidas extends javax.swing.JPanel {
 
+DefaultTableModel modelo=new DefaultTableModel();
+DaoSalida dao=new DaoSalida();
+salidas s=new salidas();
+
     /**
      * Creates new form ListaSalidas
      */
     public ListaSalidas() {
         initComponents();
+        listarSalidas();
+    }
+
+    private void listarSalidas(){
+        List<salidas> lista=dao.Listar();
+        modelo=(DefaultTableModel) tablaSalidas.getModel();
+        Object[] ob=new Object[7];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdSalida();
+            ob[1]=lista.get(i).getNumSalida();
+            ob[2]=lista.get(i).getIdCliente();
+            ob[3]=lista.get(i).getFecha();
+            ob[4]=lista.get(i).getSubtotal();
+            ob[5]=lista.get(i).getIgv();
+            ob[6]=lista.get(i).getTotal();
+            modelo.addRow(ob);
+        }
+       tablaSalidas.setModel(modelo);
     }
 
     /**
@@ -31,17 +68,17 @@ public class ListaSalidas extends javax.swing.JPanel {
         btnicono = new RSMaterialComponent.RSButtonMaterialIconDos();
         jpanelRound1 = new modelo.JpanelRound();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtnumSalida = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        fechainicial = new com.toedter.calendar.JDateChooser();
+        fechafinal = new com.toedter.calendar.JDateChooser();
         btnBuscar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnPdf = new RSMaterialComponent.RSButtonMaterialIconDos();
-        btnEliminar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnAnular = new RSMaterialComponent.RSButtonMaterialIconDos();
         jpanelRound2 = new modelo.JpanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaSalidas = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
         jLabel1.setText("Listado De Salidas");
@@ -94,14 +131,14 @@ public class ListaSalidas extends javax.swing.JPanel {
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(184, 146, 52));
-        btnEliminar.setText("Anular");
-        btnEliminar.setBackgroundHover(new java.awt.Color(181, 123, 49));
-        btnEliminar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.DELETE);
-        btnEliminar.setRound(25);
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnAnular.setBackground(new java.awt.Color(184, 146, 52));
+        btnAnular.setText("Anular");
+        btnAnular.setBackgroundHover(new java.awt.Color(181, 123, 49));
+        btnAnular.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.DELETE);
+        btnAnular.setRound(25);
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                btnAnularActionPerformed(evt);
             }
         });
 
@@ -117,13 +154,13 @@ public class ListaSalidas extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                    .addComponent(txtnumSalida)
+                    .addComponent(fechainicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechafinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPdf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(32, 32, 32))
         );
@@ -133,7 +170,7 @@ public class ListaSalidas extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnumSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelRound1Layout.createSequentialGroup()
@@ -142,14 +179,14 @@ public class ListaSalidas extends javax.swing.JPanel {
                     .addGroup(jpanelRound1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechainicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel5)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fechafinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -159,15 +196,20 @@ public class ListaSalidas extends javax.swing.JPanel {
         jpanelRound2.setRoundTopLeft(20);
         jpanelRound2.setRoundTopRight(20);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaSalidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Numero", "Id Cliente", "fecha", "subtotal", "IGV", "Total"
+                "ID", "Numero", "Id Cliente", "fecha", "subtotal", "IGV", "Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaSalidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaSalidasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaSalidas);
 
         javax.swing.GroupLayout jpanelRound2Layout = new javax.swing.GroupLayout(jpanelRound2);
         jpanelRound2.setLayout(jpanelRound2Layout);
@@ -235,31 +277,60 @@ public class ListaSalidas extends javax.swing.JPanel {
 
     private void btnPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdfActionPerformed
         // TODO add your handling code here:
-       
+       if(!txtnumSalida.getText().isEmpty()){
+            GenerarPDF(txtnumSalida.getText());
+       }else{
+            MenuPrincipal m2=new MenuPrincipal();
+            m2.error("Seleccione una Salida");
+        }
     }//GEN-LAST:event_btnPdfActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_btnAnularActionPerformed
 
+    private void tablaSalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSalidasMouseClicked
+        // TODO add your handling code here:
+        int fila=tablaSalidas.getSelectedRow();
+        String num=tablaSalidas.getValueAt(fila, 0).toString();
+        txtnumSalida.setText("00"+num);
+    }//GEN-LAST:event_tablaSalidasMouseClicked
 
+private Connection conection=new conexion().conectar();
+
+    void GenerarPDF(String numSalida){
+        Map p=new HashMap();
+        p.put("numSalida", numSalida);
+        JasperReport report;
+        JasperPrint print;
+
+        try{
+            report=JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/Salida.jrxml");
+            print=JasperFillManager.fillReport(report, p, conection);
+            JasperViewer view=new JasperViewer(print,false);
+            view.setTitle("Documento Salida N° "+numSalida);
+            view.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonMaterialIconDos btnAnular;
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnEliminar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnPdf;
     private RSMaterialComponent.RSButtonMaterialIconDos btnicono;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser fechafinal;
+    private com.toedter.calendar.JDateChooser fechainicial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
+    private javax.swing.JTable tablaSalidas;
+    private javax.swing.JTextField txtnumSalida;
     // End of variables declaration//GEN-END:variables
 }

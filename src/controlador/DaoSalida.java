@@ -4,6 +4,8 @@ package controlador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.conexion;
 import modelo.salidas;
@@ -53,5 +55,29 @@ public class DaoSalida {
         return numero;
     }
 
+
+ public List Listar(){
+        List<salidas> lista=new ArrayList<>();
+        String SQL="select * from salidas";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                salidas c=new salidas();
+                c.setIdSalida(rs.getInt(1));
+                c.setNumSalida(rs.getString(2));
+                c.setIdCliente(rs.getInt(3));
+                c.setFecha(rs.getDate(4));
+                c.setSubtotal(rs.getInt(5));
+                c.setIgv(rs.getDouble(6));
+                c.setTotal(rs.getDouble(7));
+                lista.add(c);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return lista;
+    }
     
 }
