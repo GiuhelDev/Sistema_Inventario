@@ -80,4 +80,28 @@ public class DaoSalida {
         return lista;
     }
     
+    public List ListarPorFecha(String fec1,String fec2){
+        List<salidas> lista=new ArrayList<>();
+        String SQL="SELECT * from salidas WHERE fecha BETWEEN '"+fec1+"' AND '"+fec2+"'";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                salidas c=new salidas();
+                c.setIdSalida(rs.getInt(1));
+                c.setNumSalida(rs.getString(2));
+                c.setIdCliente(rs.getInt(3));
+                c.setFecha(rs.getDate(4));
+                c.setSubtotal(rs.getInt(5));
+                c.setIgv(rs.getDouble(6));
+                c.setTotal(rs.getDouble(7));
+                lista.add(c);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return lista;
+    }
+    
 }

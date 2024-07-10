@@ -4,9 +4,12 @@
  */
 package vista;
 
+import com.toedter.calendar.JDateChooser;
 import controlador.DaoSalida;
 import java.io.File;
 import java.sql.Connection;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +42,23 @@ salidas s=new salidas();
 
     private void listarSalidas(){
         List<salidas> lista=dao.Listar();
+        modelo=(DefaultTableModel) tablaSalidas.getModel();
+        Object[] ob=new Object[7];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdSalida();
+            ob[1]=lista.get(i).getNumSalida();
+            ob[2]=lista.get(i).getIdCliente();
+            ob[3]=lista.get(i).getFecha();
+            ob[4]=lista.get(i).getSubtotal();
+            ob[5]=lista.get(i).getIgv();
+            ob[6]=lista.get(i).getTotal();
+            modelo.addRow(ob);
+        }
+       tablaSalidas.setModel(modelo);
+    }
+
+    private void listarSalidasPorFecha(String fecha1,String fecha2){
+        List<salidas> lista=dao.ListarPorFecha(fecha1, fecha2);
         modelo=(DefaultTableModel) tablaSalidas.getModel();
         Object[] ob=new Object[7];
         for(int i=0;i<lista.size();i++){
@@ -122,7 +142,7 @@ salidas s=new salidas();
 
         btnPdf.setBackground(new java.awt.Color(213, 137, 137));
         btnPdf.setText("PDF");
-        btnPdf.setBackgroundHover(new java.awt.Color(14, 76, 117));
+        btnPdf.setBackgroundHover(new java.awt.Color(117, 13, 38));
         btnPdf.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.INSERT_DRIVE_FILE);
         btnPdf.setRound(25);
         btnPdf.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +292,11 @@ salidas s=new salidas();
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        limpiarTabla();
         
+        String fecha1=obtenerFechas(fechainicial)+"";
+        String fecha2=obtenerFechas(fechafinal)+"";
+        listarSalidasPorFecha(fecha1,fecha2);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdfActionPerformed
@@ -315,6 +339,24 @@ private Connection conection=new conexion().conectar();
             e.printStackTrace();
         }
     }
+
+    void limpiarTabla(){
+        for(int i=0;i<modelo.getRowCount();i++){
+            modelo.removeRow(i);
+            i=0-1;
+        }
+    }
+
+    public Date obtenerFechas(JDateChooser dch){
+        Calendar cal;
+        int d,m,a;
+        cal=dch.getCalendar();
+        d=cal.get(Calendar.DAY_OF_MONTH);
+        m=cal.get(Calendar.MONTH);
+        a=cal.get(Calendar.YEAR)-1900;
+
+        return new Date(a,m,d);
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnAnular;
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar;

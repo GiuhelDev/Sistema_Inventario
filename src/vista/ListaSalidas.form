@@ -216,7 +216,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="PDF"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="75" green="4c" red="e" type="rgb"/>
+              <Color blue="26" green="d" red="75" type="rgb"/>
             </Property>
             <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="INSERT_DRIVE_FILE"/>
