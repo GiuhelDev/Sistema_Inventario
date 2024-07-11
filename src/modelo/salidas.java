@@ -11,11 +11,12 @@ Date fecha;
 double subtotal;
 double igv;
 double total;
+String estado;
 
     public salidas() {
     }
 
-    public salidas(int idSalida, String numSalida, int idCliente, Date fecha, double subtotal, double igv, double total) {
+    public salidas(int idSalida, String numSalida, int idCliente, Date fecha, double subtotal, double igv, double total,String estado) {
         this.idSalida = idSalida;
         this.numSalida = numSalida;
         this.idCliente = idCliente;
@@ -23,6 +24,7 @@ double total;
         this.subtotal = subtotal;
         this.igv = igv;
         this.total = total;
+        this.estado=estado;
     }
 
     public String getNumSalida() {
@@ -34,7 +36,6 @@ double total;
     }
 
     
-
     public int getIdSalida() {
         return idSalida;
     }
@@ -83,6 +84,14 @@ double total;
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 

@@ -72,6 +72,7 @@ public class DaoSalida {
                 c.setSubtotal(rs.getInt(5));
                 c.setIgv(rs.getDouble(6));
                 c.setTotal(rs.getDouble(7));
+                c.setEstado(rs.getString(8));
                 lista.add(c);
             }
         }catch(Exception e){
@@ -96,6 +97,7 @@ public class DaoSalida {
                 c.setSubtotal(rs.getInt(5));
                 c.setIgv(rs.getDouble(6));
                 c.setTotal(rs.getDouble(7));
+                c.setEstado(rs.getString(8));
                 lista.add(c);
             }
         }catch(Exception e){
@@ -104,4 +106,22 @@ public class DaoSalida {
         return lista;
     }
     
+    public boolean anularSalida(salidas c){
+        String SQL="update salidas set estado=? where idSalida=?";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setString(1, c.getEstado());
+            ps.setInt(2, c.getIdSalida());
+            int n=ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
 }

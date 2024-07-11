@@ -55,7 +55,7 @@
               <Component id="jpanelRound1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jpanelRound2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <EmptySpace pref="58" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -114,15 +114,20 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtnumSalida" max="32767" attributes="0"/>
-                      <Component id="fechainicial" max="32767" attributes="0"/>
-                      <Component id="fechafinal" alignment="1" pref="134" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtnumSalida" max="32767" attributes="0"/>
+                              <Component id="fechainicial" max="32767" attributes="0"/>
+                              <Component id="fechafinal" alignment="1" pref="134" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="txtidSalida" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="78" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -149,6 +154,8 @@
                           <Component id="btnPdf" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtidSalida" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="fechainicial" min="-2" max="-2" attributes="0"/>
@@ -245,6 +252,11 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnularActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JLabel" name="txtidSalida">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="idSalida"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="modelo.JpanelRound" name="jpanelRound2">
@@ -289,7 +301,7 @@
             <Component class="javax.swing.JTable" name="tablaSalidas">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="0">
+                  <Table columnCount="8" rowCount="0">
                     <Column editable="true" title="ID" type="java.lang.Object"/>
                     <Column editable="true" title="Numero" type="java.lang.Object"/>
                     <Column editable="true" title="Id Cliente" type="java.lang.Object"/>
@@ -297,6 +309,7 @@
                     <Column editable="true" title="subtotal" type="java.lang.Object"/>
                     <Column editable="true" title="IGV" type="java.lang.Object"/>
                     <Column editable="true" title="Total" type="java.lang.Object"/>
+                    <Column editable="true" title="Estado" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>

@@ -5,6 +5,8 @@
 package vista;
 
 import com.toedter.calendar.JDateChooser;
+import controlador.DaoDetalleSalida;
+import controlador.DaoProductos;
 import controlador.DaoSalida;
 import java.io.File;
 import java.sql.Connection;
@@ -15,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import modelo.conexion;
+import modelo.detalleSalida;
+import modelo.productos;
 import modelo.salidas;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -32,6 +36,15 @@ DefaultTableModel modelo=new DefaultTableModel();
 DaoSalida dao=new DaoSalida();
 salidas s=new salidas();
 
+detalleSalida ds=new detalleSalida();
+DaoDetalleSalida daoDs=new DaoDetalleSalida();
+
+productos p=new productos();
+DaoProductos daoP=new DaoProductos();
+
+static int idsalida;
+static int cant;
+static int idproducto;
     /**
      * Creates new form ListaSalidas
      */
@@ -43,7 +56,7 @@ salidas s=new salidas();
     private void listarSalidas(){
         List<salidas> lista=dao.Listar();
         modelo=(DefaultTableModel) tablaSalidas.getModel();
-        Object[] ob=new Object[7];
+        Object[] ob=new Object[8];
         for(int i=0;i<lista.size();i++){
             ob[0]=lista.get(i).getIdSalida();
             ob[1]=lista.get(i).getNumSalida();
@@ -52,6 +65,7 @@ salidas s=new salidas();
             ob[4]=lista.get(i).getSubtotal();
             ob[5]=lista.get(i).getIgv();
             ob[6]=lista.get(i).getTotal();
+            ob[7]=lista.get(i).getEstado();
             modelo.addRow(ob);
         }
        tablaSalidas.setModel(modelo);
@@ -60,7 +74,7 @@ salidas s=new salidas();
     private void listarSalidasPorFecha(String fecha1,String fecha2){
         List<salidas> lista=dao.ListarPorFecha(fecha1, fecha2);
         modelo=(DefaultTableModel) tablaSalidas.getModel();
-        Object[] ob=new Object[7];
+        Object[] ob=new Object[8];
         for(int i=0;i<lista.size();i++){
             ob[0]=lista.get(i).getIdSalida();
             ob[1]=lista.get(i).getNumSalida();
@@ -69,6 +83,7 @@ salidas s=new salidas();
             ob[4]=lista.get(i).getSubtotal();
             ob[5]=lista.get(i).getIgv();
             ob[6]=lista.get(i).getTotal();
+            ob[7]=lista.get(i).getEstado();
             modelo.addRow(ob);
         }
        tablaSalidas.setModel(modelo);
@@ -96,6 +111,7 @@ salidas s=new salidas();
         btnBuscar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnPdf = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnAnular = new RSMaterialComponent.RSButtonMaterialIconDos();
+        txtidSalida = new javax.swing.JLabel();
         jpanelRound2 = new modelo.JpanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSalidas = new javax.swing.JTable();
@@ -162,6 +178,8 @@ salidas s=new salidas();
             }
         });
 
+        txtidSalida.setText("idSalida");
+
         javax.swing.GroupLayout jpanelRound1Layout = new javax.swing.GroupLayout(jpanelRound1);
         jpanelRound1.setLayout(jpanelRound1Layout);
         jpanelRound1Layout.setHorizontalGroup(
@@ -169,14 +187,17 @@ salidas s=new salidas();
             .addGroup(jpanelRound1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtnumSalida)
-                    .addComponent(fechainicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fechafinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                    .addGroup(jpanelRound1Layout.createSequentialGroup()
+                        .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtnumSalida)
+                            .addComponent(fechainicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fechafinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
+                    .addComponent(txtidSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
@@ -197,6 +218,8 @@ salidas s=new salidas();
                         .addGap(6, 6, 6)
                         .addComponent(btnPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpanelRound1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtidSalida)
                         .addGap(18, 18, 18)
                         .addGroup(jpanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fechainicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,7 +244,7 @@ salidas s=new salidas();
 
             },
             new String [] {
-                "ID", "Numero", "Id Cliente", "fecha", "subtotal", "IGV", "Total"
+                "ID", "Numero", "Id Cliente", "fecha", "subtotal", "IGV", "Total", "Estado"
             }
         ));
         tablaSalidas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -282,7 +305,7 @@ salidas s=new salidas();
                 .addComponent(jpanelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -311,14 +334,42 @@ salidas s=new salidas();
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         // TODO add your handling code here:
-        
+        int fila=tablaSalidas.getSelectedRow();
+        if(fila==-1&&txtnumSalida.getText().isEmpty()){
+            MenuPrincipal m=new MenuPrincipal();
+            m.advertencia("Seleccione una Salida");
+        }else{
+            s.setIdSalida(Integer.parseInt(txtidSalida.getText()));
+            s.setEstado("Anulada");
+            if(dao.anularSalida(s)){
+                limpiarTabla();
+                listarSalidas();
+                daoP.sumarStock(idproducto, cant);
+                //limpiarCampos();
+                MenuPrincipal m=new MenuPrincipal();
+                m.exito("Se Anulo con exito");
+            }else{
+                MenuPrincipal m=new MenuPrincipal();
+                m.error("Erorr al Anular la Salida");
+            }
+        }
     }//GEN-LAST:event_btnAnularActionPerformed
 
     private void tablaSalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSalidasMouseClicked
         // TODO add your handling code here:
         int fila=tablaSalidas.getSelectedRow();
-        String num=tablaSalidas.getValueAt(fila, 0).toString();
-        txtnumSalida.setText("00"+num);
+        String num=tablaSalidas.getValueAt(fila, 1).toString();
+        txtnumSalida.setText(num);
+        txtidSalida.setText(tablaSalidas.getValueAt(fila, 0).toString());
+        idsalida=Integer.parseInt(tablaSalidas.getValueAt(fila, 0).toString());
+
+        ds.setIdSalida(idsalida);
+        daoDs.buscar(ds);
+
+        cant=ds.getCantidad();
+        idproducto=ds.getIdEntrada();
+
+
     }//GEN-LAST:event_tablaSalidasMouseClicked
 
 private Connection conection=new conexion().conectar();
@@ -354,7 +405,6 @@ private Connection conection=new conexion().conectar();
         d=cal.get(Calendar.DAY_OF_MONTH);
         m=cal.get(Calendar.MONTH);
         a=cal.get(Calendar.YEAR)-1900;
-
         return new Date(a,m,d);
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -373,6 +423,7 @@ private Connection conection=new conexion().conectar();
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
     private javax.swing.JTable tablaSalidas;
+    private javax.swing.JLabel txtidSalida;
     private javax.swing.JTextField txtnumSalida;
     // End of variables declaration//GEN-END:variables
 }
