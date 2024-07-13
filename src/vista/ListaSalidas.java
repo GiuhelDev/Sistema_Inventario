@@ -38,13 +38,12 @@ salidas s=new salidas();
 
 detalleSalida ds=new detalleSalida();
 DaoDetalleSalida daoDs=new DaoDetalleSalida();
+DefaultTableModel modelodt=new DefaultTableModel();
 
 productos p=new productos();
 DaoProductos daoP=new DaoProductos();
 
-static int idsalida;
-static int cant;
-static int idproducto;
+
     /**
      * Creates new form ListaSalidas
      */
@@ -89,6 +88,17 @@ static int idproducto;
        tablaSalidas.setModel(modelo);
     }
 
+    private void listarDetalle(int idS){
+        List<detalleSalida> lista=daoDs.buscar(idS);
+        modelodt=(DefaultTableModel) tablaDetalle.getModel();
+        Object[] ob=new Object[2];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdEntrada();
+            ob[1]=lista.get(i).getCantidad();
+            modelodt.addRow(ob);
+        }
+       tablaDetalle.setModel(modelodt);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,6 +125,9 @@ static int idproducto;
         jpanelRound2 = new modelo.JpanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSalidas = new javax.swing.JTable();
+        jpanelRound3 = new modelo.JpanelRound();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaDetalle = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
         jLabel1.setText("Listado De Salidas");
@@ -260,7 +273,7 @@ static int idproducto;
             jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanelRound2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpanelRound2Layout.setVerticalGroup(
@@ -271,6 +284,44 @@ static int idproducto;
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        jpanelRound3.setBackground(new java.awt.Color(255, 255, 255));
+        jpanelRound3.setRoundBottomLeft(20);
+        jpanelRound3.setRoundBottomRight(20);
+        jpanelRound3.setRoundTopLeft(20);
+        jpanelRound3.setRoundTopRight(20);
+
+        tablaDetalle.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID_Prod", "Cant"
+            }
+        ));
+        tablaDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaDetalleMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablaDetalle);
+
+        javax.swing.GroupLayout jpanelRound3Layout = new javax.swing.GroupLayout(jpanelRound3);
+        jpanelRound3.setLayout(jpanelRound3Layout);
+        jpanelRound3Layout.setHorizontalGroup(
+            jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelRound3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpanelRound3Layout.setVerticalGroup(
+            jpanelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelRound3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,7 +329,10 @@ static int idproducto;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpanelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpanelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jpanelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -288,7 +342,7 @@ static int idproducto;
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel4)))
                             .addComponent(jpanelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 458, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -304,8 +358,10 @@ static int idproducto;
                 .addGap(27, 27, 27)
                 .addComponent(jpanelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpanelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpanelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -344,8 +400,9 @@ static int idproducto;
             if(dao.anularSalida(s)){
                 limpiarTabla();
                 listarSalidas();
-                daoP.sumarStock(idproducto, cant);
-                //limpiarCampos();
+                limpiarCampos();
+                sumarStock();
+                limpiarTablaDT();
                 MenuPrincipal m=new MenuPrincipal();
                 m.exito("Se Anulo con exito");
             }else{
@@ -361,16 +418,15 @@ static int idproducto;
         String num=tablaSalidas.getValueAt(fila, 1).toString();
         txtnumSalida.setText(num);
         txtidSalida.setText(tablaSalidas.getValueAt(fila, 0).toString());
-        idsalida=Integer.parseInt(tablaSalidas.getValueAt(fila, 0).toString());
+        int idsalida=Integer.parseInt(tablaSalidas.getValueAt(fila, 0).toString());
 
-        ds.setIdSalida(idsalida);
-        daoDs.buscar(ds);
-
-        cant=ds.getCantidad();
-        idproducto=ds.getIdEntrada();
-
-
+        limpiarTablaDT();
+        listarDetalle(idsalida);
     }//GEN-LAST:event_tablaSalidasMouseClicked
+
+    private void tablaDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDetalleMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaDetalleMouseClicked
 
 private Connection conection=new conexion().conectar();
 
@@ -397,6 +453,12 @@ private Connection conection=new conexion().conectar();
             i=0-1;
         }
     }
+    void limpiarTablaDT(){
+        for(int i=0;i<modelodt.getRowCount();i++){
+            modelodt.removeRow(i);
+            i=0-1;
+        }
+    }
 
     public Date obtenerFechas(JDateChooser dch){
         Calendar cal;
@@ -407,6 +469,19 @@ private Connection conection=new conexion().conectar();
         a=cal.get(Calendar.YEAR)-1900;
         return new Date(a,m,d);
 }
+
+    void sumarStock(){
+        for(int i=0;i<tablaDetalle.getRowCount();i++){
+        int idProducto=Integer.parseInt(tablaDetalle.getValueAt(i, 0).toString());
+        int cant=Integer.parseInt(tablaDetalle.getValueAt(i, 1).toString());
+        daoP.sumarStock(idProducto, cant);
+        }
+    }
+
+    private void limpiarCampos() {
+        txtnumSalida.setText("");
+txtidSalida.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnAnular;
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar;
@@ -420,10 +495,15 @@ private Connection conection=new conexion().conectar();
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
+    private modelo.JpanelRound jpanelRound3;
+    private javax.swing.JTable tablaDetalle;
     private javax.swing.JTable tablaSalidas;
     private javax.swing.JLabel txtidSalida;
     private javax.swing.JTextField txtnumSalida;
     // End of variables declaration//GEN-END:variables
+
+    
 }

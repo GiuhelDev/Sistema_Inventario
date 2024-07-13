@@ -7,6 +7,8 @@ package controlador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.conexion;
 import modelo.detalleSalida;
@@ -35,26 +37,25 @@ public class DaoDetalleSalida {
         }
     }
 
-    public boolean buscar(detalleSalida c){
-        String SQL="select * from detallesalida where idSalida=?";
+    public List buscar(int idSalida){
+        List<detalleSalida> lista=new ArrayList<>();
+        String SQL="select * from detallesalida where idSalida="+idSalida;
          try{
             con=cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setInt(1, c.getIdSalida());
             rs=ps.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
+                detalleSalida c=new detalleSalida();
                 c.setIdDetalle(rs.getInt(1));
                 c.setIdSalida(rs.getInt(2));
                 c.setIdEntrada(rs.getInt(3));
                 c.setCantidad(rs.getInt(4));
                 c.setImporte(rs.getInt(5));
-                return true;
-            }else{
-                return false;
+                lista.add(c);
             }
         }catch(Exception e){
             JOptionPane.showConfirmDialog(null, e);
-            return false;
         }
+        return lista;
     }
 }
