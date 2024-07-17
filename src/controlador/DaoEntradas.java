@@ -138,4 +138,23 @@ public boolean buscar(entradas c){
             return false;
         }
     }
+
+    public int cantEntradas(){
+        String SQL="SELECT COUNT(identrada) FROM entrada";
+        int cant = 0;
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            if(rs.next()){
+               cant=rs.getInt(1);
+            }else{
+               cant=0; 
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            
+        }
+        return cant;
+    }
 }

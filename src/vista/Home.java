@@ -4,6 +4,10 @@
  */
 package vista;
 
+import controlador.DaoCategorias;
+import controlador.DaoClientes;
+import controlador.DaoEntradas;
+import controlador.DaoProveedor;
 import java.awt.Color;
 
 /**
@@ -12,14 +16,23 @@ import java.awt.Color;
  */
 public class Home extends javax.swing.JPanel {
 
+DaoCategorias daoC=new DaoCategorias();
+DaoClientes daoCl=new DaoClientes();
+DaoEntradas daoE=new DaoEntradas();
+DaoProveedor daoP=new DaoProveedor();
     /**
      * Creates new form Home
      */
     public Home() {
         initComponents();
         this.setBackground(new Color(0,0,0,0));
+        txtCantCat.setText(daoC.cantCategorias()+"");
+        txtcantClientes.setText(daoCl.cantClientes()+"");
+        txtcantEntradas.setText(daoE.cantEntradas()+"");
+        txtcantproveedores.setText(daoP.cantProveedores()+"");
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,22 +45,22 @@ public class Home extends javax.swing.JPanel {
         jpanelRound7 = new modelo.JpanelRound();
         jpanelRound6 = new modelo.JpanelRound();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        txtcantUsuarios = new javax.swing.JLabel();
         jpanelRound1 = new modelo.JpanelRound();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        txtCantCat = new javax.swing.JLabel();
         jpanelRound2 = new modelo.JpanelRound();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        txtcantClientes = new javax.swing.JLabel();
         jpanelRound3 = new modelo.JpanelRound();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        txtcantEntradas = new javax.swing.JLabel();
         jpanelRound4 = new modelo.JpanelRound();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        txtcantproveedores = new javax.swing.JLabel();
         jpanelRound5 = new modelo.JpanelRound();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        txtcantSalidas = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(238, 238, 238));
         setPreferredSize(new java.awt.Dimension(1007, 775));
@@ -67,8 +80,8 @@ public class Home extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel11.setText("Usuarios");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel12.setText("10");
+        txtcantUsuarios.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtcantUsuarios.setText("10");
 
         javax.swing.GroupLayout jpanelRound6Layout = new javax.swing.GroupLayout(jpanelRound6);
         jpanelRound6.setLayout(jpanelRound6Layout);
@@ -81,7 +94,7 @@ public class Home extends javax.swing.JPanel {
                         .addComponent(jLabel11))
                     .addGroup(jpanelRound6Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jLabel12)))
+                        .addComponent(txtcantUsuarios)))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         jpanelRound6Layout.setVerticalGroup(
@@ -90,7 +103,7 @@ public class Home extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
+                .addComponent(txtcantUsuarios)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -103,8 +116,8 @@ public class Home extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel1.setText("Categorias");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel2.setText("5");
+        txtCantCat.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtCantCat.setText("3");
 
         javax.swing.GroupLayout jpanelRound1Layout = new javax.swing.GroupLayout(jpanelRound1);
         jpanelRound1.setLayout(jpanelRound1Layout);
@@ -117,7 +130,7 @@ public class Home extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(jpanelRound1Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jLabel2)))
+                        .addComponent(txtCantCat)))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         jpanelRound1Layout.setVerticalGroup(
@@ -126,7 +139,7 @@ public class Home extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(txtCantCat)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -139,8 +152,8 @@ public class Home extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel3.setText("Clientes");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel4.setText("15");
+        txtcantClientes.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtcantClientes.setText("15");
 
         javax.swing.GroupLayout jpanelRound2Layout = new javax.swing.GroupLayout(jpanelRound2);
         jpanelRound2.setLayout(jpanelRound2Layout);
@@ -153,7 +166,7 @@ public class Home extends javax.swing.JPanel {
                         .addComponent(jLabel3))
                     .addGroup(jpanelRound2Layout.createSequentialGroup()
                         .addGap(78, 78, 78)
-                        .addComponent(jLabel4)))
+                        .addComponent(txtcantClientes)))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
         jpanelRound2Layout.setVerticalGroup(
@@ -162,7 +175,7 @@ public class Home extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(txtcantClientes)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -175,8 +188,8 @@ public class Home extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel5.setText("Entradas");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel6.setText("20");
+        txtcantEntradas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtcantEntradas.setText("20");
 
         javax.swing.GroupLayout jpanelRound3Layout = new javax.swing.GroupLayout(jpanelRound3);
         jpanelRound3.setLayout(jpanelRound3Layout);
@@ -189,7 +202,7 @@ public class Home extends javax.swing.JPanel {
                         .addComponent(jLabel5))
                     .addGroup(jpanelRound3Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(jLabel6)))
+                        .addComponent(txtcantEntradas)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         jpanelRound3Layout.setVerticalGroup(
@@ -198,7 +211,7 @@ public class Home extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(txtcantEntradas)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -211,8 +224,8 @@ public class Home extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel7.setText("Proveedores");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel8.setText("5");
+        txtcantproveedores.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtcantproveedores.setText("5");
 
         javax.swing.GroupLayout jpanelRound4Layout = new javax.swing.GroupLayout(jpanelRound4);
         jpanelRound4.setLayout(jpanelRound4Layout);
@@ -225,7 +238,7 @@ public class Home extends javax.swing.JPanel {
                         .addComponent(jLabel7))
                     .addGroup(jpanelRound4Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jLabel8)))
+                        .addComponent(txtcantproveedores)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jpanelRound4Layout.setVerticalGroup(
@@ -234,7 +247,7 @@ public class Home extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                .addComponent(txtcantproveedores)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -247,8 +260,8 @@ public class Home extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel9.setText("Salidas");
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel10.setText("5");
+        txtcantSalidas.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        txtcantSalidas.setText("5");
 
         javax.swing.GroupLayout jpanelRound5Layout = new javax.swing.GroupLayout(jpanelRound5);
         jpanelRound5.setLayout(jpanelRound5Layout);
@@ -261,7 +274,7 @@ public class Home extends javax.swing.JPanel {
                         .addComponent(jLabel9))
                     .addGroup(jpanelRound5Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(jLabel10)))
+                        .addComponent(txtcantSalidas)))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         jpanelRound5Layout.setVerticalGroup(
@@ -270,7 +283,7 @@ public class Home extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
+                .addComponent(txtcantSalidas)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -326,16 +339,10 @@ public class Home extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
@@ -344,5 +351,11 @@ public class Home extends javax.swing.JPanel {
     private modelo.JpanelRound jpanelRound5;
     private modelo.JpanelRound jpanelRound6;
     private modelo.JpanelRound jpanelRound7;
+    private javax.swing.JLabel txtCantCat;
+    private javax.swing.JLabel txtcantClientes;
+    private javax.swing.JLabel txtcantEntradas;
+    private javax.swing.JLabel txtcantSalidas;
+    private javax.swing.JLabel txtcantUsuarios;
+    private javax.swing.JLabel txtcantproveedores;
     // End of variables declaration//GEN-END:variables
 }

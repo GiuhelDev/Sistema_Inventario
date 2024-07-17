@@ -134,4 +134,23 @@ public class DaoClientes {
             return false;
         }
     }
+
+    public int cantClientes(){
+        String SQL="SELECT count(idCliente) FROM clientes";
+        int cant = 0;
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            if(rs.next()){
+               cant=rs.getInt(1);
+            }else{
+               cant=0; 
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            
+        }
+        return cant;
+    }
 }

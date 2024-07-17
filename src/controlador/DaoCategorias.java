@@ -113,4 +113,23 @@ public class DaoCategorias {
             return false;
         }
     }
+
+    public int cantCategorias(){
+        String SQL="SELECT count(idCategoria) FROM categorias";
+        int cant = 0;
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            if(rs.next()){
+               cant=rs.getInt(1);
+            }else{
+               cant=0; 
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            
+        }
+        return cant;
+    }
 }
