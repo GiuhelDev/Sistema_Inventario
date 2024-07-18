@@ -14,11 +14,12 @@ public class clientes {
    String direccion;
    String telefono;
    String correo;
+    double cantSalidas;
 
     public clientes() {
     }
 
-    public clientes(int idCliente, String nombre, String apellido, String documento, String direccion, String telefono, String correo) {
+    public clientes(int idCliente, String nombre, String apellido, String documento, String direccion, String telefono, String correo, double cantSalidas) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -26,7 +27,10 @@ public class clientes {
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
+        this.cantSalidas = cantSalidas;
     }
+
+    
 
     public int getIdCliente() {
         return idCliente;
@@ -82,6 +86,14 @@ public class clientes {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public double getCantSalidas() {
+        return cantSalidas;
+    }
+
+    public void setCantSalidas(double cantSalidas) {
+        this.cantSalidas = cantSalidas;
     }
    
    

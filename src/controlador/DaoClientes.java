@@ -153,4 +153,26 @@ public class DaoClientes {
         }
         return cant;
     }
+
+
+    public List clientesFrecuentes(){
+        List<clientes> lista=new ArrayList<>();
+        String SQL="SELECT count(s.idCliente)as cantSalidas,concat(c.nombre,' ',c.apellido)as cliente,c.documento from salidas s INNER JOIN\n" +
+                    "clientes c on s.idCliente=c.idCliente group by s.idCliente limit 3";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                clientes c=new clientes();
+                c.setCantSalidas(rs.getDouble(1));
+                c.setNombre(rs.getString(2));
+                c.setDocumento(rs.getString(3));
+                lista.add(c);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return lista;
+    }
 }
