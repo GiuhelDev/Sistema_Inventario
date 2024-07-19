@@ -157,7 +157,7 @@ public class DaoClientes {
 
     public List clientesFrecuentes(){
         List<clientes> lista=new ArrayList<>();
-        String SQL="SELECT count(s.idCliente)as cantSalidas,concat(c.nombre,' ',c.apellido)as cliente,c.documento from salidas s INNER JOIN\n" +
+        String SQL="SELECT count(s.idCliente)as cantSalidas,c.nombre,c.documento from salidas s INNER JOIN\n" +
                     "clientes c on s.idCliente=c.idCliente group by s.idCliente limit 3";
         try{
             con=cn.conectar();

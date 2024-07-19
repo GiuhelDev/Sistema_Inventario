@@ -7,11 +7,15 @@ package vista;
 import controlador.DaoCategorias;
 import controlador.DaoClientes;
 import controlador.DaoEntradas;
+import controlador.DaoProductos;
 import controlador.DaoProveedor;
+import controlador.DaoSalida;
+import controlador.DaoUsuario;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.clientes;
+import modelo.productos;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -28,8 +32,12 @@ DaoCategorias daoC=new DaoCategorias();
 DaoClientes daoCl=new DaoClientes();
 DaoEntradas daoE=new DaoEntradas();
 DaoProveedor daoP=new DaoProveedor();
+DaoSalida daoS=new DaoSalida();
+DaoUsuario daoU=new DaoUsuario();
+DaoProductos daoPr=new DaoProductos();
 
 DefaultTableModel modeloClientesF=new DefaultTableModel();
+DefaultTableModel modeloProdF=new DefaultTableModel();
     /**
      * Creates new form Home
      */
@@ -40,15 +48,17 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
         txtcantClientes.setText(daoCl.cantClientes()+"");
         txtcantEntradas.setText(daoE.cantEntradas()+"");
         txtcantproveedores.setText(daoP.cantProveedores()+"");
+        txtcantSalidas.setText(daoS.cantSalidas()+"");
+        txtcantUsuarios.setText(daoU.cantUsuarios()+"");
 
         listarClientesFrecuentes();
-        
+        listarProdFrecuentes();
     }
 
     private void listarClientesFrecuentes(){
         List<clientes> lista=daoCl.clientesFrecuentes();
         modeloClientesF=(DefaultTableModel) tablaClienteF.getModel();
-        Object[] ob=new Object[7];
+        Object[] ob=new Object[3];
         for(int i=0;i<lista.size();i++){
             ob[0]=lista.get(i).getCantSalidas();
             ob[1]=lista.get(i).getNombre();
@@ -58,6 +68,20 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
        tablaClienteF.setModel(modeloClientesF);
 
         graficarClientesF();
+    }
+
+    private void listarProdFrecuentes(){
+        List<productos> lista=daoPr.ProdFrecuentes();
+        modeloProdF=(DefaultTableModel) tablaProductoF.getModel();
+        Object[] ob=new Object[2];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getCantF();
+            ob[1]=lista.get(i).getNomProd();
+            modeloProdF.addRow(ob);
+        }
+       tablaProductoF.setModel(modeloProdF);
+
+        graficarProdF();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,7 +114,9 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClienteF = new javax.swing.JTable();
         panelClientesF = new modelo.JpanelRound();
-        jpanelRound9 = new modelo.JpanelRound();
+        panelProdF = new modelo.JpanelRound();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaProductoF = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(238, 238, 238));
         setPreferredSize(new java.awt.Dimension(1007, 775));
@@ -340,23 +366,39 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
             .addGap(0, 275, Short.MAX_VALUE)
         );
 
-        jpanelRound9.setBackground(new java.awt.Color(255, 255, 255));
+        panelProdF.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jpanelRound9Layout = new javax.swing.GroupLayout(jpanelRound9);
-        jpanelRound9.setLayout(jpanelRound9Layout);
-        jpanelRound9Layout.setHorizontalGroup(
-            jpanelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelProdFLayout = new javax.swing.GroupLayout(panelProdF);
+        panelProdF.setLayout(panelProdFLayout);
+        panelProdFLayout.setHorizontalGroup(
+            panelProdFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 456, Short.MAX_VALUE)
         );
-        jpanelRound9Layout.setVerticalGroup(
-            jpanelRound9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelProdFLayout.setVerticalGroup(
+            panelProdFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 275, Short.MAX_VALUE)
         );
+
+        tablaProductoF.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Prodcuto", "Cant."
+            }
+        ));
+        jScrollPane2.setViewportView(tablaProductoF);
 
         javax.swing.GroupLayout jpanelRound7Layout = new javax.swing.GroupLayout(jpanelRound7);
         jpanelRound7.setLayout(jpanelRound7Layout);
         jpanelRound7Layout.setHorizontalGroup(
             jpanelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelRound7Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
             .addGroup(jpanelRound7Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jpanelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,12 +420,8 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
                     .addGroup(jpanelRound7Layout.createSequentialGroup()
                         .addComponent(panelClientesF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addComponent(jpanelRound9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelProdF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))))
-            .addGroup(jpanelRound7Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpanelRound7Layout.setVerticalGroup(
             jpanelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,10 +438,12 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
                     .addComponent(jpanelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addGroup(jpanelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpanelRound9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelProdF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelClientesF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpanelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
@@ -425,10 +465,21 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
       for(int i=0;i<tablaClienteF.getRowCount();i++){
         dtsc.setValue(Double.parseDouble(tablaClienteF.getValueAt(i, 0).toString()),tablaClienteF.getValueAt(i, 0).toString(),tablaClienteF.getValueAt(i, 1).toString());
       }
-      JFreeChart ch = ChartFactory.createBarChart("E clientes Frecuentes", "Clientes", "Salidas", dtsc,PlotOrientation.VERTICAL,true,true,true);
+      JFreeChart ch = ChartFactory.createBarChart("3 clientes Frecuentes", "Clientes", "Salidas", dtsc,PlotOrientation.VERTICAL,true,true,true);
       ChartPanel cp=new ChartPanel(ch);
       panelClientesF.add(cp);
       cp.setBounds(0,0,460, 270);
+    }
+
+    void graficarProdF(){
+      DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+      for(int i=0;i<tablaProductoF.getRowCount();i++){
+        dtsc.setValue(Double.parseDouble(tablaProductoF.getValueAt(i, 0).toString()),tablaProductoF.getValueAt(i, 0).toString(),tablaProductoF.getValueAt(i, 1).toString());
+      }
+      JFreeChart ch = ChartFactory.createBarChart("3 Productos Frecuentes", "Productos", "Salidas", dtsc,PlotOrientation.VERTICAL,true,true,true);
+      ChartPanel cp=new ChartPanel(ch);
+      panelProdF.add(cp);
+      cp.setBounds(0,0,453, 270);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -438,6 +489,7 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private modelo.JpanelRound jpanelRound1;
     private modelo.JpanelRound jpanelRound2;
     private modelo.JpanelRound jpanelRound3;
@@ -445,9 +497,10 @@ DefaultTableModel modeloClientesF=new DefaultTableModel();
     private modelo.JpanelRound jpanelRound5;
     private modelo.JpanelRound jpanelRound6;
     private modelo.JpanelRound jpanelRound7;
-    private modelo.JpanelRound jpanelRound9;
     private modelo.JpanelRound panelClientesF;
+    private modelo.JpanelRound panelProdF;
     private javax.swing.JTable tablaClienteF;
+    private javax.swing.JTable tablaProductoF;
     private javax.swing.JLabel txtCantCat;
     private javax.swing.JLabel txtcantClientes;
     private javax.swing.JLabel txtcantEntradas;

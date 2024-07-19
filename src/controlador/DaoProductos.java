@@ -193,4 +193,24 @@ public class DaoProductos {
             return false;
         }
     }
+
+    public List ProdFrecuentes(){
+        List<productos> lista=new ArrayList<>();
+        String SQL="SELECT sum(ds.cantidad)as cant,p.nombre from detallesalida ds INNER JOIN\n" +
+                    "productos p on ds.idproducto=p.idproducto group by ds.idproducto order by cant DESC  limit 3";
+        try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                productos c=new productos();
+                c.setCantF(rs.getInt(1));
+                c.setNomProd(rs.getString(2));
+                lista.add(c);
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return lista;
+    }
 }

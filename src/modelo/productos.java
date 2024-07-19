@@ -12,18 +12,21 @@ public class productos {
    int stock;
    int idCategoria;
    double precioV;
+   int cantF;
 
     public productos() {
     }
 
-    public productos(int idproducto, String nomProd, int stock, int idCategoria, double precioV) {
+    public productos(int idproducto, String nomProd, int stock, int idCategoria, double precioV, int cantF) {
         this.idproducto = idproducto;
         this.nomProd = nomProd;
         this.stock = stock;
         this.idCategoria = idCategoria;
         this.precioV = precioV;
+        this.cantF = cantF;
     }
 
+    
     public int getIdproducto() {
         return idproducto;
     }
@@ -64,6 +67,14 @@ public class productos {
 
     public void setPrecioV(double precioV) {
         this.precioV = precioV;
+    }
+
+    public int getCantF() {
+        return cantF;
+    }
+
+    public void setCantF(int cantF) {
+        this.cantF = cantF;
     }
 
    

@@ -160,4 +160,23 @@ public class DaoUsuario {
             return false;
         }
     }
+
+    public int cantUsuarios(){
+        String SQL="SELECT COUNT(idUsuario) FROM usuarios";
+        int cant = 0;
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            if(rs.next()){
+               cant=rs.getInt(1);
+            }else{
+               cant=0; 
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            
+        }
+        return cant;
+    }
 }
