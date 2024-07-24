@@ -157,4 +157,23 @@ public boolean buscar(entradas c){
         }
         return cant;
     }
+
+    public double TotalEntradas(int mes,int año){
+        String SQL="Select sum(total) from entrada WHERE MONTH(fecha)="+mes+" and YEAR(fecha) = "+año;
+        double total = 0;
+         try{
+            con=cn.conectar();
+            ps=con.prepareStatement(SQL);
+            rs=ps.executeQuery();
+            if(rs.next()){
+               total=rs.getDouble(1);
+            }else{
+               total=0; 
+            }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            
+        }
+        return total;
+    }
 }

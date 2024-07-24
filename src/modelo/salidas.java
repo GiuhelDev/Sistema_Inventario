@@ -13,6 +13,7 @@ double igv;
 double total;
 String estado;
 
+
     public salidas() {
     }
 
