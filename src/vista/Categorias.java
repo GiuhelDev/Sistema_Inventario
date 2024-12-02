@@ -4,11 +4,13 @@
  */
 package vista;
 
+import controlador.DaoAuditoria;
 import controlador.DaoCategorias;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
+import modelo.auditoria;
 
 public class Categorias extends javax.swing.JPanel {
     
@@ -16,15 +18,18 @@ public class Categorias extends javax.swing.JPanel {
     DaoCategorias daoCt=new DaoCategorias();
     DefaultTableModel modeloCategoria=new DefaultTableModel();
     
+    auditoria aud=new auditoria();
+    DaoAuditoria daoAud=new DaoAuditoria();
     MenuPrincipal m=new MenuPrincipal();
     
-
+   public static int iduser=0;
     /**
      * Creates new form Categorias
      */
     public Categorias() {
         initComponents();
         listarCategorias();
+        System.out.print(iduser);
     }
     
     private void listarCategorias(){
@@ -263,7 +268,7 @@ public class Categorias extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-         ct.setNomCategoria(txtnomCategoria.getText());
+        ct.setNomCategoria(txtnomCategoria.getText());
         if(daoCt.insertar(ct)){
             //JOptionPane.showMessageDialog(null, "Categoria Registrada Con Exito");
             m.exito("Categoria Registrada Con Exito");
@@ -274,6 +279,7 @@ public class Categorias extends javax.swing.JPanel {
         limpiarTablaCategoria();
         listarCategorias();
         limpiarCampos();
+        registraAuditoria("Registro");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -291,6 +297,7 @@ public class Categorias extends javax.swing.JPanel {
                 limpiarTablaCategoria();
                 listarCategorias();
                 limpiarCampos();
+                registraAuditoria("Modificacion");
             }
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -314,6 +321,7 @@ public class Categorias extends javax.swing.JPanel {
                 limpiarCampos();
                 //JOptionPane.showMessageDialog(null, "Se Elimino con exito la cetegoria");
                 m.exito("Se Elimino con exito la cetegoria");
+                registraAuditoria("Eliminacion");
             }
         }else{
             //JOptionPane.showMessageDialog(null, "Seleccione una categoria");
@@ -350,7 +358,12 @@ public class Categorias extends javax.swing.JPanel {
             i=0-1;
         }
     }
-    
+    private void registraAuditoria(String accion) {
+        aud.setTabla("categorias");
+        aud.setAccion(accion);
+        aud.setIdUsuario(iduser);
+        daoAud.insertar(aud);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnBuscar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnEditar;
@@ -368,4 +381,6 @@ public class Categorias extends javax.swing.JPanel {
     private javax.swing.JTextField txtidcategoria;
     private javax.swing.JTextField txtnomCategoria;
     // End of variables declaration//GEN-END:variables
+
+    
 }

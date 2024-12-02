@@ -437,7 +437,7 @@ DefaultTableModel modeloProdF=new DefaultTableModel();
             .addGroup(jpanelRound7Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(panelClientesF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(panelProdF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
             .addGroup(jpanelRound7Layout.createSequentialGroup()
@@ -487,7 +487,7 @@ DefaultTableModel modeloProdF=new DefaultTableModel();
                 .addGroup(jpanelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpanelRound6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpanelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jpanelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelRound7Layout.createSequentialGroup()
                         .addGroup(jpanelRound7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,7 +552,6 @@ DefaultTableModel modeloProdF=new DefaultTableModel();
       cp.setBounds(0,0,453, 270);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RSMaterialComponent.RSButtonMaterialIconDos btnGuardar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnProcesaar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

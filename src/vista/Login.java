@@ -214,6 +214,9 @@ public class Login extends javax.swing.JFrame {
                 m.btnUsuarios.setVisible(false);
                 m.btnProductos.setVisible(true);
             }
+            MenuPrincipal.txtiduser.setText(us.getIdusuario()+"");
+            MenuPrincipal.txtuser.setText(us.getUsaurio());
+            Categorias.iduser=us.getIdusuario();
             Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, "Bienvenido");
             panel.showNotification();
             m.setVisible(true);

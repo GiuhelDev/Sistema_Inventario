@@ -58,6 +58,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnSalir = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnProductos = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnSalida = new RSMaterialComponent.RSButtonMaterialIconDos();
+        txtiduser = new javax.swing.JLabel();
+        txtuser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -196,15 +198,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        txtiduser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtiduser.setForeground(new java.awt.Color(255, 255, 255));
+        txtiduser.setText("q");
+
+        txtuser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtuser.setForeground(new java.awt.Color(255, 255, 255));
+        txtuser.setText("Giuhel");
+
         javax.swing.GroupLayout jpanelRound2Layout = new javax.swing.GroupLayout(jpanelRound2);
         jpanelRound2.setLayout(jpanelRound2Layout);
         jpanelRound2Layout.setHorizontalGroup(
             jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanelRound2Layout.createSequentialGroup()
                 .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpanelRound2Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel1))
                     .addGroup(jpanelRound2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +232,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpanelRound2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel1))
+                    .addGroup(jpanelRound2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(txtiduser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jpanelRound2Layout.setVerticalGroup(
@@ -233,7 +248,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jpanelRound2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtiduser)
+                    .addComponent(txtuser))
+                .addGap(45, 45, 45)
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,7 +276,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout jpanelRound3Layout = new javax.swing.GroupLayout(jpanelRound3);
@@ -555,5 +574,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private modelo.JpanelRound jpanelRound2;
     private modelo.JpanelRound jpanelRound3;
+    public static javax.swing.JLabel txtiduser;
+    public static javax.swing.JLabel txtuser;
     // End of variables declaration//GEN-END:variables
 }
